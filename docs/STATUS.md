@@ -32,6 +32,8 @@ primeiro export. A C2 (a vitrine e o rascunho) pode andar junto.
 - O domínio `hack.vesklab.com` (C2), a conta do Modal e a do Resend são do Igor.
 - O arquivo das palavras proibidas (`vesk-hack-videos/proibido.txt`, fora do git) existe só na máquina que escreveu
   este repositório. Em outra, o `test -s` do bloco 3 barra a fatia até o arquivo ser copiado de lá.
+- Bateria: o `python -m pytest -q` não acha teste (`no tests ran`, sai 5), porque ainda não há código. A trava do
+  playbook barrou o primeiro push do C0, e ele subiu no segundo, com este registro. A C2 põe os testes no push.
 
 ## O que foi tentado e não funcionou
 
