@@ -1,0 +1,38 @@
+# Status
+
+> **Este documento ganha de todos os outros.** Se qualquer outro doc do projeto contradisser o
+> que está aqui, este vale.
+
+Escrito pelo `/tchau` no fim de cada sessão, lido pelo `/oi` na abertura da seguinte. Quem lê é
+sempre alguém **sem nenhum contexto**. Este repositório é público: nada aqui leva segredo, dado
+pessoal ou número de cliente.
+
+`[V]` marca o que a sessão que escreveu conferiu por comando ou leitura; `[?]` marca o que veio de
+antes ou foi só dito.
+
+## Onde estamos
+
+05/11/2026: o repositório nasceu com a licença PolyForm Noncommercial 1.0.0 [V], o README de esqueleto, as regras
+(`CLAUDE.md`), o que o regulamento pede (`docs/hackathon.md`), o que a Meta e o TikTok dão por anúncio
+(`docs/fontes.md`) e o roadmap de C1 a C13 (`docs/ROADMAP.md`), escritos na sessão que decidiu o hack. Nenhum código
+ainda.
+
+## Próximo passo imediato
+
+C1, os anúncios no ar: o roteiro dos anúncios A e B com o Igor, a campanha na conta da Vesk com o teto dele e o
+primeiro export. A C2 (a vitrine e o rascunho) pode andar junto.
+
+## Pendências
+
+- [V] O repositório no GitHub (`IgorLima-py/vesk-hack`) foi criado público em 06/11/2026, e o C0 sobe nele no `/tchau`
+  da sessão que o escreveu. A configuração (`.gitignore`, `.gitattributes`, `.claude/settings.json`) e o cabeçalho do
+  `docs/DESVIOS.md` foram escritos do zero no evento, sem copiar modelo de antes dele (6.2 do regulamento).
+- O motor na nuvem é feito no repositório do motor, de 07 a 10/11. A C6 confere se ele subiu com o `curl` da
+  dependência.
+- O domínio `hack.vesklab.com` (C2), a conta do Modal e a do Resend são do Igor.
+- O arquivo das palavras proibidas (`vesk-hack-videos/proibido.txt`, fora do git) existe só na máquina que escreveu
+  este repositório. Em outra, o `test -s` do bloco 3 barra a fatia até o arquivo ser copiado de lá.
+
+## O que foi tentado e não funcionou
+
+- Nada ainda.

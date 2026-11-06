@@ -1,0 +1,9 @@
+# LF no repositório; o git converte na saída de cada máquina.
+* text=auto eol=lf
+*.ps1 text eol=crlf
+*.mp4 binary
+*.mov binary
+*.wav binary
+*.png binary
+*.jpg binary
+*.pdf binary

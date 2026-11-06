@@ -1,0 +1,42 @@
+# Segredo nunca entra no git (os do Worker e do Modal estão mais abaixo)
+*.pem
+*.key
+credentials*
+.secrets/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Node e o wrangler
+node_modules/
+.wrangler/
+
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Claude Code: viajam só as configurações do projeto; o settings.local.json fica fora
+.claude/*
+!.claude/settings.json
+!.claude/commands/
+!.claude/skills/
+!.claude/agents/
+!.claude/hooks/
+
+# Segredos do Worker e do Modal (doc do Cloudflare: .dev.vars e .env fora do git)
+.dev.vars*
+.env*
+
+# Video, audio e export de anuncio ficam fora do git (vesk-hack-videos/)
+*.mp4
+*.mov
+*.wav
+*.csv
+!tests/fixtures/*.csv
+# a resposta gravada do E1 (C6, roda sem chave num clone novo) e o resultado cru da precisão (C7)
+!laudo/exemplo/*.csv
+!precisao/*.csv
