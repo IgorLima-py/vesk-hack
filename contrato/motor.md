@@ -29,8 +29,7 @@ O pedido vai em `multipart/form-data`, com dois campos:
 | `marca` | texto | o nome da marca, de 1 a 60 caracteres; o motor procura esse nome na fala e no texto da tela |
 
 O pedido é **síncrono**: a resposta vem no mesmo pedido. Se o Modal redirecionar (`303`), o cliente segue o
-redirecionamento. O cliente espera até 300 s. Medido numa GPU local, o motor levou de 6 a 45 s para um vídeo de 15 a
-30 s, e a nuvem pode levar mais no primeiro pedido.
+redirecionamento. O cliente espera até 300 s, porque o primeiro pedido depois de um tempo parado leva mais.
 
 ### Resposta `200`
 
@@ -138,14 +137,7 @@ O teste de contrato confere estas regras à parte:
 O `request_id` muda a cada pedido. O teste de contrato não confere isso, porque precisaria chamar o motor duas
 vezes a cada bateria; quem confere é a C6, ao chamar o motor de novo.
 
-## Para quem implementa o motor na nuvem
-
-- Renomear as quatro medidas que levam nome de modelo para `cortes.principal`, `cortes.alternativo`,
-  `rostos.n_principal` e `rostos.n_alternativo`. O nome do modelo não sai na resposta.
-- Tirar do `xt.csv` as colunas que identificam a rodada e o vídeo. O `request_id` faz esse papel.
-- Juntar ao `eventos.csv` uma linha `palavra` por palavra transcrita e uma linha `texto_na_tela` por quadro lido.
-- Calcular a `versao` de cada camada e a `versao_motor`. Não mandar limiares, máquina, tempos ou caminhos.
-- Apagar o vídeo depois de responder.
+O motor apaga o vídeo depois de responder.
 
 ## Versão
 
