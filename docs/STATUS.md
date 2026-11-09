@@ -17,10 +17,15 @@ antes ou foi só dito.
 (`docs/fontes.md`) e o roadmap de C1 a C13 (`docs/ROADMAP.md`), escritos na sessão que decidiu o hack. Nenhum código
 ainda.
 
+09/11/2026: nenhuma fatia tinha começado, e a fila em sequência já não cabia até 28/11. Por decisão do Igor, a fila
+virou ondas (bloco 2 do `docs/ROADMAP.md`), e uma sessão orquestradora (a seção O) abre as fatias em paralelo, cada
+uma no seu worktree. O ponteiro está no orquestrador. As regras de quem anda em paralelo estão no `CLAUDE.md`. Ainda
+nenhum código. A mudança foi escrita de fora, numa sessão do outro repositório, e não teve `/tchau` daqui.
+
 ## Próximo passo imediato
 
-C1, os anúncios no ar: o roteiro dos anúncios A e B com o Igor, a campanha na conta da Vesk com o teto dele e o
-primeiro export. A C2 (a vitrine e o rascunho) pode andar junto.
+O orquestrador (Opus, esforço high, na Karen) abre a onda 1: a C1 (os anúncios, com o Igor), a C2 (a vitrine e o
+rascunho) e a C3 (os exemplos com gabarito e o contrato do motor), cada uma na sua sessão.
 
 ## Pendências
 

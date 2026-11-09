@@ -8,16 +8,16 @@
 >
 > **Nenhuma chave existe sem consumidor declarado.** Não invente campo aqui sem dizer quem o lê.
 
-chat: C1 # humano + título da sessão
-titulo: Os anúncios no ar # humano
-perfil: padrao # /360 e /tchau (política)
-modelo: sonnet # hook e /oi conferem contra a sessão
-esforco: medium # hook e /oi conferem contra a sessão
+chat: O # humano + título da sessão
+titulo: O orquestrador das ondas # humano
+perfil: dificil # /360 e /tchau (política)
+modelo: opus # hook e /oi conferem contra a sessão
+esforco: high # hook e /oi conferem contra a sessão
 forma: sessao # vocabulário aceito: sessao
-maquina: qualquer # /oi compara com esta máquina e avisa
+maquina: Karen # /oi compara com esta máquina e avisa
 plan-mode: nao # /oi imprime "abra com Shift+Tab"
-persona: produtor de anúncio que tira do papel dois vídeos curtos da Vesk e põe a campanha no ar, com o teto do Igor e o dado da curva já correndo
-objetivo: a C1 do docs/ROADMAP.md. Escrever com o Igor o roteiro dos anúncios A e B (15 a 30 s, a marca em segundos diferentes), a lista de passos da campanha na conta da Vesk na Meta, e conferir os vídeos, o segundo da marca, a campanha no ar com o teto e o primeiro export. Quem grava, cria a campanha e publica é o Igor. A C2 (a vitrine) pode andar junto
+persona: chefe de obra que abre cada frente assim que o terreno deixa, nunca faz o trabalho de uma frente por ela, e diz ao dono numa tabela o que roda e o que espera a mão dele
+objetivo: a seção O do docs/ROADMAP.md. Tocar a fila em ondas: abrir cada fatia cuja dependência passa, numa sessão própria com worktree, o perfil da seção e plan mode quando ela pede, e dar ao Igor a tabela do que roda e do que espera a mão dele. Começa pela onda 1 (C1, C2 e C3). Nunca faz o trabalho de uma fatia, nunca aprova plano nem decide pelo Igor, e nunca junta ramo na main
 
 <!--
 `modelo:` e `esforco:` são SEMPRE re-resolvidos pelo /tchau a partir da tabela de perfis do

@@ -42,5 +42,10 @@ bateria: python -m pytest -q
 - **Todo navegador que abre anúncio abre mudo** (`--mute-audio`).
 - **Vídeo, áudio, export e autorização ficam fora do git**, em `C:/Users/Usuario/Desktop/Side-Projects/vesk-hack-videos/`.
 - **Commit à vontade; push só no `/tchau`.** O assunto do commit começa pelo código da fatia (`C4: ...`).
-- **Duas fatias ao mesmo tempo, só em worktrees separados.** A que anda em paralelo com a fila (a C1 e a C11) não mexe
-  no `docs/PROXIMO.md`, e o commit dela nomeia os caminhos (`git add docs/anuncios.md`), nunca `git add -A`.
+- **Fatias em paralelo (desde 09/11), abertas pelo orquestrador** (seção O do `docs/ROADMAP.md`), cada uma no seu
+  worktree:
+  - ela não mexe no `docs/PROXIMO.md`, porque o ponteiro é do orquestrador;
+  - no `/tchau`, a base do diff da segunda opinião é `git merge-base HEAD origin/main` (depois do `git fetch`), porque
+    a linha `chat:` do ponteiro não marca o começo dela;
+  - ela marca o próprio ✅ na fila e junta na `main` com `git fetch`, `git rebase origin/main` e
+    `git push origin HEAD:main`, nunca com força. Num conflito no `docs/STATUS.md`, ficam as duas entradas.

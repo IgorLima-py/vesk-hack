@@ -26,43 +26,43 @@ um nível de esforço acima**. Quem errou não foi o modelo, foi o orçamento de
 Estado: ✅ feito · 🚧 em obras · ⬜ não começou · 🔴 travado
 
 O prazo é 30/11/2026 às 23h59, e o alvo de submissão é 28/11. O anúncio vem primeiro porque é o que mais demora: a
-curva só junta dado com o anúncio rodando, e o teste A/B leva dias para dar resultado. Enquanto o motor não sobe na
-nuvem (no repositório do motor, de 07 a 10/11), as fatias que não dependem dele andam.
+curva só junta dado com o anúncio rodando, e o teste A/B leva dias para dar resultado.
 
-| Quando | O quê |
-|---|---|
-| 05–07/11 | C1 (os anúncios sobem até 07/11), junto com a C2 e depois a C3 |
-| 07–09/11 | C4 |
-| 09–11/11 | C5; o 1º teste A/B sobe até 11/11 |
-| 10–13/11 | C6, com o motor no ar |
-| 13–14/11 | C7 |
-| 14–18/11 | C8 |
-| 18–20/11 | C9 |
-| 20–23/11 | C10 |
-| 15–25/11 | C11: o Igor junta as pessoas desde 15/11, e a fatia roda depois da C8 |
-| 24–26/11 | C12 |
-| 26–28/11 | C13; submissão até 30/11 às 23h59 |
+**Em ondas, desde 09/11 (decisão do Igor):** em 09/11 nenhuma fatia tinha começado, e a fila em sequência já estava
+atrasada. Desde então, as fatias andam em paralelo, tocadas pelo orquestrador (a seção «O», no bloco 3). **A regra é
+esta:** uma fatia abre assim que a dependência dela passa por comando e nenhuma fatia aberta mexe nos mesmos arquivos.
+As ondas abaixo são o calendário que essa regra dá; não são portões.
+
+| Onda | Quando | Fatias juntas | Por que juntas |
+|---|---|---|---|
+| 1 | 09–12/11 | C1, C2, C3 | nenhuma depende de outra, e os arquivos não se cruzam (`docs/anuncios.md`; `site/` e `.github/`; `exemplos/`, `contrato/` e `tests/`) |
+| 2 | 11–14/11 | C4, C5; no repositório do motor, a nuvem | a C4 espera o export da C1; a C5 precisa do `E1` da C3 e do vídeo `A`; a nuvem do motor precisa da C3 e do `A` |
+| 3 | 14–16/11 | C6 | espera o motor no ar |
+| 4 | 16–19/11 | C7, C8 | as duas só dependem da C6 (e a C8 da C4 e da C5) |
+| 5 | 19–22/11 | C9, C11 | o Igor junta as pessoas da C11 desde 15/11 |
+| 6 | 22–25/11 | C10, C12 | a C9 e a C12 mexem as duas no Worker e no backend, e por isso ficam em ondas diferentes |
+| 7 | 25–28/11 | C13 | submissão até 30/11 às 23h59 |
 
 **Ordem de corte:** se faltar tempo, cai a C10, depois a C11. A C12 e a C13 não caem.
 
-**Uma por vez no código:** a C1 é mão do Igor e só escreve `docs/anuncios.md`, por isso anda junto das outras; da C2
-em diante, as fatias andam uma depois da outra, menos a C11, que anda junto da C10. A que anda em paralelo roda em
-worktree próprio, não mexe no `docs/PROXIMO.md` e commita nomeando os caminhos (`CLAUDE.md`).
+**Quem anda em paralelo** roda em worktree próprio, não mexe no `docs/PROXIMO.md`, commita nomeando os caminhos e
+junta na `main` no próprio `/tchau` (`CLAUDE.md`). O ponteiro fica no orquestrador.
 
 | # | Chat | Perfil | Forma | Estado | Máquina | Depende de | Paralelo com | O que muda no dia seguinte |
 |---|---|---|---|---|---|---|---|---|
+| — | O — O orquestrador das ondas | `dificil` | sessao | 🚧 | Karen | — | todas | As fatias abrem sozinhas assim que a dependência passa, cada uma no seu worktree, e o Igor sabe a cada momento o que roda e o que espera a mão dele |
 | 1 | C1 — Os anúncios no ar | `padrao` | sessao | ⬜ | qualquer | — | C2, C3 | Dois anúncios da Vesk rodam na Meta com o teto do Igor, a curva real começa a juntar, e o segundo da marca de cada um está marcado à mão |
-| 2 | C2 — A vitrine e o rascunho | `padrao` | sessao | ⬜ | qualquer | — | C1 | O repositório é público com README e licença, a página está no ar nos dois idiomas, os testes rodam a cada push, e o rascunho foi enviado |
-| 3 | C3 — Os exemplos com gabarito e o contrato do motor | `dificil` | sessao | ⬜ | qualquer | C2 (os testes no push) | C1 | Qualquer sessão gera um vídeo com a marca, os cortes e a fala em segundos conhecidos, e o motor tem um contrato escrito que um teste confere |
-| 4 | C4 — O relatório do Gerenciador | `dificil` | sessao | ⬜ | qualquer | C1 (o export real) | — | O export do Gerenciador de Anúncios vira a curva do laudo, só com os pontos que a Meta deu, sem login e sem OAuth |
-| 5 | C5 — A variante e o 1º teste A/B | `dificil` | sessao | ⬜ | qualquer | C1, C3 | — | Um anúncio vira uma variante de uma mudança só, provada pixel a pixel, o tamanho de amostra sai da fórmula, e o 1º teste A/B está rodando |
+| 2 | C2 — A vitrine e o rascunho | `padrao` | sessao | ⬜ | qualquer | — | C1, C3 | O repositório é público com README e licença, a página está no ar nos dois idiomas, os testes rodam a cada push, e o rascunho foi enviado |
+| 3 | C3 — Os exemplos com gabarito e o contrato do motor | `dificil` | sessao | ⬜ | qualquer | — (os testes rodam local; o push os roda depois que a C2 juntar) | C1, C2 | Qualquer sessão gera um vídeo com a marca, os cortes e a fala em segundos conhecidos, e o motor tem um contrato escrito que um teste confere |
+| 4 | C4 — O relatório do Gerenciador | `dificil` | sessao | ⬜ | qualquer | C1 (o export real) | C5 | O export do Gerenciador de Anúncios vira a curva do laudo, só com os pontos que a Meta deu, sem login e sem OAuth |
+| 5 | C5 — A variante e o 1º teste A/B | `dificil` | sessao | ⬜ | qualquer | C3; o vídeo `A` da C1 | C4 | Um anúncio vira uma variante de uma mudança só, provada pixel a pixel, o tamanho de amostra sai da fórmula, e o 1º teste A/B está rodando |
 | 6 | C6 — O laudo que cruza | `dificil` | sessao | ⬜ | qualquer | C3, C4; o motor no ar | — | Um vídeo e uma curva viram o laudo que diz o que estava na tela e na fala em cada queda, sem interpolar |
-| 7 | C7 — A precisão medida | `dificil` | sessao | ⬜ | qualquer | C6 | — | O README diz quanto o motor acerta por camada, com n e intervalo, medido contra o gabarito |
-| 8 | C8 — A página com envio e o e-mail | `dificil` | sessao | ⬜ | qualquer | C4, C5, C6 | — | Qualquer pessoa sobe o vídeo e o export do anúncio dela e recebe o laudo, a variante e o plano do teste na tela, e no e-mail se quiser, sem mão |
-| 9 | C9 — O piloto automático na conta da Vesk | `dificil` | sessao | ⬜ | qualquer | C8; a campanha da C1 com curva | — | Anúncio novo da Vesk vira laudo sozinho, com a curva por segundo puxada da Insights API, na caixa do Igor |
-| 10 | C10 — O teste montado sozinho | `dificil` | sessao | ⬜ | qualquer | C5, C9 | C11 | A variante sobe como teste A/B pausado na conta da Vesk, o Igor aperta publicar, e o resultado do teste volta como laudo |
-| 11 | C11 — Usuários reais | `dificil` | sessao | ⬜ | qualquer | C8 | C10 | Pessoas de fora usaram o add-on com os anúncios delas, e o projeto tem laudos reais e depoimentos autorizados |
-| 12 | C12 — A demo aguenta o júri | `dificil` | sessao | ⬜ | qualquer | C8 | — | A demo recusa o que não deve processar, aguenta carga sem erro 5xx, tem teto de gasto e um vigia de 30/11 a 02/12 |
+| 7 | C7 — A precisão medida | `dificil` | sessao | ⬜ | qualquer | C6 | C8 | O README diz quanto o motor acerta por camada, com n e intervalo, medido contra o gabarito |
+| 8 | C8 — A página com envio e o e-mail | `dificil` | sessao | ⬜ | qualquer | C4, C5, C6 | C7 | Qualquer pessoa sobe o vídeo e o export do anúncio dela e recebe o laudo, a variante e o plano do teste na tela, e no e-mail se quiser, sem mão |
+| 9 | C9 — O piloto automático na conta da Vesk | `dificil` | sessao | ⬜ | qualquer | C8; a campanha da C1 com curva | C11 | Anúncio novo da Vesk vira laudo sozinho, com a curva por segundo puxada da Insights API, na caixa do Igor |
+| 10 | C10 — O teste montado sozinho | `dificil` | sessao | ⬜ | qualquer | C5, C9 | C12 | A variante sobe como teste A/B pausado na conta da Vesk, o Igor aperta publicar, e o resultado do teste volta como laudo |
+| 11 | C11 — Usuários reais | `dificil` | sessao | ⬜ | qualquer | C8 | C9 | Pessoas de fora usaram o add-on com os anúncios delas, e o projeto tem laudos reais e depoimentos autorizados |
+| 12 | C12 — A demo aguenta o júri | `dificil` | sessao | ⬜ | qualquer | C8; a C9 juntada (as duas mexem no Worker) | C10 | A demo recusa o que não deve processar, aguenta carga sem erro 5xx, tem teto de gasto e um vigia de 30/11 a 02/12 |
 | 13 | C13 — O vídeo e a submissão | `criativo` | sessao | ⬜ | qualquer | C12 | — | O projeto está submetido, com o vídeo de até 3 min, o README final e a demo funcionando inteira |
 
 ---
@@ -87,6 +87,44 @@ Valem para todas as fatias:
   sai `1` (sai `128` quando o arquivo falta, e isso não conta como passar);
 - dependência de fora deste repositório se confere por comando, antes do `falha antes:`. Se ela falhar, a fatia não
   começa.
+
+### O — O orquestrador das ondas
+
+`dificil` · opus · high · forma: sessao · máquina: Karen · plan mode: não · contexto: limpo antes
+
+**persona:** chefe de obra que abre cada frente assim que o terreno deixa, nunca faz o trabalho de uma frente por ela, e diz ao dono, numa tabela, o que roda e o que espera a mão dele.
+**por que existe:** em 09/11 nenhuma fatia tinha começado, e a fila em sequência não cabia até 28/11. O maestro do
+playbook não serve aqui: ele recusa repositório público, ainda tem furos abertos e toca uma fatia por vez.
+**entra:** a fila e a regra das ondas (bloco 2); as seções deste bloco; o `CLAUDE.md`; o `git log origin/main`.
+**a cada volta** (na abertura, quando uma sessão filha para, e quando o Igor pergunta):
+1. `git fetch -q` e a fila de `origin/main`: o que está ✅, o que roda (as sessões ligadas a ele) e o que espera.
+2. Para cada fatia ⬜ cuja dependência passa (a fatia de que ela depende está ✅ em `origin/main`, e a linha
+   `dependência:` da seção, se houver, passa por comando) e que não mexe nos arquivos de uma fatia aberta, ele abre
+   uma sessão nova: contexto limpo, worktree próprio, o modelo e o esforço da tabela de perfis, plan mode quando a
+   seção pede, o nome `c<N>` e o título da fila. O pedido é o prompt de abertura da seção, mais as regras de quem anda
+   em paralelo do `CLAUDE.md`, mais a frase «o ponteiro aponta o orquestrador; o seu perfil é o da sua seção, e o
+   aviso do hook sobre isso é esperado». No Linear, a tarefa espelho vai para In Progress.
+3. Responde ao Igor com uma tabela: a fatia, o estado (rodando, esperando o Igor, juntada na `main`), o que espera a
+   mão dele (plano a aprovar, vídeo a gravar, conta a criar, segredo a pôr) e o que abre em seguida.
+
+**o que ele nunca faz:** o trabalho de uma fatia; aprovar plano, responder pergunta ou decidir no lugar do Igor; juntar
+o ramo de uma filha na `main` (quem junta é o `/tchau` dela); mexer na fila. A pergunta que uma filha faz a ele vai ao
+Igor com as palavras dela.
+**limites:**
+- a C13 pede esforço `xhigh`, acima do dele: ele a abre em `high` e pede ao Igor que suba o esforço dela no app;
+- depois de vários avisos seguidos de filhas sem o Igor falar no meio, o app segura os avisos até o Igor falar, e a
+  tabela diz isso;
+- passando de 200k de contexto, ele fecha com `/tchau`, o ponteiro continua nele, e o Igor abre outro orquestrador;
+- o motor na nuvem é do repositório do motor: o orquestrador só confere, pela `dependência:` da C6, se ele subiu.
+
+**sai:** a cada volta, a tabela; no fim, todas as fatias ✅ ou cortadas pela ordem de corte.
+**verificar:**
+- `git log origin/main --since=2026-11-09 --format=%s | grep -oE "^C[0-9]+" | sort -u | wc -l` imprime pelo menos `2` (duas fatias juntaram na `main` desde as ondas);
+- `git log origin/main --since=2026-11-09 --format=%s -- docs/PROXIMO.md | grep -vcE "^O:"` imprime `0` (só o orquestrador mexe no ponteiro).
+**falha antes:** `git log origin/main --since=2026-11-09 --format=%s | grep -cE "^C[0-9]+:"` imprime `0` hoje.
+**prompt de abertura:**
+
+> Você é o orquestrador das ondas do vesk-hack. Leia a seção O, a fila e a regra das ondas (bloco 2) e o `CLAUDE.md`. A cada volta: `git fetch`, veja o que está ✅ em `origin/main` e o que roda nas sessões ligadas a você, abra cada fatia cuja dependência passa e que não cruza arquivo com uma aberta, e me dê a tabela do que roda e do que espera a minha mão. Você nunca faz o trabalho de uma fatia, nunca aprova plano nem decide por mim, e nunca junta ramo na `main`. Comece pela onda 1: C1, C2 e C3.
 
 ### C1 — Os anúncios no ar
 
@@ -557,4 +595,5 @@ Uma linha por decisão, só acrescentada, nunca reescrita. Quando duas linhas tr
 2026-11-05 | respondida | A demo entrega as três coisas | a página devolve o laudo, a variante e o plano do teste, não só o laudo | C8
 2026-11-05 | respondida | Palavras proibidas | moram num arquivo fora do git, porque a lista escrita aqui já seria o vazamento | todas as fatias
 2026-11-05 | respondida | Queda sem a curva por segundo | com os pontos de 25 a 100% do export, a queda é o trecho entre dois pontos dados, nunca um segundo interpolado | C6
+2026-11-09 | respondida | Ondas e orquestrador | a fila anda em paralelo, em ondas, tocada por uma sessão orquestradora que abre cada fatia no seu worktree; o maestro do playbook fica fora (recusa repositório público e toca uma fatia por vez); a cota acabar mais rápido está aceita (decisão do Igor em 2026-11-09) | todas as fatias
 ```
