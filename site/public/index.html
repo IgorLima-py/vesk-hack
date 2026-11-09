@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vesk Hack — creative autopilot</title>
+<meta name="description" content="Creative autopilot: reads every second of a video ad, crosses it with the retention curve, and delivers a report, a one-change variant and a test plan.">
+<link rel="alternate" hreflang="pt-BR" href="/pt">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<main>
+<nav><span>Hack Brasil 2026 · Logistics &amp; automation</span><a href="/pt">Português</a></nav>
+<h1>Creative autopilot</h1>
+<p class="lead">A media buyer's weekly loop on each new video ad, run on its own: pull the retention curve, watch the video second by second, find why people left, write the report, brief a new cut, plan the test.</p>
+
+<h2>How it works</h2>
+<ol>
+<li><strong>Pull.</strong> The ad video and the platform's retention curve, from the Meta Insights API or from the Ads Manager export.</li>
+<li><strong>Read.</strong> A private video-reading engine, called by API, reads every second: cuts, faces, logo, speech and on-screen text.</li>
+<li><strong>Cross.</strong> What was on screen and in the audio at each drop of the curve. Only the points the platform provides are used; nothing is interpolated.</li>
+<li><strong>Deliver.</strong> A report, a variant with one change only (with a pixel certificate that nothing else changed) and a test plan with the sample size per arm. A new ad triggers a new report.</li>
+</ol>
+
+<h2>Why it fits the track</h2>
+<p>The track asks for projects that move information and work more efficiently. This one replaces a recurring manual workflow between the ad platform, a video-analysis service and the person who decides what to test next.</p>
+
+<h2>Project status</h2>
+<div class="card">
+<p>Under construction during the online phase of Hack Brasil (November 5–30, 2026). The engine is a black box behind a documented API contract; this repository only knows the contract. Examples used in the demo are synthetic videos with a known answer key, plus the maker's own ads.</p>
+</div>
+
+<h2>Data and privacy</h2>
+<ul>
+<li>Only the maker's own ads, synthetic videos, and what a person sends are processed.</li>
+<li>No data from third parties is collected outside official APIs.</li>
+<li>This page has no forms, no cookies and no trackers.</li>
+</ul>
+
+<h2>Code</h2>
+<p>Public repository: <a href="https://github.com/IgorLima-py/vesk-hack">github.com/IgorLima-py/vesk-hack</a>. License: PolyForm Noncommercial 1.0.0. Anyone can read, run and test the code; commercial use is not licensed.</p>
+
+<footer>Vesk · Hack Brasil 2026 entry</footer>
+</main>
+</body>
+</html>

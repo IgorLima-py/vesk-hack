@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vesk Hack — piloto automático do criativo</title>
+<meta name="description" content="Piloto automático do criativo: lê cada segundo do vídeo do anúncio, cruza com a curva de retenção e entrega o laudo, a variante de uma mudança só e o plano do teste.">
+<link rel="alternate" hreflang="en" href="/">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<main>
+<nav><span>Hack Brasil 2026 · Logística &amp; automação</span><a href="/">English</a></nav>
+<h1>Piloto automático do criativo</h1>
+<p class="lead">O ciclo semanal do gestor de tráfego em cada vídeo novo de anúncio, rodando sozinho: puxar a curva de retenção, assistir ao vídeo segundo a segundo, achar por que as pessoas saíram, escrever o laudo, pedir um novo corte e planejar o teste.</p>
+
+<h2>Como funciona</h2>
+<ol>
+<li><strong>Puxar.</strong> O vídeo do anúncio e a curva de retenção da plataforma, pela API de Insights da Meta ou pela exportação do Gerenciador de Anúncios.</li>
+<li><strong>Ler.</strong> Um motor privado de leitura de vídeo, chamado por API, lê cada segundo: cortes, rostos, logo, fala e texto na tela.</li>
+<li><strong>Cruzar.</strong> O que estava na tela e no áudio em cada queda da curva. Entram só os pontos que a plataforma entrega; nada é interpolado.</li>
+<li><strong>Entregar.</strong> Um laudo, uma variante com uma mudança só (com um certificado de pixels de que nada mais mudou) e um plano de teste com o tamanho da amostra por braço. Um anúncio novo dispara um laudo novo.</li>
+</ol>
+
+<h2>Por que cabe na trilha</h2>
+<p>A trilha pede projetos que movem informação e trabalho de forma mais eficiente. Este troca um fluxo manual e recorrente entre a plataforma de anúncios, um serviço de análise de vídeo e quem decide o que testar a seguir.</p>
+
+<h2>Estado do projeto</h2>
+<div class="card">
+<p>Em construção durante a fase online do Hack Brasil (5 a 30 de novembro de 2026). O motor é uma caixa-preta atrás de um contrato de API documentado; este repositório só conhece o contrato. Os exemplos da demonstração são vídeos sintéticos com gabarito conhecido e os anúncios do próprio autor.</p>
+</div>
+
+<h2>Dados e privacidade</h2>
+<ul>
+<li>Só são processados os anúncios do próprio autor, vídeos sintéticos e o que a pessoa envia.</li>
+<li>Nenhum dado de terceiros é coletado fora de API oficial.</li>
+<li>Esta página não tem formulário, cookie nem rastreador.</li>
+</ul>
+
+<h2>Código</h2>
+<p>Repositório público: <a href="https://github.com/IgorLima-py/vesk-hack">github.com/IgorLima-py/vesk-hack</a>. Licença: PolyForm Noncommercial 1.0.0. Qualquer pessoa pode ler, rodar e testar o código; uso comercial não é licenciado.</p>
+
+<footer>Vesk · Inscrição no Hack Brasil 2026</footer>
+</main>
+</body>
+</html>

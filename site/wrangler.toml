@@ -1,0 +1,12 @@
+name = "vesk-hack"
+compatibility_date = "2026-11-01"
+
+[assets]
+directory = "./public"
+html_handling = "auto-trailing-slash"
+not_found_handling = "404-page"
+
+# Dominio proprio: hack.vesklab.com (zona vesklab.com, Cloudflare do Igor)
+[[routes]]
+pattern = "hack.vesklab.com"
+custom_domain = true
