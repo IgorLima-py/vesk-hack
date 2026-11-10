@@ -95,6 +95,47 @@ Com a C3 na `main`, abrem duas frentes:
 - [?] O esforço desta sessão não foi conferido (o hook não leu `CLAUDE_EFFORT`). O modelo foi Opus, como a tabela
   pede.
 
+## C2 — a vitrine (10/11/2026): NÃO fechou, falta a mão do Igor
+
+- [V] O `falha antes:` rodou vermelho antes do código: `curl` ao `hack.vesklab.com` deu `000` e o
+  `.github/workflows/testes.yml` não existia.
+- [V] No ar, depois do `wrangler deploy` do Igor (o primeiro, sem o visual novo): `/` e `/pt` dão `200` (2.697 e 2.922
+  bytes), `lang="en"` e `lang="pt-BR"`, as duas frases, 0 `<form`, 0 do `proibido.txt`, `cmp` sai 1. O `curl` do Windows
+  precisa de `--ssl-no-revoke`, senão imprime `000`.
+- [V] No git: repositório `PUBLIC`, 0 arquivo de segredo versionado, 0 ocorrência do `proibido.txt` em todas as
+  revisões, o commit mais antigo é de 06/11.
+- Feito: `site/` (Worker de arquivos estáticos, `wrangler.toml` com o domínio, `public/index.html` em inglês,
+  `public/pt.html` em português, `style.css` no visual da Vesk com CSS escrito do zero por causa da 6.2),
+  `.github/workflows/testes.yml` (`ubuntu-24.04` fixo, `ffmpeg` por apt, `requirements-dev.txt`, `pytest -q`, sem
+  `|| true`), `tests/test_vitrine.py`, `site/video/slides.pptx` (6 slides, fala inteira nas notas, em inglês),
+  `site/video/gerar_slides.py` e `site/video/roteiro.md` (o mapa de tempo).
+- [?] O visual novo da página e o workflow novo **não** foram para o ar nem rodaram num runner. O `.pptx` não foi
+  aberto em nenhum programa (não há LibreOffice aqui).
+- **Falta, em ordem (do Igor):** (1) `cd site` e `npx wrangler deploy` para subir o visual novo, depois os `curl` do
+  `verificar:` com `--ssl-no-revoke`; (2) ver o run do `testes.yml` na `main`: `gh run list -R IgorLima-py/vesk-hack
+  --workflow testes.yml --limit 1`, e se o `flite` do Ubuntu 24.04 falhar, a saída do passo `grep flite` diz; (3) abrir
+  `site/video/slides.pptx`, rodar na tela `python -m exemplos.sintetico --marca-em 7 --semente 9 --saida x.mp4`, gravar
+  a tela com a webcam lendo as notas, enviar o rascunho na trilha Logística & automação; (4) registrar em
+  `docs/hackathon.md`: `- rascunho enviado em 2026-11-DD HH:MM, print em <caminho em $VIDEOS>`. Só então a C2 recebe o ✅
+  na fila.
+- Desvio: o `git rebase origin/main` do `CLAUDE.md` foi barrado pelo guarda do playbook, e a junta com a C3 saiu por
+  `git merge origin/main` (commit de merge a mais). Nenhum conflito.
+- Bateria desta sessão, pela trava, com o merge: [V] 5 passaram, 0 falharam, 5 pulados (os 5 de contrato, sem `MOTOR_URL`), em 61 s.
+- Sem segunda opinião em Opus: o ponteiro desta fatia é do orquestrador e a fatia não fechou, então o ponteiro não anda.
+
+## Madrugada 10/11 — decisões para o Igor conferir
+
+- A junta com a C3 por **merge** em vez de rebase (acima): reversível, e foi a opção que não reescreve histórico.
+- O push da C2 sobe só o que já estava na `main` mais os commits da C2. Nada foi publicado fora disso, e o repositório
+  já era público.
+- Fontes: a página usa só as famílias da Vesk como lista de fallback (Newsreader, Schibsted Grotesk, IBM Plex Mono,
+  depois Georgia e system-ui). Não baixei nem copiei arquivo de fonte. Se quiser as fontes de verdade, é um download
+  novo que precisa do seu sim.
+
 ## O que foi tentado e não funcionou
 
-- Nada ainda.
+- `git rebase origin/main` pela sessão: barrado pelo hook do playbook nas três tentativas; o `merge` resolveu.
+- O preview por `file://` não carrega o `/style.css` (caminho absoluto); serve conferir por `python -m http.server`
+  dentro de `site/public`.
+- O `curl -s` do Windows imprime `000` sem erro por causa da checagem de revogação do certificado; use
+  `--ssl-no-revoke`.
