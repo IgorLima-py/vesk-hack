@@ -1,4 +1,7 @@
-# Vídeo do rascunho — roteiro e slides (rascunho para o Igor ajustar)
+# Vídeo do rascunho — roteiro
+
+Os slides estão em `site/video/slides.pptx`, com a fala inteira de cada um nas notas do slide (o `gerar_slides.py` refaz o arquivo).
+Como gravar: abra o PowerPoint em modo apresentador, grave a tela com a webcam e leia as notas. Esta tabela é só o mapa de tempo.
 
 Limite do regulamento: 3 min, com demo, sem login; de preferência narrado em inglês. Alvo: 2:30.
 O rascunho só pede trilha, repositório público com README, vídeo e página HTTPS. Mostre só o que já existe no dia da
