@@ -1,0 +1,5 @@
+# Para a bateria (python -m pytest -q). O ffmpeg com o filtro flite vem de fora do pip (exemplos/README.md).
+pytest
+jsonschema
+Pillow
+requests

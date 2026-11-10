@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/IgorLima-py/vesk-hack/blob/main/contrato/motor.schema.json",
+  "title": "Resposta 200 do POST /analisar (contrato do motor 1.0.0)",
+  "description": "Ver contrato/motor.md. Cada arquivo vem em linhas tipadas; o cliente grava os .csv a partir delas.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["versao_contrato", "request_id", "video_sha256", "duracao", "arquivos"],
+  "properties": {
+    "versao_contrato": {"const": "1.0.0"},
+    "request_id": {"type": "string", "minLength": 1, "maxLength": 128},
+    "video_sha256": {"$ref": "#/$defs/sha256"},
+    "duracao": {"type": "number", "exclusiveMinimum": 0},
+    "arquivos": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["eventos.csv", "xt.csv", "manifesto.json"],
+      "properties": {
+        "eventos.csv": {"type": "array", "items": {"$ref": "#/$defs/evento"}},
+        "xt.csv": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/segundo"}},
+        "manifesto.json": {"$ref": "#/$defs/manifesto"}
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "camada": {
+      "enum": ["cortes", "complexidade", "movimento", "cor", "rostos", "expressao", "logotipo", "embedding",
+               "energia", "fala", "segmentos", "sons", "texto"]
+    },
+    "evento": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evento", "valor", "t", "pts", "fim", "camada"],
+      "properties": {
+        "evento": {
+          "enum": ["primeira_marca", "primeira_marca_falada", "primeira_marca_escrita", "primeiro_logotipo",
+                   "logotipo_parado_abertura", "primeiro_cta", "primeiro_texto", "texto_durante_fala", "legenda",
+                   "ultimo_quadro", "palavra", "texto_na_tela"]
+        },
+        "valor": {"type": ["string", "null"]},
+        "t": {"type": ["integer", "null"], "minimum": 0},
+        "pts": {"type": ["number", "null"], "minimum": 0},
+        "fim": {"type": ["number", "null"], "minimum": 0},
+        "camada": {
+          "type": "string",
+          "pattern": "^(cortes|complexidade|movimento|cor|rostos|expressao|logotipo|embedding|energia|fala|segmentos|sons|texto)(\\+(cortes|complexidade|movimento|cor|rostos|expressao|logotipo|embedding|energia|fala|segmentos|sons|texto))*$"
+        }
+      }
+    },
+    "medida": {"type": ["number", "null"]},
+    "rotulo": {"type": ["string", "null"]},
+    "segundo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["t",
+        "cortes.principal", "cortes.alternativo",
+        "complexidade.bordas", "complexidade.png_bpp",
+        "movimento.diferenca",
+        "cor.luminancia", "cor.saturacao", "cor.colorido",
+        "rostos.n_principal", "rostos.n_alternativo", "rostos.area_maior",
+        "expressao.emocao", "expressao.valencia", "expressao.excitacao",
+        "logotipo.escore", "logotipo.centro_x", "logotipo.centro_y", "logotipo.area",
+        "embedding.novidade",
+        "energia.rms_db", "energia.pico_db",
+        "fala.palavras", "fala.prob", "fala.idioma",
+        "segmentos.fala", "segmentos.musica", "segmentos.ruido", "segmentos.sem_energia",
+        "sons.fala", "sons.canto", "sons.musica",
+        "texto.caixas", "texto.caracteres", "texto.area", "texto.confianca"],
+      "properties": {
+        "t": {"type": "integer", "minimum": 0},
+        "cortes.principal": {"type": "number", "minimum": 0},
+        "cortes.alternativo": {"type": "number", "minimum": 0},
+        "complexidade.bordas": {"$ref": "#/$defs/medida"},
+        "complexidade.png_bpp": {"$ref": "#/$defs/medida"},
+        "movimento.diferenca": {"$ref": "#/$defs/medida"},
+        "cor.luminancia": {"$ref": "#/$defs/medida"},
+        "cor.saturacao": {"$ref": "#/$defs/medida"},
+        "cor.colorido": {"$ref": "#/$defs/medida"},
+        "rostos.n_principal": {"$ref": "#/$defs/medida"},
+        "rostos.n_alternativo": {"$ref": "#/$defs/medida"},
+        "rostos.area_maior": {"$ref": "#/$defs/medida"},
+        "expressao.emocao": {"$ref": "#/$defs/rotulo"},
+        "expressao.valencia": {"$ref": "#/$defs/medida"},
+        "expressao.excitacao": {"$ref": "#/$defs/medida"},
+        "logotipo.escore": {"$ref": "#/$defs/medida"},
+        "logotipo.centro_x": {"$ref": "#/$defs/medida"},
+        "logotipo.centro_y": {"$ref": "#/$defs/medida"},
+        "logotipo.area": {"$ref": "#/$defs/medida"},
+        "embedding.novidade": {"$ref": "#/$defs/medida"},
+        "energia.rms_db": {"$ref": "#/$defs/medida"},
+        "energia.pico_db": {"$ref": "#/$defs/medida"},
+        "fala.palavras": {"type": "number", "minimum": 0},
+        "fala.prob": {"$ref": "#/$defs/medida"},
+        "fala.idioma": {"$ref": "#/$defs/rotulo"},
+        "segmentos.fala": {"$ref": "#/$defs/medida"},
+        "segmentos.musica": {"$ref": "#/$defs/medida"},
+        "segmentos.ruido": {"$ref": "#/$defs/medida"},
+        "segmentos.sem_energia": {"$ref": "#/$defs/medida"},
+        "sons.fala": {"$ref": "#/$defs/medida"},
+        "sons.canto": {"$ref": "#/$defs/medida"},
+        "sons.musica": {"$ref": "#/$defs/medida"},
+        "texto.caixas": {"$ref": "#/$defs/medida"},
+        "texto.caracteres": {"$ref": "#/$defs/medida"},
+        "texto.area": {"$ref": "#/$defs/medida"},
+        "texto.confianca": {"$ref": "#/$defs/medida"}
+      }
+    },
+    "manifesto": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["versao_motor", "camadas"],
+      "properties": {
+        "versao_motor": {"$ref": "#/$defs/sha256"},
+        "camadas": {
+          "type": "array",
+          "minItems": 13,
+          "maxItems": 13,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["nome", "versao"],
+            "properties": {
+              "nome": {"$ref": "#/$defs/camada"},
+              "versao": {"$ref": "#/$defs/sha256"}
+            }
+          },
+          "allOf": [
+            {"contains": {"properties": {"nome": {"const": "cortes"}}}},
+            {"contains": {"properties": {"nome": {"const": "complexidade"}}}},
+            {"contains": {"properties": {"nome": {"const": "movimento"}}}},
+            {"contains": {"properties": {"nome": {"const": "cor"}}}},
+            {"contains": {"properties": {"nome": {"const": "rostos"}}}},
+            {"contains": {"properties": {"nome": {"const": "expressao"}}}},
+            {"contains": {"properties": {"nome": {"const": "logotipo"}}}},
+            {"contains": {"properties": {"nome": {"const": "embedding"}}}},
+            {"contains": {"properties": {"nome": {"const": "energia"}}}},
+            {"contains": {"properties": {"nome": {"const": "fala"}}}},
+            {"contains": {"properties": {"nome": {"const": "segmentos"}}}},
+            {"contains": {"properties": {"nome": {"const": "sons"}}}},
+            {"contains": {"properties": {"nome": {"const": "texto"}}}}
+          ]
+        }
+      }
+    },
+    "saude": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ok", "versao_contrato"],
+      "properties": {
+        "ok": {"const": true},
+        "versao_contrato": {"const": "1.0.0"}
+      }
+    },
+    "erro": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["erro", "mensagem"],
+      "properties": {
+        "erro": {"enum": ["video_grande_demais", "tipo_nao_suportado", "pedido_invalido"]},
+        "mensagem": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}
