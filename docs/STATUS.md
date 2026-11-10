@@ -109,8 +109,11 @@ Com a C3 na `main`, abrem duas frentes:
   `.github/workflows/testes.yml` (`ubuntu-24.04` fixo, `ffmpeg` por apt, `requirements-dev.txt`, `pytest -q`, sem
   `|| true`), `tests/test_vitrine.py`, `site/video/slides.pptx` (6 slides, fala inteira nas notas, em inglês),
   `site/video/gerar_slides.py` e `site/video/roteiro.md` (o mapa de tempo).
-- [?] O visual novo da página e o workflow novo **não** foram para o ar nem rodaram num runner. O `.pptx` não foi
-  aberto em nenhum programa (não há LibreOffice aqui).
+- [V] 10/11, depois do push: o run do `testes.yml` no `cb9bce1` terminou em `success` e é o mesmo sha da `origin/main`
+  (`gh run list`). O `flite` do Ubuntu 24.04 funcionou no runner, o que fecha o `[?]` da C3 para essa versão.
+- [V] O visual novo **ainda não está no ar**: o `style.css` servido em `hack.vesklab.com` não tem o `#ffe14a`, e
+  `docs/hackathon.md` não tem a linha `- rascunho enviado em ...`. O `.pptx` não foi aberto em nenhum programa (não há
+  LibreOffice aqui).
 - **Falta, em ordem (do Igor):** (1) `cd site` e `npx wrangler deploy` para subir o visual novo, depois os `curl` do
   `verificar:` com `--ssl-no-revoke`; (2) ver o run do `testes.yml` na `main`: `gh run list -R IgorLima-py/vesk-hack
   --workflow testes.yml --limit 1`, e se o `flite` do Ubuntu 24.04 falhar, a saída do passo `grep flite` diz; (3) abrir
