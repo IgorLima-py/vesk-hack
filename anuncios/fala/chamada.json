@@ -1,0 +1,44 @@
+{
+  "chave": "chamada",
+  "texto": "Upload your ad. Get the report.",
+  "ouvido": "Upload your ad, get the report.",
+  "bruto_sha256": "df7244a3fbe94e4f6be18ac21723016386154cf95a8c9323f7e177496a5dee57",
+  "duracao": 2.45,
+  "palavras": [
+    {
+      "texto": "Upload",
+      "inicio": 0.31,
+      "fim": 0.64
+    },
+    {
+      "texto": "your",
+      "inicio": 0.64,
+      "fim": 0.74
+    },
+    {
+      "texto": "ad.",
+      "inicio": 0.74,
+      "fim": 1.0
+    },
+    {
+      "texto": "Get",
+      "inicio": 1.28,
+      "fim": 1.34
+    },
+    {
+      "texto": "the",
+      "inicio": 1.34,
+      "fim": 1.46
+    },
+    {
+      "texto": "report.",
+      "inicio": 1.46,
+      "fim": 2.035
+    }
+  ],
+  "whisper": {
+    "faster_whisper": "1.2.1",
+    "modelo": "small",
+    "compute_type": "int8"
+  }
+}

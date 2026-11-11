@@ -1,0 +1,54 @@
+{
+  "chave": "problema",
+  "texto": "You can see when they leave. Not why.",
+  "ouvido": "You can see when they leave, not why.",
+  "bruto_sha256": "badaa0b187069b40951778c9e50725ab2ffeb3928de33c9108978574296cb3da",
+  "duracao": 2.675,
+  "palavras": [
+    {
+      "texto": "You",
+      "inicio": 0.32,
+      "fim": 0.4
+    },
+    {
+      "texto": "can",
+      "inicio": 0.4,
+      "fim": 0.52
+    },
+    {
+      "texto": "see",
+      "inicio": 0.52,
+      "fim": 0.7
+    },
+    {
+      "texto": "when",
+      "inicio": 0.7,
+      "fim": 0.86
+    },
+    {
+      "texto": "they",
+      "inicio": 0.86,
+      "fim": 0.98
+    },
+    {
+      "texto": "leave.",
+      "inicio": 0.98,
+      "fim": 1.28
+    },
+    {
+      "texto": "Not",
+      "inicio": 1.6,
+      "fim": 1.82
+    },
+    {
+      "texto": "why.",
+      "inicio": 1.82,
+      "fim": 2.204
+    }
+  ],
+  "whisper": {
+    "faster_whisper": "1.2.1",
+    "modelo": "small",
+    "compute_type": "int8"
+  }
+}

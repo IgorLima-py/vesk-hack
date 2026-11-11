@@ -1,0 +1,69 @@
+{
+  "chave": "variante",
+  "texto": "Then you get a variant with one change, ready to test.",
+  "ouvido": "Then you get a variant with one change, ready to test.",
+  "bruto_sha256": "c8df9da2c805f15dbd1222a63b93292ed5ec39417d8f8ad7ae53df92b1bac40b",
+  "duracao": 3.5,
+  "palavras": [
+    {
+      "texto": "Then",
+      "inicio": 0.332,
+      "fim": 0.42
+    },
+    {
+      "texto": "you",
+      "inicio": 0.42,
+      "fim": 0.54
+    },
+    {
+      "texto": "get",
+      "inicio": 0.54,
+      "fim": 0.68
+    },
+    {
+      "texto": "a",
+      "inicio": 0.68,
+      "fim": 0.76
+    },
+    {
+      "texto": "variant",
+      "inicio": 0.76,
+      "fim": 1.08
+    },
+    {
+      "texto": "with",
+      "inicio": 1.08,
+      "fim": 1.26
+    },
+    {
+      "texto": "one",
+      "inicio": 1.26,
+      "fim": 1.48
+    },
+    {
+      "texto": "change,",
+      "inicio": 1.48,
+      "fim": 1.82
+    },
+    {
+      "texto": "ready",
+      "inicio": 2.14,
+      "fim": 2.42
+    },
+    {
+      "texto": "to",
+      "inicio": 2.42,
+      "fim": 2.6
+    },
+    {
+      "texto": "test.",
+      "inicio": 2.6,
+      "fim": 3.04
+    }
+  ],
+  "whisper": {
+    "faster_whisper": "1.2.1",
+    "modelo": "small",
+    "compute_type": "int8"
+  }
+}

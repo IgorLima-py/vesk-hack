@@ -1,0 +1,587 @@
+{
+  "versao": 1,
+  "fps": 30,
+  "largura": 1080,
+  "altura": 1920,
+  "quadros": 599,
+  "taxa_do_som": 24000,
+  "marca_em": 431,
+  "cortes": [
+    90,
+    171,
+    326,
+    431,
+    525
+  ],
+  "logo_sonoro_s": 0.6,
+  "visual": {
+    "fundo": "#000000",
+    "texto": "#eeedf4",
+    "mudo": "#a09db2",
+    "grifo": "#ffe14a",
+    "borda": "#26242e",
+    "cartao": "#0c0b10",
+    "fontes": {
+      "serifa": {
+        "familia": "Newsreader",
+        "arquivo": "anuncios/fontes/newsreader/Newsreader[opsz,wght].ttf"
+      },
+      "texto": {
+        "familia": "Schibsted Grotesk",
+        "arquivo": "anuncios/fontes/schibstedgrotesk/SchibstedGrotesk[wght].ttf"
+      },
+      "mono": {
+        "familia": "IBM Plex Mono",
+        "arquivo": "anuncios/fontes/ibmplexmono/IBMPlexMono-Regular.ttf"
+      }
+    }
+  },
+  "zona_segura": {
+    "topo": 269,
+    "base": 672,
+    "lados": 65
+  },
+  "cartela_marca": {
+    "wordmark": "Vesk",
+    "tamanho": 240,
+    "barra": {
+      "x": 390,
+      "y": 860,
+      "largura": 300,
+      "altura": 25
+    }
+  },
+  "legenda": {
+    "familia": "Schibsted Grotesk",
+    "tamanho": 54,
+    "cor": "#eeedf4",
+    "contorno": 3,
+    "faixa_y": [
+      1088,
+      1248
+    ],
+    "sem_legenda": [
+      "gancho",
+      "marca"
+    ]
+  },
+  "segmentos": [
+    {
+      "chave": "gancho",
+      "inicio": 0,
+      "fim": 90,
+      "texto": "Your ad is losing people in the first seconds.",
+      "fala_inicio_s": 0.335,
+      "fala_fim_s": 2.53,
+      "voz_inicio_amostra": 0,
+      "palavras": [
+        {
+          "texto": "Your",
+          "inicio": 10,
+          "fim": 13
+        },
+        {
+          "texto": "ad",
+          "inicio": 13,
+          "fim": 21
+        },
+        {
+          "texto": "is",
+          "inicio": 21,
+          "fim": 26
+        },
+        {
+          "texto": "losing",
+          "inicio": 26,
+          "fim": 35
+        },
+        {
+          "texto": "people",
+          "inicio": 35,
+          "fim": 47
+        },
+        {
+          "texto": "in",
+          "inicio": 47,
+          "fim": 52
+        },
+        {
+          "texto": "the",
+          "inicio": 52,
+          "fim": 54
+        },
+        {
+          "texto": "first",
+          "inicio": 54,
+          "fim": 59
+        },
+        {
+          "texto": "seconds.",
+          "inicio": 59,
+          "fim": 76
+        }
+      ],
+      "tela": [
+        {
+          "texto": "Your ad is losing people in the first seconds.",
+          "papel": "frase_palavra_a_palavra",
+          "inicio": 10,
+          "fim": 90
+        }
+      ],
+      "legenda": false,
+      "desenho": "A frase entra palavra a palavra, cada palavra no quadro em que é dita (segmento.palavras), em serifa (Newsreader), na cor do texto, no terço de cima da zona segura. Embaixo dela, uma curva de retenção desenhada como ilustração (uma linha só, na cor do texto) cai da esquerda para a direita enquanto o segmento corre. Sem eixo, sem rótulo, sem número."
+    },
+    {
+      "chave": "problema",
+      "inicio": 90,
+      "fim": 171,
+      "texto": "You can see when they leave. Not why.",
+      "fala_inicio_s": 3.32,
+      "fala_fim_s": 5.204,
+      "voz_inicio_amostra": 72000,
+      "palavras": [
+        {
+          "texto": "You",
+          "inicio": 100,
+          "fim": 102
+        },
+        {
+          "texto": "can",
+          "inicio": 102,
+          "fim": 106
+        },
+        {
+          "texto": "see",
+          "inicio": 106,
+          "fim": 111
+        },
+        {
+          "texto": "when",
+          "inicio": 111,
+          "fim": 116
+        },
+        {
+          "texto": "they",
+          "inicio": 116,
+          "fim": 119
+        },
+        {
+          "texto": "leave.",
+          "inicio": 119,
+          "fim": 128
+        },
+        {
+          "texto": "Not",
+          "inicio": 138,
+          "fim": 145
+        },
+        {
+          "texto": "why.",
+          "inicio": 145,
+          "fim": 156
+        }
+      ],
+      "tela": [
+        {
+          "texto": "?",
+          "papel": "interrogacao",
+          "desde_palavra": "Not",
+          "inicio": 138,
+          "fim": 171
+        }
+      ],
+      "legenda": true,
+      "desenho": "A curva inteira, parada, e o ponto onde ela despenca marcado por um círculo no grifo. Ao lado do ponto, um «?» grande em serifa, na cor do grifo, entra na primeira palavra de «Not why.». Sem número."
+    },
+    {
+      "chave": "leitura",
+      "inicio": 171,
+      "fim": 326,
+      "texto": "We read your video, second by second, and match it to the moment people drop off.",
+      "fala_inicio_s": 6.03,
+      "fala_fim_s": 10.384,
+      "voz_inicio_amostra": 136800,
+      "palavras": [
+        {
+          "texto": "We",
+          "inicio": 181,
+          "fim": 183
+        },
+        {
+          "texto": "read",
+          "inicio": 183,
+          "fim": 190
+        },
+        {
+          "texto": "your",
+          "inicio": 190,
+          "fim": 194
+        },
+        {
+          "texto": "video,",
+          "inicio": 194,
+          "fim": 204
+        },
+        {
+          "texto": "second",
+          "inicio": 218,
+          "fim": 225
+        },
+        {
+          "texto": "by",
+          "inicio": 225,
+          "fim": 231
+        },
+        {
+          "texto": "second,",
+          "inicio": 231,
+          "fim": 242
+        },
+        {
+          "texto": "and",
+          "inicio": 252,
+          "fim": 257
+        },
+        {
+          "texto": "match",
+          "inicio": 257,
+          "fim": 265
+        },
+        {
+          "texto": "it",
+          "inicio": 265,
+          "fim": 268
+        },
+        {
+          "texto": "to",
+          "inicio": 268,
+          "fim": 271
+        },
+        {
+          "texto": "the",
+          "inicio": 271,
+          "fim": 274
+        },
+        {
+          "texto": "moment",
+          "inicio": 274,
+          "fim": 281
+        },
+        {
+          "texto": "people",
+          "inicio": 281,
+          "fim": 290
+        },
+        {
+          "texto": "drop",
+          "inicio": 290,
+          "fim": 299
+        },
+        {
+          "texto": "off.",
+          "inicio": 299,
+          "fim": 312
+        }
+      ],
+      "tela": [],
+      "legenda": true,
+      "desenho": "A curva no alto e, embaixo dela, uma tira horizontal de quadros (retângulos com composições abstratas, na cor do cartão, com borda) correndo da direita para a esquerda. Uma linha vertical no grifo percorre a curva e a tira juntas, da esquerda para a direita, durante o segmento, e para no ponto da queda. Sem texto."
+    },
+    {
+      "chave": "variante",
+      "inicio": 326,
+      "fim": 431,
+      "texto": "Then you get a variant with one change, ready to test.",
+      "fala_inicio_s": 11.199,
+      "fala_fim_s": 13.907,
+      "voz_inicio_amostra": 260800,
+      "palavras": [
+        {
+          "texto": "Then",
+          "inicio": 336,
+          "fim": 339
+        },
+        {
+          "texto": "you",
+          "inicio": 339,
+          "fim": 342
+        },
+        {
+          "texto": "get",
+          "inicio": 342,
+          "fim": 346
+        },
+        {
+          "texto": "a",
+          "inicio": 346,
+          "fim": 349
+        },
+        {
+          "texto": "variant",
+          "inicio": 349,
+          "fim": 358
+        },
+        {
+          "texto": "with",
+          "inicio": 358,
+          "fim": 364
+        },
+        {
+          "texto": "one",
+          "inicio": 364,
+          "fim": 370
+        },
+        {
+          "texto": "change,",
+          "inicio": 370,
+          "fim": 381
+        },
+        {
+          "texto": "ready",
+          "inicio": 390,
+          "fim": 399
+        },
+        {
+          "texto": "to",
+          "inicio": 399,
+          "fim": 404
+        },
+        {
+          "texto": "test.",
+          "inicio": 404,
+          "fim": 417
+        }
+      ],
+      "tela": [],
+      "legenda": true,
+      "desenho": "Dois quadros verticais lado a lado, iguais, de um anúncio abstrato (retângulos e um círculo na cor do texto, sobre o cartão). No da direita, um elemento só aparece trocado e contornado no grifo, a partir da palavra «one». Sem texto."
+    },
+    {
+      "chave": "marca",
+      "inicio": 431,
+      "fim": 525,
+      "texto": "Vesk. The creative autopilot.",
+      "fala_inicio_s": 15.287,
+      "fala_fim_s": 17.017,
+      "voz_inicio_amostra": 359200,
+      "palavras": [
+        {
+          "texto": "Vesk.",
+          "inicio": 459,
+          "fim": 471
+        },
+        {
+          "texto": "The",
+          "inicio": 475,
+          "fim": 478
+        },
+        {
+          "texto": "creative",
+          "inicio": 478,
+          "fim": 487
+        },
+        {
+          "texto": "autopilot.",
+          "inicio": 487,
+          "fim": 510
+        }
+      ],
+      "tela": [
+        {
+          "texto": "Vesk",
+          "papel": "wordmark",
+          "inicio": 431,
+          "fim": 525
+        },
+        {
+          "texto": "The creative autopilot.",
+          "papel": "assinatura",
+          "inicio": 431,
+          "fim": 525
+        }
+      ],
+      "legenda": false,
+      "desenho": "A cartela da marca: fundo preto; o wordmark «Vesk» em Newsreader peso 500, na cor do texto, centrado, logo acima da barra; a barra do grifo (a mesma do h1 do site) ocupa exatamente o retângulo cartela_marca.barra; e «The creative autopilot.» em Schibsted Grotesk, na cor mudo, logo abaixo dela. Tudo entra inteiro no primeiro quadro do segmento, que é o marca_em, sem animação de entrada. Nada no grifo pode ocupar o retângulo da barra antes desse quadro."
+    },
+    {
+      "chave": "chamada",
+      "inicio": 525,
+      "fim": 599,
+      "texto": "Upload your ad. Get the report.",
+      "fala_inicio_s": 17.81,
+      "fala_fim_s": 19.535,
+      "voz_inicio_amostra": 420000,
+      "palavras": [
+        {
+          "texto": "Upload",
+          "inicio": 534,
+          "fim": 544
+        },
+        {
+          "texto": "your",
+          "inicio": 544,
+          "fim": 547
+        },
+        {
+          "texto": "ad.",
+          "inicio": 547,
+          "fim": 555
+        },
+        {
+          "texto": "Get",
+          "inicio": 563,
+          "fim": 565
+        },
+        {
+          "texto": "the",
+          "inicio": 565,
+          "fim": 569
+        },
+        {
+          "texto": "report.",
+          "inicio": 569,
+          "fim": 586
+        }
+      ],
+      "tela": [
+        {
+          "texto": "hack.vesklab.com",
+          "papel": "endereco",
+          "inicio": 525,
+          "fim": 599
+        }
+      ],
+      "legenda": true,
+      "desenho": "A cartela final: «hack.vesklab.com» em IBM Plex Mono, na cor do texto, centrado, sublinhado no grifo. A legenda queimada traz a frase; o motor só escreve o endereço."
+    }
+  ],
+  "legendas": [
+    {
+      "texto": "You can see when they leave.",
+      "inicio": 100,
+      "fim": 138,
+      "chave": "problema"
+    },
+    {
+      "texto": "Not why.",
+      "inicio": 138,
+      "fim": 171,
+      "chave": "problema"
+    },
+    {
+      "texto": "We read your video,",
+      "inicio": 181,
+      "fim": 218,
+      "chave": "leitura"
+    },
+    {
+      "texto": "second by second,",
+      "inicio": 218,
+      "fim": 252,
+      "chave": "leitura"
+    },
+    {
+      "texto": "and match it to the moment people drop off.",
+      "inicio": 252,
+      "fim": 326,
+      "chave": "leitura"
+    },
+    {
+      "texto": "Then you get a variant with one change,",
+      "inicio": 336,
+      "fim": 390,
+      "chave": "variante"
+    },
+    {
+      "texto": "ready to test.",
+      "inicio": 390,
+      "fim": 431,
+      "chave": "variante"
+    },
+    {
+      "texto": "Upload your ad.",
+      "inicio": 534,
+      "fim": 563,
+      "chave": "chamada"
+    },
+    {
+      "texto": "Get the report.",
+      "inicio": 563,
+      "fim": 599,
+      "chave": "chamada"
+    }
+  ],
+  "textos": [
+    {
+      "texto": "Your ad is losing people in the first seconds.",
+      "inicio": 10,
+      "fim": 90
+    },
+    {
+      "texto": "You can see when they leave.",
+      "inicio": 100,
+      "fim": 138
+    },
+    {
+      "texto": "?",
+      "inicio": 138,
+      "fim": 171
+    },
+    {
+      "texto": "Not why.",
+      "inicio": 138,
+      "fim": 171
+    },
+    {
+      "texto": "We read your video,",
+      "inicio": 181,
+      "fim": 218
+    },
+    {
+      "texto": "second by second,",
+      "inicio": 218,
+      "fim": 252
+    },
+    {
+      "texto": "and match it to the moment people drop off.",
+      "inicio": 252,
+      "fim": 326
+    },
+    {
+      "texto": "Then you get a variant with one change,",
+      "inicio": 336,
+      "fim": 390
+    },
+    {
+      "texto": "ready to test.",
+      "inicio": 390,
+      "fim": 431
+    },
+    {
+      "texto": "The creative autopilot.",
+      "inicio": 431,
+      "fim": 525
+    },
+    {
+      "texto": "Vesk",
+      "inicio": 431,
+      "fim": 525
+    },
+    {
+      "texto": "hack.vesklab.com",
+      "inicio": 525,
+      "fim": 599
+    },
+    {
+      "texto": "Upload your ad.",
+      "inicio": 534,
+      "fim": 563
+    },
+    {
+      "texto": "Get the report.",
+      "inicio": 563,
+      "fim": 599
+    }
+  ]
+}

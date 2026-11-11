@@ -1,0 +1,94 @@
+{
+  "chave": "leitura",
+  "texto": "We read your video, second by second, and match it to the moment people drop off.",
+  "ouvido": "We read your video, second by second, and match it to the moment people drop off.",
+  "bruto_sha256": "c8b5778cd60ce1ef5fe030ede520457f45d3f30f207ddec075a7dc3a92071d29",
+  "duracao": 5.15,
+  "palavras": [
+    {
+      "texto": "We",
+      "inicio": 0.33,
+      "fim": 0.4
+    },
+    {
+      "texto": "read",
+      "inicio": 0.4,
+      "fim": 0.64
+    },
+    {
+      "texto": "your",
+      "inicio": 0.64,
+      "fim": 0.78
+    },
+    {
+      "texto": "video,",
+      "inicio": 0.78,
+      "fim": 1.1
+    },
+    {
+      "texto": "second",
+      "inicio": 1.58,
+      "fim": 1.8
+    },
+    {
+      "texto": "by",
+      "inicio": 1.8,
+      "fim": 2.0
+    },
+    {
+      "texto": "second,",
+      "inicio": 2.0,
+      "fim": 2.38
+    },
+    {
+      "texto": "and",
+      "inicio": 2.7,
+      "fim": 2.86
+    },
+    {
+      "texto": "match",
+      "inicio": 2.86,
+      "fim": 3.14
+    },
+    {
+      "texto": "it",
+      "inicio": 3.14,
+      "fim": 3.24
+    },
+    {
+      "texto": "to",
+      "inicio": 3.24,
+      "fim": 3.34
+    },
+    {
+      "texto": "the",
+      "inicio": 3.34,
+      "fim": 3.42
+    },
+    {
+      "texto": "moment",
+      "inicio": 3.42,
+      "fim": 3.68
+    },
+    {
+      "texto": "people",
+      "inicio": 3.68,
+      "fim": 3.96
+    },
+    {
+      "texto": "drop",
+      "inicio": 3.96,
+      "fim": 4.26
+    },
+    {
+      "texto": "off.",
+      "inicio": 4.26,
+      "fim": 4.684
+    }
+  ],
+  "whisper": {
+    "faster_whisper": "1.2.1",
+    "modelo": "small",
+    "compute_type": "int8"
+  }
+}

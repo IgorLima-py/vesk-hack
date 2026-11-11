@@ -1,0 +1,34 @@
+{
+  "chave": "marca",
+  "texto": "Vesk. The creative autopilot.",
+  "ouvido": "VESC, the Creative Autopilot.",
+  "bruto_sha256": "251c8469280a3072ac2b43ba53e02d61189dbcf259f9b704f41c1cc6d2862c44",
+  "duracao": 2.525,
+  "palavras": [
+    {
+      "texto": "Vesk.",
+      "inicio": 0.32,
+      "fim": 0.74
+    },
+    {
+      "texto": "The",
+      "inicio": 0.86,
+      "fim": 0.96
+    },
+    {
+      "texto": "creative",
+      "inicio": 0.96,
+      "fim": 1.26
+    },
+    {
+      "texto": "autopilot.",
+      "inicio": 1.26,
+      "fim": 2.05
+    }
+  ],
+  "whisper": {
+    "faster_whisper": "1.2.1",
+    "modelo": "small",
+    "compute_type": "int8"
+  }
+}

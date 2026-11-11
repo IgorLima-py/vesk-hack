@@ -1,0 +1,53 @@
+{
+  "voz": {
+    "modelo": "hexgrad/Kokoro-82M",
+    "revisao": "f3ff3571791e39611d31c381e3a41a3af07b4987",
+    "pesos_sha256": "496dba118d1a58f5f3db2efc88dbdc216e0483fc89fe6e47ee1f2c53f18ad1e4",
+    "voz": "af_heart",
+    "voz_sha256": "0ab5709b8ffab19bfd849cd11d98f75b60af7733253ad0d67b12382a102cb4ff",
+    "kokoro": "0.9.4",
+    "torch": "2.15.0+cpu",
+    "python": "3.11.9",
+    "semente": 20261111,
+    "fios": 2,
+    "taxa": 24000
+  },
+  "falas": {
+    "gancho": {
+      "arquivo": "brutos/gancho.wav",
+      "sha256": "893bc13f1a962cd914730cb89fbf745945ef381d465b49f88543c10310d5c8da",
+      "amostras": 72000,
+      "duracao": 3.0
+    },
+    "problema": {
+      "arquivo": "brutos/problema.wav",
+      "sha256": "badaa0b187069b40951778c9e50725ab2ffeb3928de33c9108978574296cb3da",
+      "amostras": 64200,
+      "duracao": 2.675
+    },
+    "leitura": {
+      "arquivo": "brutos/leitura.wav",
+      "sha256": "c8b5778cd60ce1ef5fe030ede520457f45d3f30f207ddec075a7dc3a92071d29",
+      "amostras": 123600,
+      "duracao": 5.15
+    },
+    "variante": {
+      "arquivo": "brutos/variante.wav",
+      "sha256": "c8df9da2c805f15dbd1222a63b93292ed5ec39417d8f8ad7ae53df92b1bac40b",
+      "amostras": 84000,
+      "duracao": 3.5
+    },
+    "marca": {
+      "arquivo": "brutos/marca.wav",
+      "sha256": "251c8469280a3072ac2b43ba53e02d61189dbcf259f9b704f41c1cc6d2862c44",
+      "amostras": 60600,
+      "duracao": 2.525
+    },
+    "chamada": {
+      "arquivo": "brutos/chamada.wav",
+      "sha256": "df7244a3fbe94e4f6be18ac21723016386154cf95a8c9323f7e177496a5dee57",
+      "amostras": 58800,
+      "duracao": 2.45
+    }
+  }
+}

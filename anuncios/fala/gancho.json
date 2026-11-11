@@ -1,0 +1,59 @@
+{
+  "chave": "gancho",
+  "texto": "Your ad is losing people in the first seconds.",
+  "ouvido": "Your ad is losing people in the first seconds.",
+  "bruto_sha256": "893bc13f1a962cd914730cb89fbf745945ef381d465b49f88543c10310d5c8da",
+  "duracao": 3.0,
+  "palavras": [
+    {
+      "texto": "Your",
+      "inicio": 0.335,
+      "fim": 0.42
+    },
+    {
+      "texto": "ad",
+      "inicio": 0.42,
+      "fim": 0.7
+    },
+    {
+      "texto": "is",
+      "inicio": 0.7,
+      "fim": 0.88
+    },
+    {
+      "texto": "losing",
+      "inicio": 0.88,
+      "fim": 1.16
+    },
+    {
+      "texto": "people",
+      "inicio": 1.16,
+      "fim": 1.56
+    },
+    {
+      "texto": "in",
+      "inicio": 1.56,
+      "fim": 1.72
+    },
+    {
+      "texto": "the",
+      "inicio": 1.72,
+      "fim": 1.8
+    },
+    {
+      "texto": "first",
+      "inicio": 1.8,
+      "fim": 1.98
+    },
+    {
+      "texto": "seconds.",
+      "inicio": 1.98,
+      "fim": 2.53
+    }
+  ],
+  "whisper": {
+    "faster_whisper": "1.2.1",
+    "modelo": "small",
+    "compute_type": "int8"
+  }
+}
