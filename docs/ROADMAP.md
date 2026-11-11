@@ -51,7 +51,7 @@ junta na `main` no próprio `/tchau` (`CLAUDE.md`). O ponteiro fica no orquestra
 | # | Chat | Perfil | Forma | Estado | Máquina | Depende de | Paralelo com | O que muda no dia seguinte |
 |---|---|---|---|---|---|---|---|---|
 | — | O — O orquestrador das ondas | `dificil` | sessao | 🚧 | Karen | — | todas | As fatias abrem sozinhas assim que a dependência passa, cada uma no seu worktree, e o Igor sabe a cada momento o que roda e o que espera a mão dele |
-| 1v | C1v — Os anúncios montados por código | `criativo` | sessao | ⬜ | Karen | — | C2, C3 | Os dois anúncios da Vesk existem em mp4, com rosto e voz de gente e o resto composto por código, e cada um traz o gabarito do segundo da marca, dos cortes e da fala |
+| 1v | C1v — Os anúncios montados por código | `criativo` | sessao | 🚧 | Karen | — | C2, C3 | Os dois anúncios da Vesk existem em mp4, com rosto e voz de gente e o resto composto por código, e cada um traz o gabarito do segundo da marca, dos cortes e da fala |
 | 1 | C1 — Os anúncios no ar | `padrao` | sessao | ⬜ | qualquer | C1v | C2, C3 | Dois anúncios da Vesk rodam na Meta com o teto do Igor, a curva real começa a juntar, e o segundo da marca de cada um está marcado à mão |
 | 2 | C2 — A vitrine e o rascunho | `padrao` | sessao | ⬜ | qualquer | — | C1, C3 | O repositório é público com README e licença, a página está no ar nos dois idiomas, os testes rodam a cada push, e o rascunho foi enviado |
 | 3 | C3 — Os exemplos com gabarito e o contrato do motor | `dificil` | sessao | ✅ | qualquer | — (os testes rodam local; o push os roda depois que a C2 juntar) | C1, C2 | Qualquer sessão gera um vídeo com a marca, os cortes e a fala em segundos conhecidos, e o motor tem um contrato escrito que um teste confere |

@@ -13,3 +13,4 @@ AAAA-MM-DD | <fatia> | correção | <o que o Igor corrigiu> | <a regra que isso 
   Gosto numa coisa só não entra.
 
 ---
+2026-11-11 | C1v | correção | pedi ao Igor que escolhesse um motor de vídeo entre dois, e ele pediu várias frentes testando as candidatas, com o resultado guardado para todos os repositórios | quando duas ou mais ferramentas servem, propor a prova em frentes paralelas com as mesmas medidas e guardar a tabela na skill global, em vez de pedir que o Igor escolha no escuro

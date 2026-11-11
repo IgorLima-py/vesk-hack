@@ -60,9 +60,11 @@ O que foi conferido:
 
 ## Próximo passo imediato
 
-**A próxima sessão é a C1v** (decisão do Igor no `/tchau` do orquestrador, 11/11). Abra com `/oi c1v`: o ponteiro
-continua no O, porque só o orquestrador mexe nele, e o `/oi` com a fatia no comando compara o perfil com o da C1v
-(`criativo`, opus/xhigh, plan mode, na Karen). O aviso de que o ponteiro pede `dificil` é esperado.
+**A próxima sessão continua a C1v.** O plano foi aprovado em 11/11 e está na seção «C1v (11/11/2026)» abaixo. A sessão
+nova executa a Fase 1, a prova dos três motores (o Igor escolhe o vencedor) e o A e o B. Abra com `/oi c1v`, na
+Karen, onde estão a skill `video` e o arquivo do plano. O ponteiro continua no O, porque só o orquestrador mexe nele,
+e o `/oi` com a fatia no comando compara o perfil com o da C1v (`criativo`, opus/xhigh, plan mode). O aviso de que o
+ponteiro pede `dificil` é esperado.
 
 O orquestrador (Opus, esforço high, na Karen) abre a onda 1: a C1 (os anúncios, com o Igor), a C2 (a vitrine e o
 rascunho) e a C3 (os exemplos com gabarito e o contrato do motor), cada uma na sua sessão.
@@ -178,6 +180,89 @@ ponteiro não andou: ele é do orquestrador.
 - Nenhuma outra fatia foi aberta: a C1 passou a esperar a C1v, e a C4 e a C5 esperam o que sai das duas.
 - O O não fecha: o `sai:` dele é todas as fatias ✅ ou cortadas. O ponteiro fica nele.
 - Bateria: não rodou, porque o orquestrador não mexeu em código.
+
+## C1v (11/11/2026): não fechou — o plano está aprovado e ainda não há código
+
+A sessão rodou na `main` da Karen, sem worktree, aberta com `/oi c1v`, com Opus e esforço `xhigh` medido pelo Bash,
+como o perfil `criativo` pede [V]. O ponteiro continua no O. O que entrou:
+- [V] O `falha antes:` deu vermelho: `ls anuncios/` sai 2, e `ls $VIDEOS/*.mp4` também sai 2.
+- [V] As decisões do Igor estão no bloco 5 e na seção C1v do `docs/ROADMAP.md` (`e7dbc89`):
+  - sem rosto nem voz dele, nem de pessoa real;
+  - inglês, para o público dos EUA;
+  - a marca é o wordmark do visual do site;
+  - A e B diferem só na posição da cartela da marca: perto de 14 s no A e perto de 3 s no B, numa chave só, `ordem`;
+  - a imagem é motion por código;
+  - a voz é o Kokoro `af_heart`, com um logo sonoro gerado no `ffmpeg` e sem trilha;
+  - o motor sai de uma prova entre Remotion, HyperFrames e Revideo, e o Igor escolhe.
+- **O plano aprovado.** O arquivo mora só na Karen (`~/.claude/plans/tender-wiggling-biscuit.md`), então o essencial
+  está aqui:
+  - **Roteiro**, com as chaves `gancho`, `problema`, `leitura`, `variante`, `marca` e `chamada`:
+    - «Your ad is losing people in the first seconds.»
+    - «You can see when they leave. Not why.»
+    - «We read your video, second by second, and match it to the moment people drop off.»
+    - «Then you get a variant with one change, ready to test.»
+    - «Vesk. The creative autopilot.» (a cartela com o wordmark e o logo sonoro no primeiro quadro)
+    - «Upload your ad. Get the report.» (a cartela final com `hack.vesklab.com`)
+
+    O A segue 1 2 3 4 5 6, e o B segue 1 5 2 3 4 6. A marca é dita uma vez só, e o primeiro quadro da cartela é o
+    `marca_em`. Na tela, sem número nenhum: a frase, uma curva desenhada caindo, o ponto de queda com «?», uma tira de
+    quadros, e dois quadros lado a lado com um elemento trocado no grifo. O texto passa pelo `grep` do `$PROIBIDO`
+    antes de virar voz.
+  - **Fase 1** (Python, `python -m anuncios`):
+    - `voz` usa o Kokoro e grava em `$VIDEOS/brutos/`, com o sha256 em `anuncios/brutos.json`;
+    - `transcrever` usa o faster-whisper e grava em `anuncios/fala/<chave>.json`, com a grafia do roteiro e o tempo
+      do whisper. Se faltar ou sobrar palavra, o comando para;
+    - `tempo <a|b>` grava a `linha_do_tempo.json`, que é a única entrada dos motores;
+    - `som <a|b>` monta o áudio pelo `ffmpeg`, com cada voz no seu quadro e o logo sonoro por `aevalsrc`. O pico é
+      normalizado, sem `loudnorm`;
+    - `final <a|b> --imagem <mp4 mudo>` queima o `.ass` com o filtro `subtitles` e usa as flags `bitexact` do
+      `exemplos/sintetico.py`. Grava o `$VIDEOS/<a|b>.mp4` e o gabarito, nas chaves da C3, com as legendas dentro
+      de `texto`.
+
+    Testes: `test_alinhar_fala_usa_grafia_do_roteiro` e `test_marca_em_e_cortes_saem_da_ordem`.
+  - **Fase 2, a prova dos motores.** São três subagentes em paralelo: Remotion 4.0.542, HyperFrames e Revideo. Cada
+    um desenha, em `$VIDEOS/provas/<motor>/`, fora do git, a imagem muda do A a partir da mesma linha do tempo, em
+    1080x1920 e 30 fps. `python -m anuncios prova <motor>` mede seis coisas:
+    - se dois renders dão o mesmo `framemd5`;
+    - se a cartela cai no quadro do `marca_em`;
+    - o tempo e o pico de RAM;
+    - as linhas de código;
+    - a licença;
+    - o que travou.
+
+    Os renders vão pela fila da Karen (`gpu_submit`). O Igor escolhe o vencedor, e a tabela vai para a skill
+    `video`.
+  - **Fase 3, o vencedor.** Ele vai para `anuncios/<motor>/`, com o lock exato e as fontes de pacote local.
+    - `a.json` e `b.json` diferem só na `ordem`.
+    - `anuncios/roteiro.md` cumpre o `sai:`. O `--mute-audio` do Remotion está na lista de argumentos de
+      `packages/renderer/src/open-browser.ts`, conferido em 11/11.
+    - `*.m4a` e `*.mp3` entram no `.gitignore`, porque hoje faltam e o `verificar:` os conta.
+- [V] A pesquisa teve duas levas de trabalhadores Sonnet e um conferente Opus. O conferente achou o literal de seis
+  afirmações:
+  - o Kokoro é Apache-2.0, e a `af_heart` tem nota «A»;
+  - o Chatterbox foi aposentado em 08/2026 e põe marca d'água;
+  - Meta e Toluna: marca e mensagem nos primeiros 5 s deram 1,7 vez mais intenção de compra forte;
+  - o HyperFrames é Apache-2.0 e «Deterministic: same input, same frames, same output»;
+  - a Sound Collection libera anúncio;
+  - «Over 75% of Reels views on Instagram are sound on».
+
+  Tudo isso, com a URL de cada linha, está na skill global `video` (`~/.claude/skills/video/SKILL.md`), **fora do git
+  e só na Karen**.
+- Não rodaram o `medir.ps1` nem o `conferir.ps1` da `/pesquisa`, porque o plan mode só deixa gravar o arquivo do
+  plano. O custo das duas levas não foi medido.
+- [V] O que existe na Karen:
+  - Node v24.13.0 e npm 11.6.2;
+  - ffmpeg 9.0.1 full, com `flite`, `subtitles` e `ass`;
+  - Python 3.14.3, com faster-whisper 1.2.1 e torch 2.10, só CPU.
+
+  O que **não** está instalado: `kokoro` e `chatterbox`. Se o `kokoro` não instalar no 3.14, use um venv de outra
+  versão e anote no roteiro.
+- [V] A máquina estava cheia: de 3 a 4 GiB de RAM livre, e de 4 a 5 tarefas esperando na fila do workerq.
+- Há três worktrees velhos, em HEAD solto: `c1-anuncios-8fcf4c` e `c2-vitrine-3b0944`, em `67b67e4`, e
+  `c3-exemplos-contrato-c9b4ec`, em `b789318`. O da C1 é de antes da C1v.
+- A seção C1v pede plan mode. A próxima sessão entra nele, lê este plano e sai com ele, sem replanejar.
+- No Linear, a VES-102 foi para In Progress.
+- Bateria: não rodou, porque esta sessão só mexeu em `docs/` e não em código.
 
 ## Madrugada 10/11 — decisões para o Igor conferir
 
