@@ -4,5 +4,9 @@
 #   uv pip compile --python 3.11 anuncios/requisitos-voz.in -o anuncios/requisitos-voz.txt
 kokoro==0.9.4
 soundfile
+# O Python 3.11 da Karen traz o brotli 1.1.0 no site-packages dele, e ele vaza para o ambiente do uv: o httpx2 do
+# huggingface_hub chama process(..., output_buffer_limit=), que só existe a partir do 1.2.0 (job 1287, 11/11/2026:
+# «TypeError: process() takes no keyword arguments» ao baixar o Kokoro-82M).
+brotli>=1.2.0
 # O misaki baixa o modelo do spaCy pelo pip na primeira fala, e o ambiente do uv não tem pip: a wheel vai fixada aqui.
 en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
