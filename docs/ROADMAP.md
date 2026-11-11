@@ -147,8 +147,8 @@ modelos saem do ar: a API do Sora 2 em 24/09/2026 e o Veo 3.1 Preview em 22/10/2
   dos motores. As decisões estão no bloco 5.
 **sai:**
 - `anuncios/`, escrito do zero no evento (6.2):
-  - o projeto do motor que a prova dos motores escolher, com um componente só. Remotion, HyperFrames e Revideo
-    desenham a mesma `linha_do_tempo.json` e são medidos pelos mesmos comandos, e o Igor escolhe. A tabela da prova
+  - o projeto do motor que a prova dos motores escolher, com um componente só. Remotion, HyperFrames, Revideo e
+    FrameFields desenham a mesma `linha_do_tempo.json` e são medidos pelos mesmos comandos, e o Igor escolhe. A tabela da prova
     vai para a skill global `video`. O Remotion é grátis para empresa de até 3 pessoas
     (https://github.com/remotion-dev/remotion/blob/main/LICENSE.md);
   - a voz, o som (com o logo sonoro gerado no `ffmpeg`, na cartela da marca) e o gabarito saem do Python, a partir
@@ -657,4 +657,5 @@ Uma linha por decisão, só acrescentada, nunca reescrita. Quando duas linhas tr
 2026-11-09 | respondida | Ondas e orquestrador | a fila anda em paralelo, em ondas, tocada por uma sessão orquestradora que abre cada fatia no seu worktree; o maestro do playbook fica fora (recusa repositório público e toca uma fatia por vez); a cota acabar mais rápido está aceita (decisão do Igor em 2026-11-09) | todas as fatias
 2026-11-11 | respondida | Os vídeos A e B | montados por código (rosto e voz gravados pelo Igor no celular; texto, marca e legenda compostos no Remotion), com o gabarito ao lado de cada mp4, numa fatia nova, a C1v, antes da C1; a C5 passa a esperar o vídeo `A` da C1v; o mapa dos jeitos de fazer vídeo mora na skill global `video`, fora deste git (decisão do Igor em 2026-11-11) | C1v, C1, C5, C13
 2026-11-11 | respondida | Os vídeos A e B, de novo | sem rosto nem voz do Igor nem de pessoa real (vale sobre a linha anterior); inglês, público EUA; a marca é o wordmark do visual do site; A e B diferem só na posição da cartela da marca (perto de 14 s e perto de 3 s), numa chave só, `ordem`; imagem em motion por código; voz Kokoro `af_heart` e logo sonoro gerado no `ffmpeg`, sem trilha; o motor sai de uma prova com Remotion, HyperFrames e Revideo, medidos pelos mesmos comandos, e o Igor escolhe; o que a prova ensinar vai para a skill `video`, para todos os repositórios (decisão do Igor em 2026-11-11) | C1v, C1, C5, C13
+2026-11-11 | respondida | Os motores da prova | quatro frentes: Remotion, HyperFrames, Revideo e FrameFields (vale sobre a lista da linha anterior), depois da `/pesquisa` completa, com a varredura do GitHub, o conferente e o conferidor; o FrameFields entra porque não usa navegador e promete o mesmo quadro, e o Revideo fica para a prova medir se renderiza no Windows (decisão do Igor em 2026-11-11) | C1v
 ```
