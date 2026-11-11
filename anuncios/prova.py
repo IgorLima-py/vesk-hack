@@ -4,8 +4,8 @@
 
 Cada render é a imagem muda do A, desenhada a partir de anuncios/linha_do_tempo/a.json. A prova mede:
 1. se os dois renders dão o mesmo `framemd5` (quadro a quadro);
-2. se a cartela entra no quadro do `marca_em`: o miolo da barra do grifo está inteiro no grifo nesse quadro, e não
-   no anterior;
+2. se a cartela entra no quadro do `marca_em`: mais da metade do miolo da barra está no grifo nesse quadro, e menos
+   da metade no anterior;
 3. o tamanho, o fps e o número de quadros, contra a linha do tempo;
 4. as linhas de código do projeto (sem node_modules, lock, saída de build);
 5. a licença do pacote do motor, com o trecho.
@@ -27,6 +27,10 @@ from anuncios.final import _sonda
 
 TOLERANCIA_COR = 24  # por canal, a mesma dos testes do sintético da C3: o yuv420p mexe um pouco na cor
 MIOLO = 2  # px tirados de cada lado da barra: o yuv420p subamostra o croma em 2x2, e a borda mistura as cores
+# A barra está ou não está: presente é mais da metade do miolo no grifo, o ponto do meio entre ausente (0) e presente
+# (1). Exigir 1,0 exato reprovou a Remotion por 6 a 8 px de ruído de croma do h264 nos cantos (0,999 no marca_em e 0,0
+# no quadro anterior, jobs 1300 e 1306, 11/11/2026).
+PRESENTE = 0.5
 LIMIAR_DE_CENA = 0.3  # o mesmo dos testes do sintético da C3
 EXTENSOES = {".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs", ".html", ".css", ".py", ".vue", ".svelte", ".wgsl"}
 FORA = {"node_modules", "dist", "out", "build", ".cache", "output", "renders"}
@@ -124,7 +128,7 @@ def main(motor: str, renders: list[Path], projeto: Path, pacote: str | None = No
         "marca_em": n,
         "barra_no_marca_em": round(no_marca_em, 4),
         "barra_no_quadro_anterior": round(antes, 4),
-        "cartela_no_quadro_certo": no_marca_em == 1.0 and antes < 1.0,
+        "cartela_no_quadro_certo": no_marca_em > PRESENTE and antes < PRESENTE,
         "cortes_esperados": linha["cortes"],
         "cortes_vistos": cortes_vistos(renders[0], linha["fps"]),
         "linhas_de_codigo": linhas_de_codigo(projeto),
