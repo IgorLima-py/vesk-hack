@@ -102,8 +102,9 @@ def licenca(projeto: Path, pacote: str | None) -> dict:
     return info
 
 
-def main(motor: str, renders: list[Path], projeto: Path, pacote: str | None = None) -> int:
-    linha = json.loads((LINHA / "a.json").read_text(encoding="utf-8"))
+def main(motor: str, renders: list[Path], projeto: Path, pacote: str | None = None,
+         caminho_da_linha: Path | None = None) -> int:
+    linha = json.loads(Path(caminho_da_linha or LINHA / "a.json").read_text(encoding="utf-8"))
     if len(renders) != 2:
         raise SystemExit("passe dois renders (--render duas vezes)")
     sondas = [_sonda(r) for r in renders]

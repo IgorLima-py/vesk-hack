@@ -41,6 +41,7 @@ def main(argv: list[str] | None = None) -> int:
                        help="um mp4 mudo do A; passe dois, de dois renders")
     prova.add_argument("--projeto", type=Path, required=True, help="a pasta do projeto do motor")
     prova.add_argument("--pacote", help="o pacote npm do motor, para ler a licença em node_modules")
+    prova.add_argument("--linha", type=Path, help="a linha do tempo do A (padrão: anuncios/linha_do_tempo/a.json)")
 
     a = p.parse_args(argv)
     if a.comando == "voz":
@@ -60,7 +61,7 @@ def main(argv: list[str] | None = None) -> int:
         return m.main(a.anuncio, a.imagem, a.saida)
     if a.comando == "prova":
         from anuncios import prova as m
-        return m.main(a.motor, a.render, a.projeto, a.pacote)
+        return m.main(a.motor, a.render, a.projeto, a.pacote, a.linha)
     return 2
 
 
