@@ -10,7 +10,7 @@ import pytest
 from anuncios.caminhos import PACOTE
 from anuncios.falas import CHAVES, FALAS
 from anuncios.tempo import montar
-from anuncios.transcrever import alinhar
+from anuncios.transcrever import ajustar_pontas, alinhar
 
 OUVIDAS = [(" Vesque.", 0.10, 0.52), (" The", 0.70, 0.81), (" creative", 0.81, 1.25), (" autopilot.", 1.25, 1.98)]
 
@@ -24,6 +24,14 @@ def test_alinhar_fala_usa_grafia_do_roteiro():
         alinhar("Vesk. The creative autopilot.", OUVIDAS[:3])
     with pytest.raises(ValueError, match=r"sobram \['now'\]"):
         alinhar("Vesk. The creative autopilot.", OUVIDAS + [(" now", 2.0, 2.2)])
+
+
+# evita: a fala do gabarito começando em 0,0 s, onde o whisper pôs a primeira palavra, 0,32 s antes da voz (job 1299)
+def test_pontas_da_fala_vem_do_audio():
+    palavras = ajustar_pontas(alinhar("Vesk. The creative autopilot.", [(" Vesk.", 0.0, 0.74)] + OUVIDAS[1:]),
+                              0.317, 2.056)
+    assert (palavras[0]["inicio"], palavras[-1]["fim"]) == (0.317, 2.056)
+    assert [(p["inicio"], p["fim"]) for p in palavras[1:3]] == [(0.7, 0.81), (0.81, 1.25)]
 
 
 def _falas_sinteticas() -> dict[str, dict]:
