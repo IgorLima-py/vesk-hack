@@ -63,8 +63,11 @@ O que foi conferido:
 O orquestrador (Opus, esforço high, na Karen) abre a onda 1: a C1 (os anúncios, com o Igor), a C2 (a vitrine e o
 rascunho) e a C3 (os exemplos com gabarito e o contrato do motor), cada uma na sua sessão.
 
+Desde 11/11, a fila tem a C1v (os anúncios A e B montados por código), que abre já, sem dependência: perfil
+`criativo` (opus, xhigh), com plan mode, na Karen. A C1 espera a C1v.
+
 Com a C3 na `main`, abrem duas frentes:
-- a C5, que só espera o vídeo `A` da C1;
+- a C5, que só espera o vídeo `A` da C1v (desde 11/11; antes era o da C1);
 - o motor na nuvem, no outro repositório, que segue o `contrato/` e o que a nota `c3-para-o-motor-na-nuvem.md`
   pede.
 
@@ -125,6 +128,40 @@ Com a C3 na `main`, abrem duas frentes:
   `git merge origin/main` (commit de merge a mais). Nenhum conflito.
 - Bateria desta sessão, pela trava, com o merge: [V] 5 passaram, 0 falharam, 5 pulados (os 5 de contrato, sem `MOTOR_URL`), em 61 s.
 - Sem segunda opinião em Opus: o ponteiro desta fatia é do orquestrador e a fatia não fechou, então o ponteiro não anda.
+
+## Pesquisa dos vídeos e a C1v (11/11/2026)
+
+Sessão de pesquisa aberta pelo orquestrador (perfil `replan`), na `main` da Karen, sem worktree. Não é fatia, e o
+ponteiro não andou: ele é do orquestrador.
+- [V] O mapa dos jeitos de fazer um anúncio em vídeo está na skill global `video`
+  (`~/.claude/skills/video/SKILL.md`), fora de qualquer git, como o Igor escolheu. Ele cobre gravado de verdade, tela,
+  vídeo por código, IA generativa, avatar, banco de imagens, voz e legenda, com a fonte de cada linha.
+- [V] A recomendação para A e B é o híbrido montado por código: rosto e voz do Igor no celular, e por cima texto,
+  marca e legenda compostos no Remotion, com o gabarito ao lado de cada mp4.
+- [V] O Igor aprovou a fatia nova, e o commit `ee92833` mudou o `docs/ROADMAP.md`:
+  - a C1v entrou na fila, com a seção própria;
+  - a C1 passa a depender dela, e o verificar da C1 ganhou a marca à mão contra o gabarito, com ±1 s;
+  - a C5 espera o vídeo `A` da C1v;
+  - a C13 ganha a skill na entrada;
+  - o bloco 5 ganhou uma linha.
+- [V] No Linear: a VES-102 é o espelho da C1v (Todo), e a VES-76 (C1) e a VES-82 (C5) têm o «Depende de» novo.
+- [V] Um conferente Opus releu na fonte as três afirmações que decidem:
+  - a página do rótulo de IA da Meta fala de **imagem**: a feita com IA de terceiros não leva o rótulo, e de vídeo a
+    página não diz nada;
+  - o regulamento: a 6.4 permite IA, e a 6.2 trata só de código;
+  - o Remotion é grátis para empresa de até 3 pessoas, inclusive para uso comercial.
+- [V] Fora do ar desde 2026: a API do Sora 2 (24/09) e o Veo 3.1 Preview da Gemini API (22/10).
+- Não achei semente para refazer o mesmo vídeo por IA, nem estudo revisado por pares de anúncio em vídeo feito por IA
+  contra feito por gente.
+- O relatório completo e a proposta estão na pasta de notas das sessões: `video-pesquisa-relatorio.md` e
+  `video-proposta-da-fila.md`.
+- [?] Esforço: o Igor disse que subiu a sessão para xhigh; não foi conferido por comando.
+- **Pendências:**
+  - o idioma e o público do anúncio. A fala em `vesk-hack-videos/voz/fala.txt` é em português, e o `CLAUDE.md`
+    limita a prospecção ativa a empresa dos EUA. O Igor decide no plano da C1v;
+  - mover a skill `video` para `playbook/.claude/skills`, com link, como as outras skills globais;
+  - o vídeo de demo da C13 (gravação de tela com áudio) ficou fora da pesquisa.
+- Bateria: não rodou, porque esta sessão não mexeu em código, só em `docs/`.
 
 ## Madrugada 10/11 — decisões para o Igor conferir
 
