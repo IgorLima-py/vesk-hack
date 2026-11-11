@@ -1,0 +1,46 @@
+{
+  "ordem": ["gancho", "marca", "problema", "leitura", "variante", "chamada"],
+  "fps": 30,
+  "largura": 1080,
+  "altura": 1920,
+  "taxa_do_som": 24000,
+  "pausa_antes_s": null,
+  "pausa_depois_s": null,
+  "logo_sonoro_s": null,
+  "pico_dbfs": -1,
+  "visual": {
+    "fundo": "#000000",
+    "texto": "#eeedf4",
+    "mudo": "#a09db2",
+    "grifo": "#ffe14a",
+    "borda": "#26242e",
+    "cartao": "#0c0b10",
+    "fontes": {
+      "serifa": {"familia": "Newsreader", "arquivo": "anuncios/fontes/newsreader/Newsreader[opsz,wght].ttf"},
+      "texto": {"familia": "Schibsted Grotesk", "arquivo": "anuncios/fontes/schibstedgrotesk/SchibstedGrotesk[wght].ttf"},
+      "mono": {"familia": "IBM Plex Mono", "arquivo": "anuncios/fontes/ibmplexmono/IBMPlexMono-Regular.ttf"}
+    }
+  },
+  "zona_segura": {"topo": 269, "base": 672, "lados": 65},
+  "legenda": {
+    "familia": "Schibsted Grotesk",
+    "tamanho": 54,
+    "cor": "#eeedf4",
+    "contorno": 3,
+    "faixa_y": [1088, 1248],
+    "sem_legenda": ["gancho", "marca"]
+  },
+  "cartela_marca": {
+    "wordmark": "Vesk",
+    "tamanho": 240,
+    "barra": {"x": 390, "y": 860, "largura": 300, "altura": 25}
+  },
+  "origem": {
+    "visual": "as cores e as fontes do site/public/style.css",
+    "zona_segura": "Meta, Instagram Reels ads guide: 14% em cima, 35% embaixo e 6% dos lados sem texto nem logo (https://web.facebook.com/business/ads-guide/update/video/instagram-reels); em 1080x1920, 1920*0,14, 1920*0,35 e 1080*0,06",
+    "pico_dbfs": "o teto de -1 dBTP da EBU R 128 (https://tech.ebu.ch/docs/r/r128.pdf), aplicado ao pico de amostra; sem loudnorm, porque nenhum alvo de loudness para anúncio da Meta tem fonte",
+    "legenda": "escolha de desenho: 54 px cabem em duas linhas na largura da zona segura; a faixa acaba onde a zona segura de baixo começa (1920-672=1248) e tem a altura de duas linhas com folga; sem legenda no gancho e na cartela da marca, onde a tela já escreve a frase (decisão do Igor, 11/11/2026)",
+    "cartela_marca": "o h1 do site em escala: a barra tem 1,25 vez o corpo da letra de largura (4.5rem para 3.6rem) e 0,104 de altura (6px para 3.6rem); com o wordmark em 240 px, 300x25, centrada",
+    "pausas": "a decisão do Igor, que ainda não veio"
+  }
+}

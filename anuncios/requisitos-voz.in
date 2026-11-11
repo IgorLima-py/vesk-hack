@@ -1,0 +1,8 @@
+# A voz (`python -m anuncios voz`) roda no Python 3.11 pelo uv: no 3.14, o pip só acha o kokoro até a 0.7.16, e a
+# 0.9.4 não tem distribuição para ele (`pip index versions kokoro`, medido na Karen em 11/11/2026).
+# O requisitos-voz.txt sai daqui, com a versão exata de tudo:
+#   uv pip compile --python 3.11 anuncios/requisitos-voz.in -o anuncios/requisitos-voz.txt
+kokoro==0.9.4
+soundfile
+# O misaki baixa o modelo do spaCy pelo pip na primeira fala, e o ambiente do uv não tem pip: a wheel vai fixada aqui.
+en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
