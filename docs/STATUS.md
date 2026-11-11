@@ -60,11 +60,13 @@ O que foi conferido:
 
 ## Próximo passo imediato
 
-**A próxima sessão continua a C1v.** O plano foi aprovado em 11/11 e está na seção «C1v (11/11/2026)» abaixo. A sessão
-nova executa a Fase 1, a prova dos três motores (o Igor escolhe o vencedor) e o A e o B. Abra com `/oi c1v`, na
-Karen, onde estão a skill `video` e o arquivo do plano. O ponteiro continua no O, porque só o orquestrador mexe nele,
-e o `/oi` com a fatia no comando compara o perfil com o da C1v (`criativo`, opus/xhigh, plan mode). O aviso de que o
-ponteiro pede `dificil` é esperado.
+**A próxima sessão continua a C1v, pela Fase 1.** A `/pesquisa` dos motores já rodou inteira, e o Igor escolheu as
+quatro frentes da prova: Remotion, HyperFrames, Revideo e FrameFields (seção «C1v (11/11/2026, segunda sessão)»
+abaixo). O plano vale como foi aprovado em 11/11 (seção «C1v (11/11/2026)»), com a prova em quatro frentes. A sessão
+nova entra no plan mode, como a seção pede, e sai com o plano já aprovado, sem replanejar. Depois roda o `falha antes:`,
+faz a Fase 1, a prova e o A e o B. Abra com `/oi c1v`, na Karen, onde estão a skill `video` e os arquivos dos planos.
+O ponteiro continua no O, porque só o orquestrador mexe nele, e o `/oi` com a fatia no comando compara o perfil com o
+da C1v (`criativo`, opus/xhigh, plan mode). O aviso de que o ponteiro pede `dificil` é esperado.
 
 O orquestrador (Opus, esforço high, na Karen) abre a onda 1: a C1 (os anúncios, com o Igor), a C2 (a vitrine e o
 rascunho) e a C3 (os exemplos com gabarito e o contrato do motor), cada uma na sua sessão.
@@ -263,6 +265,69 @@ como o perfil `criativo` pede [V]. O ponteiro continua no O. O que entrou:
 - A seção C1v pede plan mode. A próxima sessão entra nele, lê este plano e sai com ele, sem replanejar.
 - No Linear, a VES-102 foi para In Progress.
 - Bateria: não rodou, porque esta sessão só mexeu em `docs/` e não em código.
+
+## C1v (11/11/2026, segunda sessão): não fechou — a /pesquisa completa e os quatro motores; ainda sem código
+
+A sessão rodou na `main` da Karen, aberta com `/oi c1v`, com Opus e esforço `xhigh` medido pelo Bash [V]. O ponteiro
+continua no O.
+- [V] O `falha antes:` deu vermelho de novo: `ls anuncios/` sai 2, e `ls $VIDEOS/*.mp4` também.
+- [V] O Igor perguntou se o plano tinha usado a `/pesquisa`. Tinha usado só em parte: sem o `medir.ps1`, sem o
+  `conferir.ps1`, com duas levas e sem registro da varredura do GitHub, porque o plan mode só deixa gravar o arquivo
+  do plano. Ele pediu para completar a pesquisa, e o plano novo pôs a pesquisa como Fase 0, fora do plan mode
+  (`~/.claude/plans/hidden-stirring-twilight.md`, só na Karen, aprovado). O resto do plano de 11/11 não mudou.
+- [V] A `/pesquisa` rodou inteira:
+  - uma leva de 3 trabalhadores Sonnet (família do navegador, família sem navegador, quem já comparou) e um
+    conferente Opus sobre as afirmações que decidem;
+  - o `conferir.ps1` saiu 0, e o `medir.ps1` (`20261111-134346-00c0`) deu US$ 5,04 nesta sessão;
+  - o relatório foi entregue na conversa e apagado do `%TEMP%`. Os achados estão na skill `video`, na tabela «Motores
+    de vídeo por código» e nas ressalvas logo abaixo dela (fora do git, só na Karen).
+- [V] A decisão do Igor: **quatro frentes na prova, Remotion, HyperFrames, Revideo e FrameFields**, no bloco 5 e na
+  seção C1v do `docs/ROADMAP.md` (`1109c7d`).
+- O que a prova precisa levar em conta (conferido no literal pelo conferente):
+  - **Remotion 4.0.542:** a correção dos quadros diferentes no Windows (PR #12939) saiu na 4.0.541 e está dentro da
+    4.0.542, mas a PR diz «Windows runtime verification is still needed». Renderize com `--concurrency=1`.
+  - **HyperFrames:** renderize com 1 worker, porque 1 e 3 workers dão quadros diferentes (#7111, aberta). No Windows, o
+    `spawn EBUSY` transitório do ffmpeg derruba o render (#4058, aberta).
+  - **Revideo:** o `npm run render` do exemplo padrão falha no Windows 10 com «Output file #0 does not contain any
+    stream» (#348, aberta). A prova mede se ele renderiza na Karen.
+  - **FrameFields:** sem navegador, WebGPU com Dawn, D3D12 no Windows, Apache-2.0, cena em TypeScript. O README diz
+    «Deterministic & Frame-Accurate» e não diz que alguém testou o Windows. Usa a GPU: vai pelo `gpu_submit` com
+    `vram_gb`.
+- [V] A zona segura do Reels, no literal da Meta: «Deixe pelo menos 14% da parte superior, 35% da parte inferior e 6%
+  de cada lado do seu ativo sem texto, logotipos ou outros elementos criativos importantes.»
+  (https://web.facebook.com/business/ads-guide/update/video/instagram-reels). Em 1080x1920 são 269 px em cima, 672
+  embaixo e 65 dos lados (conta: 1920 × 0,14; 1920 × 0,35; 1080 × 0,06). A legenda fica logo acima dos 672 px de
+  baixo, e os motores desenham dentro da zona.
+- O que esta sessão levantou para a Fase 1, ainda sem código:
+  - [V] No Python 3.14, o pip só acha o `kokoro` até a 0.7.16 (`pip index versions kokoro`); a 0.9.4 não tem
+    distribuição para ele. Há um Python 3.11 (`py -0`) e o `uv` no PATH. O caminho é
+    `uv run --no-project --python 3.11 --with-requirements <requisitos com versão exata> python -m anuncios voz`.
+  - [?] O `misaki`, que o `kokoro` usa, baixa o `en_core_web_sm` do spaCy pelo pip, e o ambiente do `uv` não tem pip.
+    Fixe a wheel do `en_core_web_sm` no arquivo de requisitos. Não medi.
+  - [?] O decodificador do Kokoro soma ruído aleatório: ponha `torch.manual_seed` antes de cada fala e confira o
+    sha256 gerando duas vezes. Não medi.
+  - [V] O `faster-whisper` 1.2.1 está no Python 3.14, e o modelo `faster-whisper-small` está no cache do Hugging
+    Face na Karen.
+  - [V] As três fontes do site estão no `google/fonts`, no commit `c30b221beb0c1da59d563feb91ec8656a1fa972a`:
+    `ofl/schibstedgrotesk/SchibstedGrotesk[wght].ttf`, `ofl/newsreader/Newsreader[opsz,wght].ttf` e
+    `ofl/ibmplexmono/IBMPlexMono-*.ttf`, cada uma com o `OFL.txt`. Elas vão para `anuncios/fontes/` com a origem
+    (URL@commit), e servem à legenda e aos motores sem rede.
+  - Proposta de desenho, que não foi aprovada nem escrita:
+    - `a.json` e `b.json` levam os mesmos parâmetros (as cores e as fontes do site, a zona segura, as pausas) e
+      diferem só na `ordem`;
+    - cada segmento é a pausa antes, mais o bruto inteiro (sem cortar silêncio, para não ter limiar sem fonte),
+      mais a pausa depois, arredondado para cima em quadros;
+    - na cartela da marca, o logo sonoro toca no primeiro quadro e a voz entra depois dele;
+    - os `cortes` são o começo de cada segmento menos o primeiro, e a imagem tem de cortar de verdade ali;
+    - a legenda queimada não aparece no gancho nem na cartela da marca, onde a tela já mostra a própria frase. Isso
+      precisa do sim do Igor;
+    - no filtro `subtitles`, o `ffmpeg` roda com o diretório da montagem como pasta de trabalho, e as fontes vão
+      copiadas para lá: assim o caminho não tem `C:` para escapar.
+- [V] A fila da Karen: com o sim do Igor, cancelei o job #1232 (`c1-voz-chatterbox`, de 10/11, do plano antigo, com
+  a voz dele). A RAM livre ficou entre 4,7 e 5,9 GiB, e três jobs de outro projeto esperam 6 GiB cada. O Kokoro e o whisper vão
+  pelo `gpu_submit` com `gpus: 0`.
+- No Linear, a VES-102 continua In Progress.
+- Bateria: não rodou, porque esta sessão não mexeu em código, só em `docs/`.
 
 ## Madrugada 10/11 — decisões para o Igor conferir
 

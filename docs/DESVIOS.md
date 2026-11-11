@@ -14,3 +14,4 @@ AAAA-MM-DD | <fatia> | correção | <o que o Igor corrigiu> | <a regra que isso 
 
 ---
 2026-11-11 | C1v | correção | pedi ao Igor que escolhesse um motor de vídeo entre dois, e ele pediu várias frentes testando as candidatas, com o resultado guardado para todos os repositórios | quando duas ou mais ferramentas servem, propor a prova em frentes paralelas com as mesmas medidas e guardar a tabela na skill global, em vez de pedir que o Igor escolha no escuro
+2026-11-11 | C1v | correção | o Igor perguntou se o plano tinha usado a /pesquisa: tinha usado só em parte (sem medir.ps1, conferir.ps1 nem a varredura registrada do GitHub), porque o plan mode só deixa gravar o arquivo do plano | pesquisa que decide um plano roda inteira antes do plan mode, ou entra no plano como a primeira fase, e nunca pela metade dentro dele
