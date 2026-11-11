@@ -131,7 +131,7 @@ Igor com as palavras dela.
 
 `criativo` · opus · xhigh · forma: sessao · máquina: Karen · plan mode: sim · contexto: limpo antes
 
-**persona:** diretor de criação que monta por código dois anúncios de verdade: rosto e voz de gente gravados no celular, o resto composto por cima, e cada coisa num segundo que o gabarito conhece.
+**persona:** diretor de criação que monta por código dois anúncios de verdade, sem rosto nem voz de pessoa real: motion no visual do site, voz sintética de licença comercial, e cada coisa num segundo que o gabarito conhece.
 **por que existe:** em 11/11, a pesquisa dos jeitos de fazer vídeo (a skill global `video`, em
 `~/.claude/skills/video/SKILL.md`, fora deste git, com a fonte de cada linha) recomendou o híbrido montado por código.
 Gravado à mão, o vídeo não dá o segundo exato nem a prova da variante. A IA generativa não refaz o mesmo vídeo, e os
@@ -139,15 +139,20 @@ modelos saem do ar: a API do Sora 2 em 24/09/2026 e o Veo 3.1 Preview em 22/10/2
 **entra:**
 - a skill `video`, `docs/hackathon.md` (a 6.4 permite IA, e a 6.2 trata de código) e o `CLAUDE.md`;
 - o gerador da C3 (`exemplos/sintetico.py`), que dá o formato do gabarito;
-- a marca da Vesk, que o Igor traz, e a fala em `$VIDEOS/voz/fala.txt`;
-- o idioma e o público do anúncio, que o Igor decide no plano, numa linha do bloco 5. O `CLAUDE.md` limita a
-  prospecção ativa a empresa dos EUA;
-- o bruto que o Igor grava no celular, na vertical: rosto e voz, ou só a voz. Sem bruto de voz, a voz sai de um TTS
-  local com licença comercial, o Chatterbox (MIT) ou o Kokoro (Apache-2.0).
+- a marca da Vesk: o wordmark no visual do site (`site/public/style.css`);
+- o roteiro em inglês, para o público dos EUA, a partir da fala em `$VIDEOS/voz/fala.txt`;
+- sem rosto nem voz de pessoa real. A voz vem do Kokoro-82M `af_heart` (Apache-2.0), gerado local, e o arquivo vira
+  bruto com sha256;
+- o plano aprovado pelo Igor em 11/11, gravado no `docs/STATUS.md`, com o roteiro, a parte comum em Python e a prova
+  dos motores. As decisões estão no bloco 5.
 **sai:**
 - `anuncios/`, escrito do zero no evento (6.2):
-  - o projeto Remotion, grátis para empresa de até 3 pessoas
-    (https://github.com/remotion-dev/remotion/blob/main/LICENSE.md), com um componente só;
+  - o projeto do motor que a prova dos motores escolher, com um componente só. Remotion, HyperFrames e Revideo
+    desenham a mesma `linha_do_tempo.json` e são medidos pelos mesmos comandos, e o Igor escolhe. A tabela da prova
+    vai para a skill global `video`. O Remotion é grátis para empresa de até 3 pessoas
+    (https://github.com/remotion-dev/remotion/blob/main/LICENSE.md);
+  - a voz, o som (com o logo sonoro gerado no `ffmpeg`, na cartela da marca) e o gabarito saem do Python, a partir
+    da mesma linha do tempo;
   - os parâmetros de cada anúncio em `anuncios/a.json` e `anuncios/b.json`;
   - a legenda queimada, feita do bruto pelo faster-whisper e pelo filtro `subtitles` do `ffmpeg`;
 - `anuncios/roteiro.md`, com:
@@ -171,7 +176,7 @@ modelos saem do ar: a API do Sora 2 em 24/09/2026 e o Veo 3.1 Preview em 22/10/2
 **falha antes:** `ls anuncios/` falha e `ls $VIDEOS/*.mp4` não acha nada hoje.
 **prompt de abertura:**
 
-> Você é diretor de criação e vai montar por código os dois anúncios da Vesk. Comece rodando o `falha antes:` da C1v. Leia a seção C1v, a skill `video`, `docs/hackathon.md` e o `CLAUDE.md`. No plano, traga ao Igor o roteiro dos dois, com a marca em segundos diferentes, a decisão do idioma e do público, e a lista do que ele grava no celular. Monte no Remotion um componente só, com a legenda queimada e o gabarito ao lado de cada mp4. Quem grava o bruto é o Igor. Pronto quando os comandos do `verificar:` da C1v passarem.
+> Você é diretor de criação e vai montar por código os dois anúncios da Vesk, sem rosto nem voz de pessoa real. Comece rodando o `falha antes:` da C1v. Leia a seção C1v, o plano aprovado em 11/11 (no `docs/STATUS.md`), a skill `video`, `docs/hackathon.md` e o `CLAUDE.md`. Faça a parte comum em Python, a prova dos três motores com as mesmas medidas, leve a tabela ao Igor para ele escolher, e monte A e B no vencedor, com a legenda queimada e o gabarito ao lado de cada mp4. Pronto quando os comandos do `verificar:` da C1v passarem.
 
 ### C1 — Os anúncios no ar
 
@@ -651,4 +656,5 @@ Uma linha por decisão, só acrescentada, nunca reescrita. Quando duas linhas tr
 2026-11-05 | respondida | Queda sem a curva por segundo | com os pontos de 25 a 100% do export, a queda é o trecho entre dois pontos dados, nunca um segundo interpolado | C6
 2026-11-09 | respondida | Ondas e orquestrador | a fila anda em paralelo, em ondas, tocada por uma sessão orquestradora que abre cada fatia no seu worktree; o maestro do playbook fica fora (recusa repositório público e toca uma fatia por vez); a cota acabar mais rápido está aceita (decisão do Igor em 2026-11-09) | todas as fatias
 2026-11-11 | respondida | Os vídeos A e B | montados por código (rosto e voz gravados pelo Igor no celular; texto, marca e legenda compostos no Remotion), com o gabarito ao lado de cada mp4, numa fatia nova, a C1v, antes da C1; a C5 passa a esperar o vídeo `A` da C1v; o mapa dos jeitos de fazer vídeo mora na skill global `video`, fora deste git (decisão do Igor em 2026-11-11) | C1v, C1, C5, C13
+2026-11-11 | respondida | Os vídeos A e B, de novo | sem rosto nem voz do Igor nem de pessoa real (vale sobre a linha anterior); inglês, público EUA; a marca é o wordmark do visual do site; A e B diferem só na posição da cartela da marca (perto de 14 s e perto de 3 s), numa chave só, `ordem`; imagem em motion por código; voz Kokoro `af_heart` e logo sonoro gerado no `ffmpeg`, sem trilha; o motor sai de uma prova com Remotion, HyperFrames e Revideo, medidos pelos mesmos comandos, e o Igor escolhe; o que a prova ensinar vai para a skill `video`, para todos os repositórios (decisão do Igor em 2026-11-11) | C1v, C1, C5, C13
 ```
