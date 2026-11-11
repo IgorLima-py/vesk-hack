@@ -7,3 +7,6 @@
 *.png binary
 *.jpg binary
 *.pdf binary
+*.ttf binary
+# As fontes e as licenças ficam byte a byte como no google/fonts, para o sha256 do ORIGEM.md bater
+anuncios/fontes/** -text
