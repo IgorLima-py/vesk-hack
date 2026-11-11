@@ -60,6 +60,10 @@ O que foi conferido:
 
 ## Próximo passo imediato
 
+**A próxima sessão é a C1v** (decisão do Igor no `/tchau` do orquestrador, 11/11). Abra com `/oi c1v`: o ponteiro
+continua no O, porque só o orquestrador mexe nele, e o `/oi` com a fatia no comando compara o perfil com o da C1v
+(`criativo`, opus/xhigh, plan mode, na Karen). O aviso de que o ponteiro pede `dificil` é esperado.
+
 O orquestrador (Opus, esforço high, na Karen) abre a onda 1: a C1 (os anúncios, com o Igor), a C2 (a vitrine e o
 rascunho) e a C3 (os exemplos com gabarito e o contrato do motor), cada uma na sua sessão.
 
@@ -162,6 +166,18 @@ ponteiro não andou: ele é do orquestrador.
   - mover a skill `video` para `playbook/.claude/skills`, com link, como as outras skills globais;
   - o vídeo de demo da C13 (gravação de tela com áudio) ficou fora da pesquisa.
 - Bateria: não rodou, porque esta sessão não mexeu em código, só em `docs/`.
+
+## O orquestrador (11/11/2026): não fechou, segue aberto
+
+- [V] Na abertura, o `git pull` trouxe a C3 (✅) e a C2 (subiu sem fechar) até o `67b67e4`; modelo Opus e esforço
+  `high` medido pelo Bash, como a tabela pede para o `dificil`.
+- O Igor achou que o roteiro não tinha pensado em como fazer os vídeos, e o orquestrador abriu uma sessão própria de
+  pesquisa (perfil `replan`), em vez de pesquisar ele mesmo. Ela abriu em `high`, porque o orquestrador não abre acima
+  do próprio esforço, e o Igor a subiu para `xhigh`. O que ela entregou está na seção «Pesquisa dos vídeos e a C1v»
+  acima (a C1v na fila, a skill `video`).
+- Nenhuma outra fatia foi aberta: a C1 passou a esperar a C1v, e a C4 e a C5 esperam o que sai das duas.
+- O O não fecha: o `sai:` dele é todas as fatias ✅ ou cortadas. O ponteiro fica nele.
+- Bateria: não rodou, porque o orquestrador não mexeu em código.
 
 ## Madrugada 10/11 — decisões para o Igor conferir
 
