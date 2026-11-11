@@ -35,8 +35,8 @@ As ondas abaixo são o calendário que essa regra dá; não são portões.
 
 | Onda | Quando | Fatias juntas | Por que juntas |
 |---|---|---|---|
-| 1 | 09–12/11 | C1, C2, C3 | nenhuma depende de outra, e os arquivos não se cruzam (`docs/anuncios.md`; `site/` e `.github/`; `exemplos/`, `contrato/` e `tests/`) |
-| 2 | 11–14/11 | C4, C5; no repositório do motor, a nuvem | a C4 espera o export da C1; a C5 precisa do `E1` da C3 e do vídeo `A`; a nuvem do motor precisa da C3 e do `A` |
+| 1 | 09–12/11 | C1v, C1, C2, C3 | nenhuma depende de outra, salvo a C1, que espera os vídeos da C1v (desde 11/11); os arquivos não se cruzam (`anuncios/`; `docs/anuncios.md`; `site/` e `.github/`; `exemplos/`, `contrato/` e `tests/`) |
+| 2 | 11–14/11 | C4, C5; no repositório do motor, a nuvem | a C4 espera o export da C1; a C5 precisa do `E1` da C3 e do vídeo `A` da C1v; a nuvem do motor precisa da C3 e do `A` |
 | 3 | 14–16/11 | C6 | espera o motor no ar |
 | 4 | 16–19/11 | C7, C8 | as duas só dependem da C6 (e a C8 da C4 e da C5) |
 | 5 | 19–22/11 | C9, C11 | o Igor junta as pessoas da C11 desde 15/11 |
@@ -51,11 +51,12 @@ junta na `main` no próprio `/tchau` (`CLAUDE.md`). O ponteiro fica no orquestra
 | # | Chat | Perfil | Forma | Estado | Máquina | Depende de | Paralelo com | O que muda no dia seguinte |
 |---|---|---|---|---|---|---|---|---|
 | — | O — O orquestrador das ondas | `dificil` | sessao | 🚧 | Karen | — | todas | As fatias abrem sozinhas assim que a dependência passa, cada uma no seu worktree, e o Igor sabe a cada momento o que roda e o que espera a mão dele |
-| 1 | C1 — Os anúncios no ar | `padrao` | sessao | ⬜ | qualquer | — | C2, C3 | Dois anúncios da Vesk rodam na Meta com o teto do Igor, a curva real começa a juntar, e o segundo da marca de cada um está marcado à mão |
+| 1v | C1v — Os anúncios montados por código | `criativo` | sessao | ⬜ | Karen | — | C2, C3 | Os dois anúncios da Vesk existem em mp4, com rosto e voz de gente e o resto composto por código, e cada um traz o gabarito do segundo da marca, dos cortes e da fala |
+| 1 | C1 — Os anúncios no ar | `padrao` | sessao | ⬜ | qualquer | C1v | C2, C3 | Dois anúncios da Vesk rodam na Meta com o teto do Igor, a curva real começa a juntar, e o segundo da marca de cada um está marcado à mão |
 | 2 | C2 — A vitrine e o rascunho | `padrao` | sessao | ⬜ | qualquer | — | C1, C3 | O repositório é público com README e licença, a página está no ar nos dois idiomas, os testes rodam a cada push, e o rascunho foi enviado |
 | 3 | C3 — Os exemplos com gabarito e o contrato do motor | `dificil` | sessao | ✅ | qualquer | — (os testes rodam local; o push os roda depois que a C2 juntar) | C1, C2 | Qualquer sessão gera um vídeo com a marca, os cortes e a fala em segundos conhecidos, e o motor tem um contrato escrito que um teste confere |
 | 4 | C4 — O relatório do Gerenciador | `dificil` | sessao | ⬜ | qualquer | C1 (o export real) | C5 | O export do Gerenciador de Anúncios vira a curva do laudo, só com os pontos que a Meta deu, sem login e sem OAuth |
-| 5 | C5 — A variante e o 1º teste A/B | `dificil` | sessao | ⬜ | qualquer | C3; o vídeo `A` da C1 | C4 | Um anúncio vira uma variante de uma mudança só, provada pixel a pixel, o tamanho de amostra sai da fórmula, e o 1º teste A/B está rodando |
+| 5 | C5 — A variante e o 1º teste A/B | `dificil` | sessao | ⬜ | qualquer | C3; o vídeo `A` da C1v (o passo do teste A/B na Meta espera a C1) | C4 | Um anúncio vira uma variante de uma mudança só, provada pixel a pixel, o tamanho de amostra sai da fórmula, e o 1º teste A/B está rodando |
 | 6 | C6 — O laudo que cruza | `dificil` | sessao | ⬜ | qualquer | C3, C4; o motor no ar | — | Um vídeo e uma curva viram o laudo que diz o que estava na tela e na fala em cada queda, sem interpolar |
 | 7 | C7 — A precisão medida | `dificil` | sessao | ⬜ | qualquer | C6 | C8 | O README diz quanto o motor acerta por camada, com n e intervalo, medido contra o gabarito |
 | 8 | C8 — A página com envio e o e-mail | `dificil` | sessao | ⬜ | qualquer | C4, C5, C6 | C7 | Qualquer pessoa sobe o vídeo e o export do anúncio dela e recebe o laudo, a variante e o plano do teste na tela, e no e-mail se quiser, sem mão |
@@ -126,19 +127,66 @@ Igor com as palavras dela.
 
 > Você é o orquestrador das ondas do vesk-hack. Leia a seção O, a fila e a regra das ondas (bloco 2) e o `CLAUDE.md`. A cada volta: `git fetch`, veja o que está ✅ em `origin/main` e o que roda nas sessões ligadas a você, abra cada fatia cuja dependência passa e que não cruza arquivo com uma aberta, e me dê a tabela do que roda e do que espera a minha mão. Você nunca faz o trabalho de uma fatia, nunca aprova plano nem decide por mim, e nunca junta ramo na `main`. Comece pela onda 1: C1, C2 e C3.
 
+### C1v — Os anúncios montados por código
+
+`criativo` · opus · xhigh · forma: sessao · máquina: Karen · plan mode: sim · contexto: limpo antes
+
+**persona:** diretor de criação que monta por código dois anúncios de verdade: rosto e voz de gente gravados no celular, o resto composto por cima, e cada coisa num segundo que o gabarito conhece.
+**por que existe:** em 11/11, a pesquisa dos jeitos de fazer vídeo (a skill global `video`, em
+`~/.claude/skills/video/SKILL.md`, fora deste git, com a fonte de cada linha) recomendou o híbrido montado por código.
+Gravado à mão, o vídeo não dá o segundo exato nem a prova da variante. A IA generativa não refaz o mesmo vídeo, e os
+modelos saem do ar: a API do Sora 2 em 24/09/2026 e o Veo 3.1 Preview em 22/10/2026.
+**entra:**
+- a skill `video`, `docs/hackathon.md` (a 6.4 permite IA, e a 6.2 trata de código) e o `CLAUDE.md`;
+- o gerador da C3 (`exemplos/sintetico.py`), que dá o formato do gabarito;
+- a marca da Vesk, que o Igor traz, e a fala em `$VIDEOS/voz/fala.txt`;
+- o idioma e o público do anúncio, que o Igor decide no plano, numa linha do bloco 5. O `CLAUDE.md` limita a
+  prospecção ativa a empresa dos EUA;
+- o bruto que o Igor grava no celular, na vertical: rosto e voz, ou só a voz. Sem bruto de voz, a voz sai de um TTS
+  local com licença comercial, o Chatterbox (MIT) ou o Kokoro (Apache-2.0).
+**sai:**
+- `anuncios/`, escrito do zero no evento (6.2):
+  - o projeto Remotion, grátis para empresa de até 3 pessoas
+    (https://github.com/remotion-dev/remotion/blob/main/LICENSE.md), com um componente só;
+  - os parâmetros de cada anúncio em `anuncios/a.json` e `anuncios/b.json`;
+  - a legenda queimada, feita do bruto pelo faster-whisper e pelo filtro `subtitles` do `ffmpeg`;
+- `anuncios/roteiro.md`, com:
+  - o roteiro dos dois, segundo a segundo;
+  - o comando que renderiza um anúncio;
+  - o sha256 de cada bruto;
+  - a linha `- A e B diferem em: <chaves>`;
+  - como o navegador do render cumpre a regra do `--mute-audio`;
+- `$VIDEOS/a.mp4` e `$VIDEOS/b.mp4`, em 1080x1920 (9:16), de 15 a 30 s, com áudio e legenda queimada; a marca entra
+  em segundos diferentes nos dois, para o laudo ter o que comparar;
+- ao lado de cada mp4, `$VIDEOS/a.gabarito.json` e `$VIDEOS/b.gabarito.json`, nas chaves do gabarito da C3 (`duracao`,
+  `fps`, `largura`, `altura`, `marca_em`, `cortes`, `fala`, `texto`, `video_sha256`);
+- os brutos em `$VIDEOS/brutos/`, fora do git.
+**verificar:**
+- `ffprobe -v error -select_streams v -show_entries stream=width,height -of csv=p=0` imprime `1080,1920` em `$VIDEOS/a.mp4` e em `$VIDEOS/b.mp4`, a duração dos dois fica entre `15` e `30`, e o `ffprobe` dos streams mostra `audio` nos dois;
+- o comando de `anuncios/roteiro.md`, rodado duas vezes para o `A` na Karen, dá dois mp4 com o mesmo `ffmpeg -v error -i <mp4> -map 0 -f framemd5 -` (vídeo e áudio, quadro a quadro);
+- um `python -c` lê os dois gabaritos: o `marca_em` é maior que 0, menor que a `duracao` e diferente entre A e B, e o `video_sha256` de cada um é o sha256 do mp4 ao lado;
+- um `python -c` compara `anuncios/a.json` e `anuncios/b.json`: as chaves que diferem são exatamente as da linha `- A e B diferem em:` de `anuncios/roteiro.md`;
+- `git ls-files | grep -ciE "\.(mp4|mov|wav|m4a|mp3)$"` imprime `0`, e o `git grep` do `$PROIBIDO` em todas as revisões não imprime nada;
+- `python -m pytest -q` sai 0.
+**falha antes:** `ls anuncios/` falha e `ls $VIDEOS/*.mp4` não acha nada hoje.
+**prompt de abertura:**
+
+> Você é diretor de criação e vai montar por código os dois anúncios da Vesk. Comece rodando o `falha antes:` da C1v. Leia a seção C1v, a skill `video`, `docs/hackathon.md` e o `CLAUDE.md`. No plano, traga ao Igor o roteiro dos dois, com a marca em segundos diferentes, a decisão do idioma e do público, e a lista do que ele grava no celular. Monte no Remotion um componente só, com a legenda queimada e o gabarito ao lado de cada mp4. Quem grava o bruto é o Igor. Pronto quando os comandos do `verificar:` da C1v passarem.
+
 ### C1 — Os anúncios no ar
 
 `padrao` · sonnet · medium · forma: sessao · máquina: qualquer · plan mode: não · contexto: limpo antes
 
-**persona:** produtor de anúncio que tira do papel dois vídeos curtos da Vesk e põe a campanha no ar, com o teto do Igor e o dado da curva já correndo.
-**entra:** `docs/fontes.md` (a curva por segundo da Meta e os pontos de 25 a 100%); `docs/hackathon.md`; a marca da
-Vesk, que o Igor traz; o teto de gasto, que o Igor fixa. O Igor grava os vídeos, cria a campanha na conta da Vesk e
-aperta publicar; a sessão escreve o roteiro, a lista de passos e a conferência.
+**persona:** produtor de anúncio que põe no ar os dois vídeos curtos da C1v, com o teto do Igor e o dado da curva já correndo.
+**dependência:** a C1v está ✅ na fila, e `ls $VIDEOS/a.mp4 $VIDEOS/b.mp4 $VIDEOS/a.gabarito.json $VIDEOS/b.gabarito.json` acha os quatro.
+**entra:** `docs/fontes.md` (a curva por segundo da Meta e os pontos de 25 a 100%); `docs/hackathon.md`; os vídeos `A`
+e `B` e o roteiro da C1v (`anuncios/roteiro.md`); o teto de gasto, que o Igor fixa. O Igor cria a campanha na conta
+da Vesk, marca o segundo da marca assistindo, antes de abrir o gabarito, e aperta publicar; a sessão escreve a lista
+de passos e a conferência.
 **sai:**
-- dois anúncios em vídeo da Vesk, `A` e `B`, de 15 a 30 s, com áudio, em `$VIDEOS/a.mp4` e `$VIDEOS/b.mp4`, fora do
-  git. A marca entra em segundos diferentes nos dois, para o laudo ter o que comparar;
+- os dois anúncios da C1v, `A` e `B`, no ar como saíram do render (`$VIDEOS/a.mp4` e `$VIDEOS/b.mp4`, fora do git);
 - `docs/anuncios.md`, com:
-  - o roteiro de cada um;
+  - o caminho do roteiro de cada um (`anuncios/roteiro.md`);
   - `- segundo da marca: A = <s>` e `- segundo da marca: B = <s>`, marcados à mão pelo Igor;
   - `- sha256: A = <hash>` e `- sha256: B = <hash>`;
   - `- nome no Gerenciador: A = <nome>` e `- nome no Gerenciador: B = <nome>`, como aparecem no export;
@@ -148,15 +196,16 @@ aperta publicar; a sessão escreve o roteiro, a lista de passos e a conferência
 - o print do Gerenciador com os dois anúncios ativos, em `$VIDEOS`, tirado pelo Igor.
 **verificar:**
 - `ffprobe -v error -show_entries format=duration -of csv=p=0 $VIDEOS/a.mp4` e o mesmo para `b.mp4` imprimem um número entre `15` e `30`, e `ffprobe -v error -select_streams a -show_entries stream=codec_type -of csv=p=0` imprime `audio` nos dois;
-- um `python -c` calcula o sha256 de `a.mp4` e de `b.mp4`: os dois são diferentes entre si e iguais aos de `docs/anuncios.md`; o segundo da marca de cada um é maior que 0, menor que a duração do vídeo, e os dois são diferentes;
+- um `python -c` calcula o sha256 de `a.mp4` e de `b.mp4`: os dois são diferentes entre si e iguais aos de `docs/anuncios.md` e ao `video_sha256` dos gabaritos da C1v; o segundo da marca de cada um é maior que 0, menor que a duração do vídeo, e os dois são diferentes;
+- o segundo da marca marcado à mão bate com o `marca_em` do gabarito da C1v, com ±1 s, em `A` e em `B`;
 - `grep -cE "^- segundo da marca: (A|B) = [0-9]+$" docs/anuncios.md` e `grep -cE "^- nome no Gerenciador: (A|B) = .+$" docs/anuncios.md` imprimem `2` cada;
 - `grep -cE "^- campanha no ar desde 2026-11-[0-3][0-9], teto de R\\$ [0-9]+" docs/anuncios.md` imprime `1`;
 - um `python -c` lê o export mais novo em `$VIDEOS/export-meta-*.csv` com o módulo `csv` e exige: a coluna de impressões («Impressões» ou «Impressions») e pelo menos uma coluna de reprodução de vídeo no cabeçalho; uma linha para cada nome no Gerenciador de `A` e de `B`, com impressões maiores que 0 e pelo menos uma coluna de reprodução maior que 0; e o início do relatório («Início dos relatórios» ou «Reporting starts») não anterior à data da campanha;
 - o print do Gerenciador com os dois anúncios ativos está em `$VIDEOS`, e o `file` o reconhece como PNG ou JPEG com pelo menos 20 KB (é a confirmação do Igor: sem o acesso de leitura da Marketing API, nenhum comando prova a origem do export).
-**falha antes:** `docs/anuncios.md` não existe e `ls $VIDEOS/*.mp4` não acha nada hoje.
+**falha antes:** `docs/anuncios.md` não existe hoje.
 **prompt de abertura:**
 
-> Você é produtor de anúncio e vai pôr no ar dois vídeos curtos da Vesk, com o teto do Igor. Comece rodando o `falha antes:` da C1. Leia a seção C1, `docs/fontes.md` e `docs/hackathon.md`. Escreva com o Igor o roteiro dos dois anúncios, com a marca em segundos diferentes, e a lista de passos da campanha na Meta. Quem grava, cria a campanha e aperta publicar é o Igor. Depois que os dois tiverem impressão, peça o export com as colunas de vídeo e confira. Pronto quando os comandos do `verificar:` da C1 passarem.
+> Você é produtor de anúncio e vai pôr no ar os dois vídeos curtos da Vesk que a C1v montou, com o teto do Igor. Comece rodando a `dependência:` e o `falha antes:` da C1. Leia a seção C1, `docs/fontes.md`, `docs/hackathon.md` e `anuncios/roteiro.md`. Escreva com o Igor a lista de passos da campanha na Meta. Quem cria a campanha, marca o segundo da marca assistindo (antes de abrir o gabarito) e aperta publicar é o Igor. Depois que os dois tiverem impressão, peça o export com as colunas de vídeo e confira. Pronto quando os comandos do `verificar:` da C1 passarem.
 
 ### C2 — A vitrine e o rascunho
 
@@ -270,8 +319,10 @@ C1, em `$VIDEOS/export-meta-*.csv`, aberto antes de escrever código; `docs/anun
 `dificil` · opus · high · forma: sessao · máquina: qualquer · plan mode: sim · contexto: limpo antes
 
 **persona:** cientista de marketing que muda uma coisa só no vídeo, prova que só ela mudou, e calcula quanto teste precisa antes de prometer resultado.
-**entra:** o `E1` e o gerador da C3; o anúncio `A`, com o segundo da marca de `docs/anuncios.md`; a fórmula do teste
-de duas proporções, escrita do zero com a fonte; o teto do Igor para o teste.
+**entra:** o `E1` e o gerador da C3; o anúncio `A` da C1v, com o `marca_em` de `$VIDEOS/a.gabarito.json` (e, quando a
+C1 fechar, o segundo marcado à mão de `docs/anuncios.md`); a fórmula do teste de duas proporções, escrita do zero com
+a fonte; o teto do Igor para o teste. A C5 abre quando a C1v fecha. O passo do teste A/B na Meta, que escreve em
+`docs/anuncios.md`, espera a C1 ✅, porque o arquivo é da C1 e o teste precisa da campanha.
 **sai:**
 - `python -m variante gerar --video <mp4> --marca-em <s> --mudanca marca_no_inicio --saida <pasta>`: pelo `ffmpeg`,
   põe o quadro da marca no 1º segundo. A variante sai sem perda (fora do trecho, cada quadro decodificado é igual ao
@@ -531,7 +582,10 @@ custo do Modal (o crédito de US$ 30 por mês); `docs/hackathon.md` (a demo prec
 
 **persona:** quem conta em 3 minutos, em inglês, por que o trabalho do gestor de tráfego agora roda sozinho, e mostra a demo funcionando.
 **entra:** da C1 à C12; `docs/hackathon.md` (vídeo de até 3 min com demo, os 4 critérios, a final presencial);
-`docs/precisao.md`; `docs/usuarios.md`; a marca da Vesk.
+`docs/precisao.md`; `docs/usuarios.md`; a marca da Vesk; a skill global `video` (o mapa dos jeitos de fazer vídeo, em
+`~/.claude/skills/video/SKILL.md`) e o pipeline de legenda da C1v (`anuncios/`), que serve à legenda em português. O
+vídeo de demo, com gravação de tela e áudio, não entrou na pesquisa de 11/11: a C13 confere esse pedaço antes de
+gravar.
 `VIDEO=C:/Users/Usuario/Desktop/Side-Projects/vesk-hack-videos/final.mp4` fica fora do git, e o README cita a URL
 publicada.
 **sai:**
@@ -596,4 +650,5 @@ Uma linha por decisão, só acrescentada, nunca reescrita. Quando duas linhas tr
 2026-11-05 | respondida | Palavras proibidas | moram num arquivo fora do git, porque a lista escrita aqui já seria o vazamento | todas as fatias
 2026-11-05 | respondida | Queda sem a curva por segundo | com os pontos de 25 a 100% do export, a queda é o trecho entre dois pontos dados, nunca um segundo interpolado | C6
 2026-11-09 | respondida | Ondas e orquestrador | a fila anda em paralelo, em ondas, tocada por uma sessão orquestradora que abre cada fatia no seu worktree; o maestro do playbook fica fora (recusa repositório público e toca uma fatia por vez); a cota acabar mais rápido está aceita (decisão do Igor em 2026-11-09) | todas as fatias
+2026-11-11 | respondida | Os vídeos A e B | montados por código (rosto e voz gravados pelo Igor no celular; texto, marca e legenda compostos no Remotion), com o gabarito ao lado de cada mp4, numa fatia nova, a C1v, antes da C1; a C5 passa a esperar o vídeo `A` da C1v; o mapa dos jeitos de fazer vídeo mora na skill global `video`, fora deste git (decisão do Igor em 2026-11-11) | C1v, C1, C5, C13
 ```
