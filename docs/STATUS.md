@@ -60,29 +60,36 @@ O que foi conferido:
 
 ## Próximo passo imediato
 
-**A próxima sessão continua a C1v, pela Fase 3.** Ela abre com duas decisões do Igor, e a seção «C1v (11/11/2026,
-terceira sessão)», abaixo, tem a tabela e os números. A Fase 1 e a prova das quatro frentes estão prontas.
+**A próxima sessão continua a C1v: refazer o desenho a partir do vesklab.com, com o Igor aprovando quadros antes do
+render.** A seção «C1v (12 e 13/11/2026, quarta sessão)», abaixo, tem o veredito dele e os números. A voz, o tempo, o
+som, o `final` e as linhas do tempo estão prontos e não mudam.
 
-As duas decisões:
-1. **Os cortes.** Os motores desenham segmentos que o ffmpeg não vê como corte. A recomendação é que cada segmento
-   mude a tela inteira, com o fundo alternando entre o preto e o `#eeedf4`, e que a curva não atravesse o corte. A
-   outra saída é tirar os cortes do gabarito.
-2. **O motor vencedor.** Os quatro passaram nas medidas.
+Em ordem:
+1. Abra com `/oi c1v`, na Karen, onde estão os brutos, as histórias, a skill `video` e os vídeos.
+2. Peça ao Igor 2 ou 3 vídeos de anúncio que ele acha bonitos.
+3. Tire quadros do vesklab.com (o topo, o «Method» e o «Sample», no Chrome) e guarde-os em `$VIDEOS/referencias/`.
+   - O visual dele: fundo de matriz de pontos em degradê azul, violeta, magenta e laranja sobre preto; Newsreader fina
+     e grande; rótulo pequeno em mono caixa-alta acima do título; cartões escuros de borda fina; o amarelo como
+     marca-texto sobre a frase, nunca como campo; a tela do produto e as folhas do relatório como imagem.
+   - Os anúncios só tiveram a página do hack (`site/public/`, 21 linhas de CSS) como marca, e é a principal razão do
+     «cara de IA».
+4. Reescreva em `anuncios/storylines.md` as duas histórias que o Igor preferiu, a 3 (o tipo) e a 2 (a fita), no
+   visual do vesklab.com, e mostre a ele um storyboard de cada, um quadro por fala, tirado no HyperFrames. Nada de
+   render inteiro antes do sim dele.
+5. Desenhe os efeitos sonoros discretos nos cortes (deslize, clique, o tique da leitura). Cada som com a origem e a
+   licença anotadas, e nenhum de banco sem licença que permita uso comercial.
+6. Com a história e o som aprovados, a Fase 3 de antes:
+   - copie o projeto para `anuncios/hyperframes/`, com o lock na versão exata;
+   - renderize pela fila a imagem muda de A e B (o A duas vezes, para o `framemd5`);
+   - rode `python -m anuncios final a` e `b`;
+   - escreva `anuncios/roteiro.md` como o `sai:` pede, com a nota de cena medida em cada corte;
+   - ponha `*.m4a` e `*.mp3` no `.gitignore`;
+   - rode o `verificar:` inteiro.
 
-Depois, a sessão:
-- copia o projeto do vencedor de `$VIDEOS/provas/<motor>/` para `anuncios/<motor>/`, com o lock na versão exata;
-- ajusta o desenho conforme a decisão dos cortes (o texto `desenho` de cada segmento em `anuncios/falas.py`; depois,
-  `python -m anuncios tempo a` e `tempo b`);
-- renderiza pela fila a imagem muda de A e B a partir de `anuncios/linha_do_tempo/<a|b>.json` (599 quadros), duas
-  vezes no A, para o `framemd5`;
-- roda `python -m anuncios final a --imagem <mp4 mudo>` e o mesmo para o b. É a primeira vez que o `final` roda: confira
-  a legenda num quadro;
-- escreve `anuncios/roteiro.md` como o `sai:` pede;
-- põe `*.m4a` e `*.mp3` no `.gitignore`;
-- roda o `verificar:` inteiro.
-
-Abra com `/oi c1v`, na Karen, onde estão os brutos, as provas, a skill `video` e os planos. O plan mode da seção sai
-com o plano aprovado, sem replanejar. O ponteiro continua no O, e o aviso de que ele pede `dificil` é esperado.
+O motor é o HyperFrames: dois renders iguais nas 3 histórias, contra 1 de 3 no Remotion. O Igor viu a tabela e não
+discordou, mas a escolha formal está anotada como dele. O plan mode da seção não precisa de replanejamento: o plano
+aprovado continua valendo, só o desenho muda. O ponteiro continua no O, e o aviso de que ele pede `dificil` é
+esperado.
 
 O orquestrador (Opus, esforço high, na Karen) abre a onda 1: a C1 (os anúncios, com o Igor), a C2 (a vitrine e o
 rascunho) e a C3 (os exemplos com gabarito e o contrato do motor), cada uma na sua sessão.
@@ -244,6 +251,74 @@ foram para `docs/historico/c1v-sessoes-1-e-2.md`, onde ficam o roteiro e o plano
 - [V] Bateria desta sessão, pela trava: 13 testes, 8 passaram, 0 falharam, 5 pulados (os 5 de contrato, sem
   `MOTOR_URL`), em 45 s.
 - Sem segunda opinião em Opus: a fatia não fechou (faltam a Fase 3 e o `verificar:`), e o ponteiro é do orquestrador.
+
+## C1v (12 e 13/11/2026, quarta sessão): não fechou — três histórias feitas nos dois motores; o Igor achou todas com «cara de IA»
+
+Continuação da terceira sessão, na `main` da Karen, depois de um resumo de contexto. O ponteiro continua no O.
+
+- **As decisões do Igor nesta sessão:**
+  - [V] **Os cortes:** corte de verdade. No primeiro quadro de cada fala, nada da fala anterior fica na tela. O gabarito
+    fica com os 5 cortes, e o `roteiro.md` vai anotar a nota de cena medida em cada um.
+  - [V] **O desenho:** ao ver a folha de quadros da prova, achou feio («mt feio»). Pediu pesquisa de direção de arte,
+    com referências do PC e da internet, e depois as três histórias feitas até o fim nos dois motores, para escolher
+    assistindo.
+  - [V] **O veredito, em 13/11:** gostou mais da história 3 (o tipo) e da 2 (a fita), mas disse que todas estão
+    «ABSURDAMENTE cara de ia», com «zero gosto de design», sem alma, «nem msm a estetica parecida com a do site», e
+    «de design ta mt cru». A locução ficou ok. O som pede um pouco de efeito sonoro melhor, sem exagero.
+- **O que foi feito:**
+  - [V] `anuncios/storylines.md`: as três linhas de história, pelo método da skill do HyperFrames (Apache-2.0) (`d7ffa9f`).
+  - [V] A pesquisa de direção de arte, conferida pela `/pesquisa` (US$ 3,81), está fora do git, na skill global
+    `video` (`direcao-de-arte.md` e a seção «Direção de arte» do `SKILL.md`). A conclusão: a doutrina mais útil é a
+    da própria skill do HyperFrames, e a `impeccable` só serve para tipografia e cor, porque é de interface web.
+  - [V] **Seis versões renderizadas** pela fila, por agentes Opus, em `$VIDEOS/historias/<1|2|3>-<hyperframes|remotion>/`.
+    Cada pasta tem `SPEC.md` (só nas do HyperFrames), `stills/folha.png`, `a_mudo.mp4`, o segundo render para o
+    determinismo e o `a.mp4` com som e legenda. Só o A foi renderizado; o B só foi conferido em quadros parados.
+  - [V] Para assistir, os 10 vídeos estão numa pasta só, `$VIDEOS/TODOS-OS-VIDEOS/`, por link físico (sem ocupar
+    espaço a mais): os 6 finais e os 4 esboços da prova.
+  - [V] **O `final` rodou de ponta a ponta** (job 1336, e depois um por história): som, legenda queimada e gabarito
+    certos, com `marca_em` 14,367 s. Isso fecha o `[?]` da terceira sessão.
+- **As medidas, como os agentes relataram** [?] (os vídeos e as folhas foram vistos nesta sessão; os números não
+  foram reconferidos):
+
+  | | 1. O seu anúncio | 2. A curva | 3. O tipo |
+  |---|---|---|---|
+  | nota de cena nos 5 cortes (HyperFrames) | 0,53 / 0,28 / 0,09 / 0,003 / 0,02 | 0,43 / 0,42 / 0,21 / 0,11 / 0,10 | 1,0 / 0,82 / 0,91 / 0,77 / 0,93 |
+  | cortes que a prova vê (limiar 0,3) | 1 de 5 | 2 de 5 | 5 de 5 |
+  | barra no `marca_em` / no quadro anterior | 1,0 / 0,0 | 1,0 / 0,0 | 0,9997 / 0,0 |
+  | dois renders iguais, HyperFrames | sim | sim | sim |
+  | dois renders iguais, Remotion | **não** (133 quadros diferentes) | **não** (143 a 499) | sim, byte a byte |
+  | Remotion contra HyperFrames | PSNR médio 44,95 dB | 13 de 20 quadros idênticos | 18 de 26 idênticos |
+  | render e pico de RAM, HyperFrames | 115 s; 1,4 GiB | 174 a 323 s; 1,35 GiB | 85 a 122 s; 1,4 GiB |
+  | render e pico de RAM, Remotion | 133 a 143 s; 1,8 GiB | 106 a 129 s; 1,8 GiB | 191 a 219 s; 1,8 GiB |
+
+  A nota de cena baixa da 1 e da 2 vem da saída do segmento, que mexe a tela antes do corte; nos quadros, nada da fala
+  anterior fica na tela.
+- **O que foi tentado e falhou:**
+  - **O desenho a partir de doutrina escrita.** Cada agente recebeu a linha de história, a skill do HyperFrames e a
+    página do hack como marca, e não o vesklab.com. Saíram campos inteiros de amarelo e de claro, que o site não usa,
+    e garrafa e cartões desenhados em código, com linhas cinzas no lugar de texto, com cara de rascunho. [V] O
+    vesklab.com foi aberto nesta sessão, e a diferença está no passo 3 do «Próximo passo imediato».
+  - **O determinismo no Remotion 4.0.542**, nas histórias 1 e 2. Os agentes tentaram e não zeraram a diferença:
+    - grão em canvas;
+    - transform sempre 2D;
+    - véu no lugar da `mask-image`;
+    - trocar o GL;
+    - `disableSharedMemoryCapture`;
+    - `--disable-gpu-rasterization`, ligado por uma variável interna reservada do Remotion.
+
+    A causa provável, não provada: o Remotion não deixa passar ao Chrome as flags de determinismo que o HyperFrames
+    usa. O mesmo quadro desenhado sozinho sai igual nas duas vezes.
+  - Os agentes quebraram regras da casa, e cada um disse no relatório:
+    - alguns comandos começaram com `cd`;
+    - um agente rodou o `hyperframes check` uma vez fora da fila, com o Chrome mudo.
+  - O commit `11038c8` citava o nome da pasta do app privado; o Igor o refez como `d7ffa9f` antes do push, porque o
+    guarda do playbook barra o `--amend` da sessão. [V] O `git log -p origin/main..HEAD` não tem mais o nome.
+- [V] No Linear, a VES-102 continua In Progress.
+- [V] Bateria desta sessão, pela trava: 13 testes, 8 passaram, 0 falharam, 5 pulados (os 5 de contrato, sem
+  `MOTOR_URL`), em 40 s.
+- Sem segunda opinião em Opus: a fatia não fechou (falta o desenho aprovado, o A e o B e o `verificar:`), e o ponteiro
+  é do orquestrador.
+- A sessão passou de ~320k de contexto antes do resumo e voltou a ~190k.
 
 ## Madrugada 10/11 — decisões para o Igor conferir
 
