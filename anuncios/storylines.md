@@ -124,3 +124,18 @@ O que isso muda no código, antes da Fase 3:
   o A de cada história.
 
 Fica em aberto, para o Igor: o teste A/B da ordem roda com uma história ou com as duas.
+
+## Depois dos quatro vídeos (16/11)
+
+O Igor assistiu A2, B2, A3 e B3. A história 2 está melhor, mas ainda pede outra volta:
+- **O endereço:** «hack.vesklab.com» não é amigável, e ele mesmo não entraria num site com esse nome.
+- **O logo sonoro:** o som da Vesk na cartela está ruim.
+- **A cara de IA:** os vídeos ainda parecem feitos por IA.
+- **O movimento e a cor:** falta movimento, falta ser mais dinâmico, e ainda cabe mais cor.
+
+Ele pediu skills e plugins que ajudem. No catálogo do claude.ai, os que servem são:
+- o **Motion Reel**: vídeo de movimento feito por código, com grade de batida, lista de planos aprovada, trilha e
+  efeitos sintetizados, crítica em folha de quadros e entrega em 9:16 a -14 LUFS;
+- o **Design**: crítica de design.
+
+A busca de skills não achou nada de movimento nem de som.
