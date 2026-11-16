@@ -30,8 +30,12 @@ def test_poder_igual_statsmodels(p1, p2):
     assert "Cohen" in feito.stdout
 
 
-def test_poder_sem_efeito():
-    """evita: devolver um n (ou infinito) quando as duas taxas são iguais."""
-    feito = _poder("--p1", "0.05", "--p2", "0.05")
+@pytest.mark.parametrize("p1, p2", [("0.05", "0.05"), ("0.5", "0.5000000000000001"),
+                                    ("0.3", "0.30000000000000004"), ("0.5", "0.5000001")])
+def test_poder_sem_efeito(p1, p2):
+    """evita: devolver um n, travar ou cair com traceback quando as taxas são iguais (ou só diferem no float)."""
+    feito = subprocess.run([sys.executable, "-m", "teste", "poder", "--p1", p1, "--p2", p2],
+                           cwd=RAIZ, capture_output=True, text=True, timeout=20)
     assert feito.returncode != 0
     assert "não há efeito a detectar" in feito.stderr
+    assert "Traceback" not in feito.stderr

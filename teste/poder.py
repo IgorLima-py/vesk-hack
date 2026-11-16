@@ -29,6 +29,7 @@ FONTE = ("Cohen, J. (1988). Statistical Power Analysis for the Behavioral Scienc
          "(diferenças entre proporções, h de Cohen)")
 CONFERENCIA = "https://www.statsmodels.org/stable/generated/statsmodels.stats.power.NormalIndPower.html"
 _N = NormalDist()
+N_MAXIMO = 1e9  # acima disso por braço, a diferença é ruído de ponto flutuante, não efeito que um teste pega
 
 
 class SemEfeito(ValueError):
@@ -67,18 +68,27 @@ def _entre_0_e_1(nome: str, x: float) -> None:
 def calcular(p1: float, p2: float, alfa: float = 0.05, poder_pedido: float = 0.8) -> Plano:
     for nome, x in (("--p1", p1), ("--p2", p2), ("--alfa", alfa), ("--poder", poder_pedido)):
         _entre_0_e_1(nome, x)
-    if p1 == p2:
-        raise SemEfeito(f"não há efeito a detectar: p1 é igual a p2 ({p1:g}), e nenhum n chega ao poder pedido")
     h = efeito_h(p1, p2)
+    if p1 == p2 or h == 0:
+        raise SemEfeito(f"não há efeito a detectar: p1 é igual a p2 ({p1:g}), e nenhum n chega ao poder pedido")
     z_alfa = _N.inv_cdf(1 - alfa / 2)
     z_poder = _N.inv_cdf(poder_pedido)
     aproximado = 2 * ((z_alfa + z_poder) / h) ** 2
-    # A forma fechada ignora o segundo termo, que só soma poder: o n certo é ≤ ceil(aproximado).
-    n = max(1, math.ceil(aproximado))
-    while n > 1 and poder(n - 1, h, alfa) >= poder_pedido:
-        n -= 1
-    while poder(n, h, alfa) < poder_pedido:
-        n += 1
+    if aproximado > N_MAXIMO:
+        raise SemEfeito(f"não há efeito a detectar na prática: p1 = {p1!r} e p2 = {p2!r} diferem tão pouco que "
+                        f"o teste pediria mais de {N_MAXIMO:.0e} pessoas por braço")
+    # A forma fechada ignora o segundo termo, que só soma poder: o n certo é ≤ ceil(aproximado). O poder cresce com
+    # n, então a busca binária acha o menor n com poder(n) ≥ o pedido.
+    baixo, alto = 1, max(1, math.ceil(aproximado))
+    while poder(alto, h, alfa) < poder_pedido:  # só por segurança contra o arredondamento
+        alto *= 2
+    while baixo < alto:
+        meio = (baixo + alto) // 2
+        if poder(meio, h, alfa) >= poder_pedido:
+            alto = meio
+        else:
+            baixo = meio + 1
+    n = alto
     return Plano(p1, p2, alfa, poder_pedido, h, z_alfa, z_poder, aproximado, n, poder(n, h, alfa))
 
 
