@@ -80,7 +80,7 @@ atrás como atmosfera. Não há desenho de produto.
   âmbar. Embaixo, «Vesk» em Newsreader 500, a barra do grifo no retângulo de sempre e «The creative autopilot for video
   ads.». Tudo está inteiro no primeiro quadro; só a faixa de pontos de trás se mexe.
 - **Chamada:** o anúncio no feed à esquerda e o relatório vazio à direita. Em «Upload», pontos da paleta correm de um
-  para o outro; em «report», a leitura e o próximo teste aparecem no lugar do esqueleto. Embaixo, «hack.vesklab.com»
+  para o outro; em «report», a leitura e o próximo teste aparecem no lugar do esqueleto. Embaixo, «vesklab.com» (era «hack.vesklab.com» até 16/11)
   em IBM Plex Mono, sublinhado no grifo em «Upload».
 
 ## A segunda volta (16/11)

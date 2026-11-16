@@ -675,7 +675,7 @@
       "tela": {
         "2": [
           {
-            "texto": "hack.vesklab.com",
+            "texto": "vesklab.com",
             "papel": "endereco",
             "inicio": 525,
             "fim": 599
@@ -742,7 +742,7 @@
         ],
         "3": [
           {
-            "texto": "hack.vesklab.com",
+            "texto": "vesklab.com",
             "papel": "endereco",
             "inicio": 525,
             "fim": 599
@@ -1034,7 +1034,7 @@
         "fim": 599
       },
       {
-        "texto": "hack.vesklab.com",
+        "texto": "vesklab.com",
         "inicio": 525,
         "fim": 599
       },
@@ -1191,7 +1191,7 @@
         "fim": 599
       },
       {
-        "texto": "hack.vesklab.com",
+        "texto": "vesklab.com",
         "inicio": 525,
         "fim": 599
       },

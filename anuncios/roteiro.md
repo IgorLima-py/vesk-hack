@@ -20,7 +20,7 @@ O A, com 599 quadros a 30 fps (19,967 s):
 | 5,700 a 10,867 s | «We read your video, second by second, and match it to the moment people drop off.» | a tela do produto: o mosaico, a leitura, a curva e as faixas; o cabeçote volta ao penhasco em «match» | o rolo de «second» freia em «match»; «Drop-off» em «drop» |
 | 10,867 a 14,367 s | «Then you get a variant with one change, ready to test.» | control e variant no feed; o frasco entra na variante em «one» | «Logo first.» vira «Bottle first.» em «one» |
 | 14,367 a 17,500 s | «Vesk. The creative autopilot.» | a cartela: o selo de três pontos, «Vesk», a barra e «The creative autopilot for video ads.» | a mesma |
-| 17,500 a 19,967 s | «Upload your ad. Get the report.» | o anúncio vira relatório; «hack.vesklab.com» | a mesma |
+| 17,500 a 19,967 s | «Upload your ad. Get the report.» | o anúncio vira relatório; «vesklab.com» | a mesma |
 
 O B tem as mesmas cenas na ordem gancho, marca, problema, leitura, variante e chamada: a marca entra em 3,000 s, logo
 depois do gancho, e cada fala seguinte começa 3,133 s mais tarde do que no A, até a chamada, que fica no mesmo lugar.

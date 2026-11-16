@@ -122,7 +122,7 @@ FALAS: dict[str, dict] = {
         "texto": "Upload your ad. Get the report.",
         "voz": "Upload your ad. Get the report.",
         "tela": _nas_duas([
-            {"texto": "hack.vesklab.com", "papel": "endereco"}, *_CARTAO, {"texto": "Readout", "papel": "rotulo"},
+            {"texto": "vesklab.com", "papel": "endereco"}, *_CARTAO, {"texto": "Readout", "papel": "rotulo"},
             {"texto": "Logo only, no product", "papel": "leitura", "desde_palavra": "report"},
             {"texto": "Product enters late", "papel": "leitura", "desde_palavra": "report"},
             {"texto": "Close-up, no text", "papel": "leitura", "desde_palavra": "report"},
