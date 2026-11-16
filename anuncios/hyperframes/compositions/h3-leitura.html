@@ -1,0 +1,63 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #000; overflow: hidden; }
+    #h3l-campo { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    #h3l-janela { position: absolute; left: 0; top: 270px; width: 1080px; height: 790px; overflow: hidden;
+      -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 22%, #000 78%, transparent 100%);
+      mask-image: linear-gradient(180deg, transparent 0, #000 22%, #000 78%, transparent 100%); }
+    #h3l-rolo { position: absolute; left: 150px; top: 0; width: 900px; }
+    .h3l-seg { position: absolute; left: 0; margin: 0; font-size: 200px; line-height: 1; white-space: nowrap;
+      color: #3b3a46; }
+    #h3l-cabeca { position: absolute; left: 65px; top: 655px; width: 56px; height: 4px; background: var(--tinta); }
+    #h3l-cabeca::after { content: ""; position: absolute; right: -10px; top: -8px; width: 20px; height: 20px;
+      border-radius: 50%; background: var(--tinta); }
+  </style>
+  <div id="root" data-composition-id="h3-leitura" data-width="1080" data-height="1920">
+    <canvas id="h3l-campo" width="1080" height="1920" data-layout-allow-overflow></canvas>
+    <div id="h3l-janela" data-layout-allow-overflow><div id="h3l-rolo"></div></div>
+    <div id="h3l-cabeca"></div>
+  </div>
+  <script>
+    (function () {
+      /* «second by second» virado coisa: um rolo de «second» que corre para cima, um por segundo do anúncio, passando
+         pelo cabeçote da leitura. Em «match», o rolo freia; em «drop», o segundo que parou no cabeçote é grifado:
+         é o momento em que as pessoas saem. */
+      const K = window.VeskKit, seg = K.segmento("leitura"), dur = seg.quadros / K.FPS;
+      const em = (w) => K.q(K.palavra(seg, w).inicio);
+      const tl = gsap.timeline({ paused: true });
+      const N = 14, PASSO = 214, CABECA = 385; // a linha do cabeçote, dentro da janela (655 - 270)
+      const rolo = document.getElementById("h3l-rolo");
+      rolo.innerHTML = Array.from({ length: N }, (_, i) =>
+        `<p class="h3l-seg vk-serifa" style="top:${i * PASSO}px">${i === 9 ? '<span id="h3l-grifo" class="vk-grifo">second</span>' : "second"}</p>`
+      ).join("");
+      const linhas = [...rolo.querySelectorAll(".h3l-seg")];
+      // A posição do rolo: corre de «read» até «match» e freia com o 10º segundo (o da queda) no cabeçote.
+      const alvo = CABECA - 9 * PASSO - 100, inicio = CABECA - 1 * PASSO - 100;
+      const freia = em("match");
+      const y = (t) => {
+        const a = K.clamp((t - em("read")) / (freia + 0.6 - em("read")), 0, 1);
+        return inicio + (alvo - inicio) * gsap.parseEase("power2.inOut")(a);
+      };
+      const campo = new K.Campo(document.getElementById("h3l-campo"), { passo: 24, semente: 61 });
+      const ruido = K.ruido(67);
+      function desenhar(t) {
+        const yy = y(t);
+        rolo.style.transform = `translateY(${yy}px)`;
+        linhas.forEach((el, i) => {
+          const centro = yy + i * PASSO + 100, perto = K.suave(PASSO * 0.9, 0, Math.abs(centro - CABECA));
+          const c = K.mix([59, 58, 70], [238, 237, 244], perto);
+          if (i !== 9 || t < em("drop")) el.style.color = K.css(c);
+        });
+        campo.desenhar((p) => {
+          const d = Math.hypot((p.x - 1080) / 520, (p.y - 640) / 700);
+          const legenda = 1 - 0.55 * K.suave(1050, 1090, p.y) * K.suave(1290, 1250, p.y);
+          const v = K.suave(1, 0.15, d) * (0.3 + 0.7 * ruido(p.x / 120, p.y / 120 + t * 0.6)) * legenda;
+          return { v, u: 0.1 + 0.6 * (p.y / 1920) };
+        }, "#000");
+      }
+      K.relogio(tl, dur, desenhar);
+      K.grifar(tl, document.getElementById("h3l-grifo"), em("drop"), 0.4);
+      window.__timelines["h3-leitura"] = tl;
+    })();
+  </script>
+</template>

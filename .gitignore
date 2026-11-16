@@ -40,3 +40,11 @@ desktop.ini
 # a resposta gravada do E1 (C6, roda sem chave num clone novo) e o resultado cru da precisão (C7)
 !laudo/exemplo/*.csv
 !precisao/*.csv
+
+# O projeto do HyperFrames dos anúncios (C1v): o que `python -m anuncios cenas` gera ou copia, e o estado do Studio
+anuncios/hyperframes/index.html
+anuncios/hyperframes/assets/fontes/
+anuncios/hyperframes/assets/gsap.min.js
+anuncios/hyperframes/.hyperframes/
+*.m4a
+*.mp3

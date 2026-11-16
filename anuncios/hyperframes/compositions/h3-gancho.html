@@ -1,0 +1,46 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #000; overflow: hidden; }
+    #h3g-campo { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    #h3g-texto { position: absolute; left: 65px; top: 296px; width: 950px; margin: 0; }
+    #h3g-texto .l1, #h3g-texto .l4 { display: block; font-size: 104px; }
+    #h3g-texto .l2, #h3g-texto .l3 { display: block; font-size: 318px; line-height: 0.86; margin-left: -12px; }
+    #h3g-texto .l4 { margin-top: 74px; }
+  </style>
+  <div id="root" data-composition-id="h3-gancho" data-width="1080" data-height="1920">
+    <canvas id="h3g-campo" width="1080" height="1920" data-layout-allow-overflow></canvas>
+    <h1 id="h3g-texto" class="vk-serifa">
+      <span class="l1"><span class="vk-palavra">Your</span> <span class="vk-palavra">ad</span> <span
+          class="vk-palavra">is</span></span>
+      <span class="l2"><span class="vk-palavra">losing</span></span>
+      <span class="l3"><span class="vk-palavra">people</span></span>
+      <span class="l4"><span class="vk-palavra">in</span> <span class="vk-palavra">the</span> <span id="h3g-grifo"
+          class="vk-grifo"><span class="vk-palavra">first</span> <span class="vk-palavra">seconds.</span></span></span>
+    </h1>
+  </div>
+  <script>
+    (function () {
+      /* O tipo carrega o argumento: duas palavras gigantes, «losing people», e atrás delas o campo do site. A mancha de
+         pontos vai se apagando um ponto por vez enquanto a voz diz que o anúncio perde gente. */
+      const K = window.VeskKit, seg = K.segmento("gancho"), dur = seg.quadros / K.FPS;
+      const tl = gsap.timeline({ paused: true });
+      const campo = new K.Campo(document.getElementById("h3g-campo"), { passo: 24, semente: 51 });
+      const ruido = K.ruido(53);
+      const comeca = K.q(K.palavra(seg, "losing").inicio);
+      function desenhar(t) {
+        const f = K.clamp((t - comeca) / (dur - comeca), 0, 1); // quanto da mancha já foi embora
+        campo.desenhar((p) => {
+          const d = Math.hypot((p.x - 760) / 620, (p.y - 1180) / 640);
+          const sai = p.s * 0.85 + 0.1 * (p.x / 1080);
+          const fica = K.suave(sai + 0.06, sai, f * 0.75);
+          const v = K.suave(1, 0.25, d) * (0.35 + 0.65 * ruido(p.x / 130 + t * 0.2, p.y / 130)) * fica;
+          return { v, u: 0.15 + 0.85 * K.clamp((p.x - 200) / 900, 0, 1) };
+        }, "#000");
+      }
+      K.relogio(tl, dur, desenhar);
+      K.falarPalavras(tl, seg, [...document.querySelectorAll("#h3g-texto .vk-palavra")]);
+      K.grifar(tl, document.getElementById("h3g-grifo"), K.q(K.palavra(seg, "first").inicio), 0.4);
+      window.__timelines["h3-gancho"] = tl;
+    })();
+  </script>
+</template>

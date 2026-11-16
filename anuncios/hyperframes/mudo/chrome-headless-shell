@@ -1,0 +1,14 @@
+#!/bin/sh
+# Todo navegador que abre anúncio abre mudo (CLAUDE.md). O HyperFrames 0.9.33 não passa --mute-audio ao Chrome, mas
+# aceita HYPERFRAMES_BROWSER_PATH: o render e o snapshot apontam para este script, que chama o chrome-headless-shell
+# que o próprio HyperFrames baixou (`npx hyperframes browser path`) com o argumento a mais. O nome do arquivo é o do
+# binário, porque o HyperFrames decide pelo nome se é o headless shell (e só nele há a captura por beginFrame).
+set -e
+real="${VESK_CHROME_REAL:-}"
+if [ -z "$real" ]; then
+  for c in "$HOME"/.cache/hyperframes/chrome/chrome-headless-shell/*/chrome-headless-shell-*/chrome-headless-shell; do
+    [ -x "$c" ] && real="$c"
+  done
+fi
+[ -n "$real" ] || { echo "chrome-headless-shell do HyperFrames não encontrado: rode npx hyperframes browser ensure" >&2; exit 1; }
+exec "$real" "$@" --mute-audio

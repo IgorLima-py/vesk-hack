@@ -4,6 +4,7 @@
     transcrever           o tempo de cada palavra (faster-whisper), com a grafia do roteiro
     tempo a|b             a linha do tempo, a única entrada dos motores
     som a|b               o áudio: as falas no quadro delas e o logo sonoro na cartela da marca
+    cenas a|b [--historia N]  a raiz do projeto do HyperFrames (anuncios/hyperframes/index.html)
     final a|b --imagem X  queima a legenda na imagem muda do motor, junta o som, grava o mp4 e o gabarito
     prova <motor> ...     as medidas de uma frente da prova dos motores
 
@@ -29,6 +30,10 @@ def main(argv: list[str] | None = None) -> int:
     for nome in ("tempo", "som"):
         s = sub.add_parser(nome)
         s.add_argument("anuncio", choices=("a", "b"))
+
+    cenas = sub.add_parser("cenas", help="a raiz do projeto do HyperFrames")
+    cenas.add_argument("anuncio", choices=("a", "b"))
+    cenas.add_argument("--historia", default="2", help="a linha de história de anuncios/storylines.md (2 ou 3)")
 
     final = sub.add_parser("final", help="legenda, som, mp4 e gabarito")
     final.add_argument("anuncio", choices=("a", "b"))
@@ -56,6 +61,9 @@ def main(argv: list[str] | None = None) -> int:
     if a.comando == "som":
         from anuncios import som as m
         return m.main(a.anuncio)
+    if a.comando == "cenas":
+        from anuncios import cenas as m
+        return m.main(a.anuncio, a.historia)
     if a.comando == "final":
         from anuncios import final as m
         return m.main(a.anuncio, a.imagem, a.saida)

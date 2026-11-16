@@ -1,74 +1,91 @@
-# As três linhas de história dos anúncios A e B
+# As duas linhas de história dos anúncios A e B, no visual do vesklab.com
 
-Escritas em 11/11/2026 pelo método da skill do HyperFrames (`skills/hyperframes/references/story.md`, Apache-2.0,
-heygen-com/hyperframes): três filmes diferentes, cada um com o seu mundo, o seu dispositivo e a sua forma, e o Igor
-escolhe um. A pesquisa de direção de arte que embasa estas regras está fora do git, na skill global `video`
-(`direcao-de-arte.md`).
+Em 13/11/2026, o Igor viu as três histórias da quarta sessão renderizadas e preferiu a 3 (o tipo) e a 2 (a curva).
+Achou todas com «cara de IA» e sem a estética do site. A versão anterior deste arquivo está no git (`d7ffa9f`).
+Em 16/11, no Mac, as duas foram redesenhadas a partir do vesklab.com, e cada uma virou um storyboard de quadros
+parados. Ele aprova antes de qualquer render inteiro. As folhas estão fora do git, em
+`$VIDEOS/historias/storyboard-historia-2.png` e `-3.png`.
 
-O que as três respeitam, porque já foi decidido:
-- as seis falas, a voz e o tempo de cada uma (`anuncios/linha_do_tempo/`), sem mudar uma palavra;
-- A e B diferem só na `ordem`, e por isso cada fala abre com um corte próprio e não depende da fala anterior;
-- corte de verdade no começo de cada fala: no quadro do corte, nada da fala anterior fica na tela;
-- a cartela da marca entra inteira no primeiro quadro dela, com a barra do grifo no retângulo de sempre;
-- sem pessoa real, sem número na tela, e o texto dentro da zona segura do Reels;
-- só a voz e o logo sonoro, sem trilha.
+## O visual, medido no site
 
-O que o esboço da prova fazia e a skill proíbe: fundo preto com coisa pequena flutuando no meio, o quadro 0 vazio,
-linha fina como herói e o mesmo jeito de entrar em toda cena. O herói de cada plano ocupa pelo menos 40% do quadro, e o
-título ocupa de 4 a 9% da altura.
+Os quadros do vesklab.com estão em `$VIDEOS/referencias/`: a página inteira no desktop, o topo no celular e o DOM.
+Eles foram tirados com o Chrome mudo e sem cabeça. As cores do tema escuro saíram do DOM; a paleta dos pontos saiu dos
+quadros, como a mediana do quartil mais claro de cada faixa de matiz.
 
-## 1. O seu anúncio, por dentro (a recomendada)
+- **O campo de pontos:** é o fundo do site. Pontos redondos numa grade, apagados em `#18181d`, que acendem em
+  `#5762fe`, `#7c4aff`, `#b53de8`, `#f43ca7`, `#ff516e`, `#ff7c44` e `#ffb84a`. No vídeo, a grade tem passo de 24 px;
+  no site, ela tem cerca de 12 px a 1440 de largura.
+- **O tipo:**
+  - Newsreader 300 grande, com o espaço entre letras apertado, como os títulos do site;
+  - Schibsted Grotesk no apoio;
+  - IBM Plex Mono em caixa-alta para os rótulos pequenos («ORIGINAL», «VARIANT») e no endereço.
+- **O grifo:** `#ffe14a` só como marca-texto atrás de uma palavra ou de uma linha, e a letra escurece junto. O campo
+  inteiro amarelo saiu, porque o site não o usa.
+- **O selo:** os três pontos do logo do site, na cartela, na chamada e em cada linha da leitura.
+- **A tela do produto:** um cartão escuro com borda fina e um anúncio lido em mosaico, numa janela de barra clara
+  listrada, como as do topo do site. Ao lado, a leitura em linhas e as faixas do que estava na tela, com as cores das
+  faixas do site (`#8fa8ff`, `#ffe14a` e `#ff8a5b`) e o cabeçote branco.
+- **O anúncio fictício:** o cartaz de um sérum de uma marca sem nome, com frasco âmbar, sol e pedestal. Ele é
+  desenhado em código e mostrado em mosaico pontilhado, sem foto e sem pessoa. O clipe do topo do site é do Pexels e
+  fica de fora.
 
-- **Dispositivo e forma:** o produto trabalhando sobre algo que a pessoa reconhece, que é o próprio anúncio dela no
-  feed. A forma é o corte em deslize: toda troca de fala é o gesto de deslizar o feed para cima, o mesmo gesto de quem
-  vai embora. O mundo seguinte chega de baixo, borrado, e firma. A cartela da marca é o único corte seco.
-- **O que se vê e se sente:** um anúncio de cliente fictício passando em tela cheia, que vai perdendo gente. A Vesk
-  abre esse anúncio, lê quadro a quadro, acha o quadro da queda e entrega a variante com uma troca só.
-- **Os dois primeiros segundos:** no quadro 0, o anúncio fictício já está passando em tela cheia, com a moldura do
-  Reels, «Losing people.» em serifa grande por cima e a curva amarela começando a cair. Até 1,5 s, o feed dá dois
-  trancos para cima: gente saindo.
-- **Os mundos, na ordem do A:**
-  - gancho: o feed;
-  - problema: a câmera fecha no ponto onde a curva despenca, e um «?» gigante ocupa o vão;
-  - leitura: o anúncio vira uma tira vertical dos próprios quadros, grande, e uma linha amarela lê quadro a quadro até
-    parar no quadro da queda;
-  - variante: esse quadro sozinho, com 70% do quadro, e um elemento dele é trocado por uma cortina, contornado no
-    grifo;
-  - marca: a cartela;
-  - chamada: o endereço em mono, enorme e sublinhado.
-- **Look:**
-  - o mundo da Vesk é o do site: fundo #000, tinta #eeedf4 e grifo #ffe14a só no foco;
-  - o anúncio fictício tem paleta própria, quente e diferente da Vesk, para ler como o anúncio do outro;
-  - Newsreader 500 no título, de 135 a 173 px; Schibsted Grotesk no apoio; IBM Plex Mono só no endereço;
-  - 2% de grão.
-- **O risco:** o anúncio fictício precisa parecer anúncio de verdade sem banco de imagem nem IA. Ele é desenhado em
-  código como um cartaz tipográfico de produto.
+## O que as duas respeitam
 
-## 2. A curva é o palco
+Isto já estava decidido e não mudou:
+- as seis falas, a voz e o tempo de cada uma (`anuncios/linha_do_tempo/`);
+- A e B diferem só na `ordem`;
+- corte de verdade no primeiro quadro de cada fala;
+- a cartela inteira no `marca_em`, com a barra no retângulo de sempre;
+- nada em `#ffe14a` dentro desse retângulo antes da cartela, em nenhuma fala;
+- nenhum número na tela;
+- o texto dentro da zona segura do Reels;
+- a faixa da legenda (y de 1088 a 1248) sem texto do motor e com o campo de pontos apagado embaixo dela.
 
-- **Dispositivo e forma:** o objeto é a explicação. A curva de permanência vira uma fita amarela grossa, a coisa física
-  do filme. A forma é um palco só, e a câmera reenquadra seco a cada fala: fecha, abre, corre ao longo da fita.
-- **O que se vê e se sente:** a queda como um penhasco. A Vesk desce até o penhasco e mostra o que estava na tela
-  naquele segundo.
-- **Os dois primeiros segundos:** no quadro 0, a fita ocupa o quadro e despenca pela borda de baixo, com «first
-  seconds» em serifa grande na beira.
-- **Os beats:** o penhasco, depois o close no penhasco com o «?», depois a câmera abre e a fita corre sobre a tira de
-  quadros, depois o quadro da queda descola e ganha a troca, depois a cartela, depois o endereço.
-- **Look:** fundo preto, e a fita é a única cor, com 40 a 60% do quadro; mesma tipografia da 1.
-- **O risco:** é mais abstrata, e um estranho pode não ler «anúncio». Se a fita não for grande, cai no fundo preto
-  vazio.
+A marca e a chamada são as mesmas cenas nas duas histórias.
+
+## 2. A curva é feita de gente
+
+**A ideia:** cada ponto aceso é uma pessoa assistindo. O campo de pontos do site vira a área sob a curva de permanência.
+No penhasco dos primeiros segundos, os pontos se apagam um a um enquanto a voz fala.
+
+- **Gancho:** no quadro 0, a frase já está na tela em cinza, e a massa de pontos já cai. Cada palavra vira tinta no
+  quadro em que é dita, «first seconds.» ganha o grifo, e o penhasco se aprofunda.
+- **Problema:** de perto, no penhasco, com pontos grandes. Um anel marca o beiral em «when», e um «?» enorme ocupa o
+  vazio de quem saiu em «Not».
+- **Leitura:** a tela do produto. O cabeçote corre o anúncio de «read» até «and»; em «match» ele volta ao penhasco, e
+  em «drop» a linha «Logo only, no product» é grifada.
+- **Variante:** o anúncio e a cópia dele lado a lado, iguais. Em «one», só a cópia muda: o frasco entra na abertura,
+  contornado no grifo, com a etiqueta «One change».
+- **Marca e chamada:** as comuns, abaixo.
+- **O risco:** a tela do produto tem muito texto pequeno para 5 s, e a leitura depende da legenda.
 
 ## 3. O tipo carrega o argumento
 
-- **Dispositivo e forma:** tipo cinético gigante. A forma é cortar na voz, com campos de cor: cada fala tem 1 a 3
-  palavras enormes, de 60 a 90% da largura, sobre um campo que muda a cada beat (preto, #eeedf4, #ffe14a).
-- **O que se vê e se sente:** um cartaz de revista por beat; a curva aparece uma vez só, como um traço gigante.
-- **Os dois primeiros segundos:** no quadro 0, um campo amarelo com «Losing people.» preenchendo a largura.
-- **Os beats:** o gancho em amarelo, depois «Not why.» em preto, depois a leitura como uma palavra que corre quadro a
-  quadro, depois a variante como uma palavra da frase que gira e troca, depois a cartela, depois o endereço.
-- **Look:** os três campos de cor do site, Newsreader no tipo gigante e nada de ilustração.
-- **O risco:** é o mais seguro de ficar bonito, e o mais genérico; tipo cinético é o que muita marca de software faz.
+**A ideia:** uma ou duas palavras enormes por fala, em Newsreader fina, com o grifo numa palavra só e o campo de pontos
+atrás como atmosfera. Não há desenho de produto.
+
+- **Gancho:** «losing people» enorme. No quadro 0, a frase toda está em cinza sobre a mancha de pontos. As palavras
+  viram tinta quando são ditas, e a mancha se apaga ponto a ponto.
+- **Problema:** «You can see when they leave.» chega palavra a palavra. Em «Not», ela sai num borrão, e «Not why.» ocupa
+  a largura, com «why.» grifado.
+- **Leitura:** um rolo de «second» corre pelo cabeçote, um por segundo do anúncio. Em «match» ele freia, e em «drop» o
+  segundo parado no cabeçote é grifado.
+- **Variante:** original e variante iguais, «Logo first.». Em «one», a linha da variante roda como caça-níquel e para em
+  «Bottle first.», com «Bottle» grifado; a original ganha um risco.
+- **O risco:** sem a tela do produto, o anúncio não mostra o que a Vesk entrega, só diz.
+
+## A marca e a chamada (comuns)
+
+- **Marca:** o selo de três pontos, «Vesk» em Newsreader 500, a barra do grifo e «The creative autopilot.». Tudo está
+  inteiro no primeiro quadro. Só a faixa de pontos do rodapé do site se mexe atrás.
+- **Chamada:** «hack.vesklab.com» em IBM Plex Mono, sublinhado no grifo em «Upload», sobre a faixa de pontos.
+
+## O texto na tela muda o gabarito
+
+As duas histórias escrevem na tela mais do que o `tela` de `anuncios/falas.py` declara hoje. São rótulos, linhas da
+leitura e palavras gigantes. Na história escolhida, o `tela` de cada fala passa a listar tudo o que o motor escreve.
+Na frase que já começa em cinza, o texto vale desde o começo da fala. A voz, os cortes e o `marca_em` não mudam.
 
 ## A escolha
 
-Ainda não feita: decisão do Igor.
+Ainda não feita: decisão do Igor, pelo storyboard.

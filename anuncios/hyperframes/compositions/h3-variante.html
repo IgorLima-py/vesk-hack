@@ -1,0 +1,50 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #000; overflow: hidden; }
+    #h3v-campo { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    .h3v-rotulo { position: absolute; left: 65px; margin: 0; }
+    .h3v-linha { position: absolute; left: 65px; width: 1000px; margin: 0; font-size: 158px; white-space: nowrap; }
+    #h3v-risco { position: absolute; left: 65px; top: 452px; width: 0; height: 8px; background: var(--tinta-2); }
+    #h3v-b { height: 200px; overflow: hidden; }
+    #h3v-pilha { position: absolute; left: 0; top: 0; }
+    #h3v-pilha > span { display: block; height: 200px; white-space: nowrap; }
+  </style>
+  <div id="root" data-composition-id="h3-variante" data-width="1080" data-height="1920">
+    <canvas id="h3v-campo" width="1080" height="1920" data-layout-allow-overflow></canvas>
+    <p class="h3v-rotulo vk-rotulo" style="top:300px">Original</p>
+    <h1 id="h3v-a" class="h3v-linha vk-serifa" style="top:352px">Logo first.</h1>
+    <div id="h3v-risco"></div>
+    <p class="h3v-rotulo vk-rotulo" style="top:600px">Variant</p>
+    <h1 id="h3v-b" class="h3v-linha vk-serifa" style="top:652px"><span id="h3v-pilha"><span>Logo first.</span><span>Face
+          first.</span><span><span id="h3v-grifo" class="vk-grifo">Bottle</span> first.</span></span></h1>
+  </div>
+  <script>
+    (function () {
+      /* A variante em tipo: as duas aberturas uma sobre a outra, iguais, até «one»; aí a linha da variante roda como
+         caça-níquel e para em «Bottle first.», com «Bottle» grifado, e a original ganha um risco. Uma troca só. */
+      const K = window.VeskKit, seg = K.segmento("variante"), dur = seg.quadros / K.FPS;
+      const em = (w) => K.q(K.palavra(seg, w).inicio);
+      const tl = gsap.timeline({ paused: true });
+      const um = em("one");
+      const montar = () => {
+        tl.fromTo("#h3v-pilha", { y: 0 }, { y: -400, duration: 0.42, ease: "power3.out" }, um);
+        K.grifar(tl, document.getElementById("h3v-grifo"), um + 0.38, 0.35);
+        tl.fromTo("#h3v-risco", { width: 0 }, { width: 630, duration: 0.35, ease: "expo.out" }, um + 0.2);
+        tl.fromTo("#h3v-a", { color: "#eeedf4" }, { color: "#5c5a6c", duration: 0.3, ease: "none" }, um + 0.2);
+        const campo = new K.Campo(document.getElementById("h3v-campo"), { passo: 24, semente: 71 });
+        const ruido = K.ruido(73);
+        function desenhar(t) {
+          campo.desenhar((p) => {
+            const d = Math.hypot((p.x - 860) / 520, (p.y - 1560) / 420);
+            const legenda = 1 - 0.55 * K.suave(1050, 1090, p.y) * K.suave(1290, 1250, p.y);
+            const v = K.suave(1, 0.2, d) * (0.35 + 0.65 * ruido(p.x / 130 - t * 0.3, p.y / 130)) * legenda;
+            return { v, u: 0.45 + 0.5 * (p.x / 1080) };
+          }, "#000");
+        }
+        K.relogio(tl, dur, desenhar);
+        window.__timelines["h3-variante"] = tl;
+      };
+      montar();
+    })();
+  </script>
+</template>

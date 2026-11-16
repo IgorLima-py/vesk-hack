@@ -1,0 +1,50 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #000; overflow: hidden; }
+    #mc-campo { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    #mc-selo { position: absolute; left: 540px; top: 548px; width: 0; height: 0; }
+    #mc-selo i { position: absolute; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%;
+      background: #eeedf4; }
+    #mc-nome { position: absolute; left: 0; width: 1080px; top: 0; margin: 0; text-align: center;
+      font-family: var(--serifa); font-weight: 500; font-optical-sizing: auto; font-size: 240px;
+      letter-spacing: -0.02em; line-height: 1; color: var(--tinta); }
+    #mc-barra { position: absolute; background: var(--grifo); }
+    #mc-assinatura { position: absolute; left: 0; width: 1080px; top: 922px; margin: 0; text-align: center;
+      font-family: var(--texto); font-weight: 400; font-size: 50px; color: var(--tinta-2); }
+  </style>
+  <div id="root" data-composition-id="marca" data-width="1080" data-height="1920">
+    <canvas id="mc-campo" width="1080" height="1920" data-layout-allow-overflow></canvas>
+    <div id="mc-selo"><i style="left:-29px;top:-16px"></i><i style="left:29px;top:-16px"></i><i
+        style="left:-6px;top:30px"></i></div>
+    <h1 id="mc-nome">Vesk</h1>
+    <div id="mc-barra"></div>
+    <p id="mc-assinatura">The creative autopilot.</p>
+  </div>
+  <script>
+    (function () {
+      /* A cartela: tudo inteiro no primeiro quadro (o marca_em), sem entrada. A barra do grifo ocupa exatamente o
+         retângulo cartela_marca.barra da linha do tempo. O que se mexe é o mundo de trás: a faixa de pontos do rodapé
+         do vesklab.com, do laranja ao azul, correndo devagar. */
+      const K = window.VeskKit, seg = K.segmento("marca"), dur = seg.quadros / K.FPS;
+      const barra = window.VESK.cartela_marca.barra;
+      const b = document.getElementById("mc-barra");
+      Object.assign(b.style, { left: barra.x + "px", top: barra.y + "px", width: barra.largura + "px",
+        height: barra.altura + "px" });
+      // O wordmark assenta logo acima da barra: a linha de base fica 22 px acima dela.
+      const nome = document.getElementById("mc-nome");
+      nome.style.top = (barra.y - 22 - 240 * 0.86) + "px";
+      const tl = gsap.timeline({ paused: true });
+      const campo = new K.Campo(document.getElementById("mc-campo"), { passo: 24, semente: 3 });
+      const ruido = K.ruido(9);
+      function desenhar(t) {
+        campo.desenhar((p) => {
+          const meio = 1560 + 120 * Math.sin(p.x / 260 + t * 0.6) - 0.18 * (p.x - 540);
+          const v = K.suave(210, 40, Math.abs(p.y - meio)) * (0.5 + 0.5 * ruido(p.x / 120 + t * 0.4, p.y / 120));
+          return { v, u: 1 - p.x / 1080 };
+        }, "#000");
+      }
+      K.relogio(tl, dur, desenhar);
+      window.__timelines["marca"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,43 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #000; overflow: hidden; }
+    #ch-campo { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    #ch-selo { position: absolute; left: 540px; top: 470px; width: 0; height: 0; }
+    #ch-selo i { position: absolute; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%;
+      background: #eeedf4; }
+    #ch-endereco { position: absolute; left: 0; width: 1080px; top: 560px; margin: 0; text-align: center;
+      font-family: var(--mono); font-weight: 400; font-size: 88px; letter-spacing: -0.01em; color: var(--tinta); }
+    #ch-traco { position: absolute; left: 118px; top: 690px; width: 844px; height: 12px; background: var(--grifo);
+      transform-origin: 0 50%; }
+  </style>
+  <div id="root" data-composition-id="chamada" data-width="1080" data-height="1920">
+    <canvas id="ch-campo" width="1080" height="1920" data-layout-allow-overflow></canvas>
+    <div id="ch-selo"><i style="left:-22px;top:-12px"></i><i style="left:22px;top:-12px"></i><i
+        style="left:-4px;top:23px"></i></div>
+    <p id="ch-endereco">hack.vesklab.com</p>
+    <div id="ch-traco"></div>
+  </div>
+  <script>
+    (function () {
+      /* A chamada: o endereço em mono, sublinhado no grifo quando a voz diz «Upload», sobre a faixa de pontos do rodapé
+         do site. A frase fica na legenda; a faixa passa por baixo da legenda, apagada ali para ela ler. */
+      const K = window.VeskKit, seg = K.segmento("chamada"), dur = seg.quadros / K.FPS;
+      const tl = gsap.timeline({ paused: true });
+      // O endereço já está inteiro no quadro do corte, porque o gabarito o põe no começo da fala.
+      tl.fromTo("#ch-traco", { scaleX: 0 }, { scaleX: 1, duration: 0.45, ease: "expo.out" },
+        K.q(K.palavra(seg, "Upload").inicio));
+      const campo = new K.Campo(document.getElementById("ch-campo"), { passo: 24, semente: 21 });
+      const ruido = K.ruido(13);
+      function desenhar(t) {
+        campo.desenhar((p) => {
+          const meio = 1420 - 0.32 * (p.x - 540) + 90 * Math.sin(p.x / 230 - t * 0.7);
+          const legenda = 1 - 0.75 * K.suave(1060, 1100, p.y) * K.suave(1280, 1240, p.y);
+          const v = K.suave(240, 50, Math.abs(p.y - meio)) * (0.5 + 0.5 * ruido(p.x / 110 - t * 0.5, p.y / 110));
+          return { v: v * legenda, u: p.x / 1080 };
+        }, "#000");
+      }
+      K.relogio(tl, dur, desenhar);
+      window.__timelines["chamada"] = tl;
+    })();
+  </script>
+</template>

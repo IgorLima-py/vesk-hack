@@ -1,0 +1,117 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #000; overflow: hidden; }
+    #h2l-fundo { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    #h2l-cartao { left: 65px; top: 290px; width: 950px; height: 760px; }
+    #h2l-janela { left: 95px; top: 322px; width: 250px; height: 463px; }
+    #h2l-cabeca { position: absolute; left: 385px; top: 318px; margin: 0; font-family: var(--texto); font-size: 30px;
+      color: var(--tinta-2); }
+    #h2l-linha0 { position: absolute; left: 385px; width: 600px; top: 372px; height: 2px; background: var(--borda); }
+    .h2l-item { position: absolute; left: 385px; width: 600px; height: 92px; border-bottom: 2px solid var(--borda); }
+    .h2l-item .vk-selo { position: absolute; left: 0; top: 30px; }
+    .h2l-item p { position: absolute; left: 62px; top: 22px; margin: 0; font-family: var(--texto); font-size: 36px;
+      line-height: 1.2; color: var(--tinta); white-space: nowrap; }
+    .vk-selo { width: 40px; height: 34px; }
+    .vk-selo i { position: absolute; width: 13px; height: 13px; border-radius: 50%; background: var(--tinta); }
+    #h2l-curva { position: absolute; left: 210px; top: 806px; width: 775px; height: 96px; }
+    .h2l-rotulo { position: absolute; left: 95px; margin: 0; font-family: var(--texto); font-size: 28px;
+      color: var(--tinta-2); }
+    .h2l-trilho { position: absolute; left: 210px; width: 775px; height: 24px; border-radius: 5px; background: #232229; }
+    .h2l-faixa { position: absolute; top: 0; height: 24px; border-radius: 5px; transform-origin: 0 50%; }
+    #h2l-cabecote { position: absolute; left: 210px; top: 800px; width: 4px; height: 222px; margin-left: -2px;
+      background: var(--tinta); }
+    #h2l-cabecote::before { content: ""; position: absolute; left: -7px; top: -9px; width: 18px; height: 18px;
+      border-radius: 50%; background: var(--tinta); }
+  </style>
+  <div id="root" data-composition-id="h2-leitura" data-width="1080" data-height="1920">
+    <canvas id="h2l-fundo" width="1080" height="1920" data-layout-allow-overflow></canvas>
+    <div id="h2l-cartao" class="vk-cartao"></div>
+    <div id="h2l-janela" class="vk-janela"><canvas id="h2l-anuncio" width="244" height="428"></canvas></div>
+    <p id="h2l-cabeca">Readout</p>
+    <div id="h2l-linha0"></div>
+    <div id="h2l-item1" class="h2l-item" style="top:376px"><div class="vk-selo"><i style="left:0;top:0"></i><i
+          style="left:20px;top:0"></i><i style="left:9px;top:19px"></i></div>
+      <p><span id="h2l-grifo" class="vk-grifo">Logo only, no product</span></p></div>
+    <div id="h2l-item2" class="h2l-item" style="top:470px"><div class="vk-selo"><i style="left:0;top:0"></i><i
+          style="left:20px;top:0"></i><i style="left:9px;top:19px"></i></div>
+      <p>Product enters late</p></div>
+    <div id="h2l-item3" class="h2l-item" style="top:564px"><div class="vk-selo"><i style="left:0;top:0"></i><i
+          style="left:20px;top:0"></i><i style="left:9px;top:19px"></i></div>
+      <p>Close-up, no text</p></div>
+    <canvas id="h2l-curva" width="775" height="96"></canvas>
+    <p class="h2l-rotulo" style="top:907px">Logo</p>
+    <p class="h2l-rotulo" style="top:947px">Product</p>
+    <p class="h2l-rotulo" style="top:987px">Cut</p>
+    <div class="h2l-trilho" style="top:913px"><div id="h2l-f-logo" class="h2l-faixa"
+        style="left:0;width:171px;background:var(--faixa-rosto)"></div></div>
+    <div class="h2l-trilho" style="top:953px"><div id="h2l-f-produto" class="h2l-faixa"
+        style="left:171px;width:604px;background:var(--grifo)"></div></div>
+    <div class="h2l-trilho" style="top:993px"><div id="h2l-f-corte" class="h2l-faixa"
+        style="left:0;width:775px;background:transparent"></div></div>
+    <div id="h2l-cabecote"></div>
+  </div>
+  <script>
+    (function () {
+      /* A tela do produto, como no topo do vesklab.com: o anúncio lido em mosaico na janela, a leitura em linhas com o
+         selo, a curva de pontos e as faixas do que estava na tela. O cabeçote corre o anúncio de «read» até «and»; em
+         «match» volta ao penhasco, a janela mostra o quadro de lá, e em «drop» a linha que explica a saída é grifada. */
+      const K = window.VeskKit, seg = K.segmento("leitura"), dur = seg.quadros / K.FPS;
+      const em = (w) => K.q(K.palavra(seg, w).inicio);
+      const tl = gsap.timeline({ paused: true });
+      const W = 775, CORTES = [0.22, 0.45, 0.7], PENHASCO = 0.17;
+      const TOMADAS = ["abertura", "frasco", "close", "gotas"];
+      const tomada = (u) => TOMADAS[CORTES.filter((c) => u >= c).length];
+
+      // O cabeçote: de 0 a 1 entre «read» e «and», depois volta ao penhasco em «match».
+      const ida = [em("read"), em("and")], volta = em("match");
+      const posicao = (t) => {
+        if (t < volta) return gsap.parseEase("power1.inOut")(K.clamp((t - ida[0]) / (ida[1] - ida[0]), 0, 1));
+        const f = gsap.parseEase("expo.out")(K.clamp((t - volta) / 0.5, 0, 1));
+        return 1 + (PENHASCO - 1) * f;
+      };
+
+      const fundo = new K.Campo(document.getElementById("h2l-fundo"), { passo: 24, semente: 31 });
+      const curva = new K.Campo(document.getElementById("h2l-curva"), { passo: 12, rMin: 1.4, rMax: 4.6, semente: 5,
+        x0: 6, y0: 6 });
+      const anuncio = new K.Mosaico(document.getElementById("h2l-anuncio"), 28);
+      const ruido = K.ruido(41);
+      const permanece = (u) => 1 - 0.56 * K.suave(0.1, 0.24, u) - 0.16 * u;
+      const corte = document.getElementById("h2l-f-corte");
+      corte.innerHTML = CORTES.map((c) => `<i style="position:absolute;left:${c * W - 3}px;top:0;width:6px;height:24px;
+        border-radius:2px;background:var(--faixa-sorriso)"></i>`).join("");
+      function desenhar(t) {
+        const u = posicao(t), ate = Math.max(u, t >= volta ? 1 : 0);
+        // O fundo: o campo apagado com um brilho só, longe do texto, como as manchas do site atrás dos cartões.
+        fundo.desenhar((p) => {
+          const d = Math.hypot((p.x - 1010) / 520, (p.y - 1600) / 380);
+          const legenda = 1 - 0.8 * K.suave(1050, 1090, p.y) * K.suave(1290, 1250, p.y);
+          return { v: K.suave(1, 0.2, d) * (0.4 + 0.6 * ruido(p.x / 120 + t * 0.3, p.y / 120)) * legenda, u: 0.25 + 0.5 * (p.x / 1080) };
+        }, "#000");
+        curva.desenhar((p) => {
+          const x = p.x / W, topo = 6 + (1 - permanece(x)) * 84;
+          if (p.y < topo) return null;
+          const aceso = x <= ate + 0.004 ? 1 : 0.18;
+          return { v: aceso * (0.55 + 0.45 * ruido(p.x / 40, p.y / 40)), u: 1 - K.clamp((p.y - topo) / 90, 0, 1) * 0.8 };
+        });
+        anuncio.desenhar(tomada(u), (t % 1.2) / 1.2);
+        document.getElementById("h2l-cabecote").style.transform = `translateX(${u * W}px)`;
+        for (const [id, a, b] of [["h2l-f-logo", 0, 0.22], ["h2l-f-produto", 0.22, 1]]) {
+          const f = K.clamp((ate - a) / (b - a), 0, 1);
+          document.getElementById(id).style.transform = `scaleX(${f})`;
+        }
+        corte.style.clipPath = `inset(0 ${(1 - ate) * 100}% 0 0)`;
+      }
+      K.relogio(tl, dur, desenhar);
+      // As linhas da leitura entram quando o cabeçote passa pela tomada delas.
+      const quando = (alvo) => {
+        for (let t = ida[0]; t < ida[1]; t += 1 / K.FPS) if (posicao(t) >= alvo) return t;
+        return ida[1];
+      };
+      [["#h2l-item1", 0.04], ["#h2l-item2", 0.3], ["#h2l-item3", 0.52]].forEach(([sel, alvo]) =>
+        tl.fromTo(sel, { opacity: 0, filter: "blur(8px)" },
+          { opacity: 1, filter: "blur(0px)", duration: 0.15, ease: "power3.out" }, quando(alvo)));
+      K.grifar(tl, document.getElementById("h2l-grifo"), em("drop"), 0.4);
+      window.__timelines["h2-leitura"] = tl;
+    })();
+  </script>
+</template>

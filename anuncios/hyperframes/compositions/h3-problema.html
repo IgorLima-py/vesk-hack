@@ -1,0 +1,51 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #000; overflow: hidden; }
+    #h3p-campo { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    #h3p-ve { position: absolute; left: 65px; top: 320px; width: 950px; margin: 0; font-size: 128px; }
+    #h3p-nao { position: absolute; left: 50px; top: 500px; width: 1000px; margin: 0; font-size: 236px;
+      white-space: nowrap; }
+  </style>
+  <div id="root" data-composition-id="h3-problema" data-width="1080" data-height="1920">
+    <canvas id="h3p-campo" width="1080" height="1920" data-layout-allow-overflow></canvas>
+    <h1 id="h3p-ve" class="vk-serifa"><span class="vk-palavra">You</span> <span class="vk-palavra">can</span> <span
+        class="vk-palavra">see</span> <span class="vk-palavra">when</span> <span class="vk-palavra">they</span> <span
+        class="vk-palavra">leave.</span></h1>
+    <h1 id="h3p-nao" class="vk-serifa"><span id="h3p-not" class="vk-palavra">Not</span> <span id="h3p-grifo"
+        class="vk-grifo"><span id="h3p-why" class="vk-palavra">why.</span></span></h1>
+  </div>
+  <script>
+    (function () {
+      /* «You can see when they leave.» chega palavra a palavra; em «Not», a frase sai num borrão e «Not why.» ocupa a
+         largura, com «why.» grifado na palavra dela. A mancha do fundo esfria do laranja para o azul. */
+      const K = window.VeskKit, seg = K.segmento("problema"), dur = seg.quadros / K.FPS;
+      const em = (w) => K.q(K.palavra(seg, w).inicio);
+      const tl = gsap.timeline({ paused: true });
+      const ve = [...document.querySelectorAll("#h3p-ve .vk-palavra")];
+      ve.forEach((el, i) => tl.fromTo(el, { color: "#3b3a46" },
+        { color: "#eeedf4", duration: 0.1, ease: "power1.out" }, K.q(seg.palavras[i].inicio)));
+      const nao = em("Not");
+      tl.fromTo("#h3p-ve", { opacity: 1, filter: "blur(0px)" },
+        { opacity: 0, filter: "blur(10px)", duration: 0.13, ease: "power3.in" }, nao - 0.06);
+      tl.fromTo("#h3p-nao", { opacity: 0 }, { opacity: 1, duration: 0.01, ease: "none" }, nao);
+      tl.fromTo("#h3p-not", { color: "#eeedf4", filter: "blur(10px)" },
+        { color: "#eeedf4", filter: "blur(0px)", duration: 0.13, ease: "power3.out" }, nao);
+      tl.fromTo("#h3p-why", { color: "#eeedf4", opacity: 0, filter: "blur(10px)" },
+        { color: "#eeedf4", opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power3.out" }, em("why"));
+      K.grifar(tl, document.getElementById("h3p-grifo"), em("why") + 0.1, 0.35);
+      const campo = new K.Campo(document.getElementById("h3p-campo"), { passo: 24, semente: 57 });
+      const ruido = K.ruido(59);
+      function desenhar(t) {
+        const f = K.clamp(t / dur, 0, 1);
+        campo.desenhar((p) => {
+          const d = Math.hypot((p.x - 260) / 560, (p.y - 1500) / 420);
+          const legenda = 1 - 0.55 * K.suave(1050, 1090, p.y) * K.suave(1290, 1250, p.y);
+          const v = K.suave(1, 0.2, d) * (0.35 + 0.65 * ruido(p.x / 130, p.y / 130 - t * 0.25)) * legenda;
+          return { v, u: 0.75 - 0.65 * f - 0.15 * (p.x / 1080) };
+        }, "#000");
+      }
+      K.relogio(tl, dur, desenhar);
+      window.__timelines["h3-problema"] = tl;
+    })();
+  </script>
+</template>

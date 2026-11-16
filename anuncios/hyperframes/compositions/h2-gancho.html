@@ -1,0 +1,46 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #000; overflow: hidden; }
+    #h2g-campo { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    #h2g-titulo { position: absolute; left: 65px; top: 292px; width: 950px; margin: 0; font-size: 116px; }
+  </style>
+  <div id="root" data-composition-id="h2-gancho" data-width="1080" data-height="1920">
+    <canvas id="h2g-campo" width="1080" height="1920" data-layout-allow-overflow></canvas>
+    <h1 id="h2g-titulo" class="vk-serifa"><span class="vk-palavra">Your</span> <span class="vk-palavra">ad</span>
+      <span class="vk-palavra">is</span> <span class="vk-palavra">losing</span> <span class="vk-palavra">people</span>
+      <span class="vk-palavra">in</span> <span class="vk-palavra">the</span> <span id="h2g-grifo"
+        class="vk-grifo"><span class="vk-palavra">first</span> <span class="vk-palavra">seconds.</span></span></h1>
+  </div>
+  <script>
+    (function () {
+      /* A curva é feita de gente: cada ponto aceso é uma pessoa assistindo. A massa de pontos é a área sob a curva de
+         permanência, e no penhasco dos primeiros segundos os pontos se apagam um a um enquanto a voz fala. */
+      const K = window.VeskKit, seg = K.segmento("gancho"), dur = seg.quadros / K.FPS;
+      const tl = gsap.timeline({ paused: true });
+      const campo = new K.Campo(document.getElementById("h2g-campo"), { passo: 24, semente: 11 });
+      const ruido = K.ruido(5);
+      // O topo da massa: 100% de gente à esquerda, o penhasco entre x 150 e 330, e uma descida lenta depois.
+      const antes = (x) => 700 + 40 * (x / 1080);
+      const queda = (x) => 470 * K.suave(150, 330, x) + 90 * K.suave(330, 1080, x);
+      const k = (t) => 0.22 + 0.78 * gsap.parseEase("power2.inOut")(K.clamp((t - 0.55) / 1.75, 0, 1));
+      function desenhar(t) {
+        const kk = k(t);
+        campo.desenhar((p) => {
+          const y0 = antes(p.x), d = queda(p.x);
+          if (p.y < y0) return null;
+          const precisa = d > 1 ? (p.y - y0) / d + (p.s - 0.5) * 0.22 : 9; // o k em que esse ponto vai embora
+          const fica = K.suave(0, 0.07, precisa - kk);
+          const topo = y0 + d * kk;
+          const fundo = 1 - 0.6 * K.suave(1400, 1920, p.y);
+          const n = ruido(p.x / 110, p.y / 110 + t * 0.2);
+          const v = fica * (0.3 + 0.7 * n * n) * fundo;
+          return { v, u: 1 - K.clamp((p.y - topo) / 950, 0, 1) * 0.95 };
+        }, "#000");
+      }
+      K.relogio(tl, dur, desenhar);
+      K.falarPalavras(tl, seg, [...document.querySelectorAll("#h2g-titulo .vk-palavra")]);
+      K.grifar(tl, document.getElementById("h2g-grifo"), K.q(K.palavra(seg, "first").inicio), 0.4);
+      window.__timelines["h2-gancho"] = tl;
+    })();
+  </script>
+</template>

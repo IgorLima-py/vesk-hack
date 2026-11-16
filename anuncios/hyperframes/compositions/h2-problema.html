@@ -1,0 +1,52 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #000; overflow: hidden; }
+    #h2p-campo { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    #h2p-marca { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
+    #h2p-pergunta { position: absolute; left: 560px; top: 250px; margin: 0; font-family: var(--serifa);
+      font-style: italic; font-weight: 300; font-optical-sizing: auto; font-size: 700px; line-height: 1;
+      color: var(--tinta); }
+  </style>
+  <div id="root" data-composition-id="h2-problema" data-width="1080" data-height="1920">
+    <canvas id="h2p-campo" width="1080" height="1920" data-layout-allow-overflow></canvas>
+    <svg id="h2p-marca" viewBox="0 0 1080 1920" data-layout-allow-overflow>
+      <circle id="h2p-anel" cx="468" cy="780" r="104" fill="none" stroke="#eeedf4" stroke-width="5"
+        pathLength="100" stroke-dasharray="100 120" stroke-dashoffset="110" transform="rotate(-90 468 780)" />
+    </svg>
+    <p id="h2p-pergunta">?</p>
+  </div>
+  <script>
+    (function () {
+      /* De perto, no penhasco: os pontos grandes são as pessoas, e à direita delas o vazio de quem já saiu. A
+         plataforma mostra quando (o anel no beiral, em «when»), não por quê (o «?» que ocupa o vazio, em «Not»). */
+      const K = window.VeskKit, seg = K.segmento("problema"), dur = seg.quadros / K.FPS;
+      const tl = gsap.timeline({ paused: true });
+      const campo = new K.Campo(document.getElementById("h2p-campo"), { passo: 72, semente: 17 });
+      const ruido = K.ruido(23);
+      // A massa de perto: à esquerda, quem ainda assiste (topo em 732); o penhasco em x 470; à direita, o que sobrou
+      // (topo em 1380). No vão, os últimos pontos ainda se apagam durante a cena.
+      const topo = (x) => 732 + 648 * K.suave(430, 520, x);
+      function desenhar(t) {
+        const f = K.clamp(t / dur, 0, 1);
+        campo.desenhar((p) => {
+          const tp = topo(p.x);
+          const legenda = 1 - 0.45 * K.suave(1050, 1090, p.y) * K.suave(1290, 1250, p.y);
+          const n = ruido(p.x / 200, p.y / 200 + t * 0.2);
+          if (p.y >= tp) return { v: (0.45 + 0.55 * n) * legenda, u: 1 - K.clamp((p.y - tp) / 1000, 0, 1) * 0.95 };
+          // no vão do penhasco: alguns pontos ainda acesos, que se apagam um a um
+          if (p.x > 450 && p.y > 732 && p.s > 0.72) {
+            const sai = 0.15 + (p.s - 0.72) * 2.6;
+            return { v: K.suave(sai + 0.12, sai, f) * 0.8 * legenda, u: 0.95 };
+          }
+          return null;
+        }, "#000");
+      }
+      K.relogio(tl, dur, desenhar);
+      tl.fromTo("#h2p-anel", { attr: { "stroke-dashoffset": 110 } },
+        { attr: { "stroke-dashoffset": 0 }, duration: 0.45, ease: "power3.out" }, K.q(K.palavra(seg, "when").inicio));
+      tl.fromTo("#h2p-pergunta", { opacity: 0, filter: "blur(14px)" },
+        { opacity: 1, filter: "blur(0px)", duration: 0.1, ease: "power4.out" }, K.q(K.palavra(seg, "Not").inicio));
+      window.__timelines["h2-problema"] = tl;
+    })();
+  </script>
+</template>
