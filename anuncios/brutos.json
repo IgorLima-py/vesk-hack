@@ -6,8 +6,8 @@
     "voz": "af_heart",
     "voz_sha256": "0ab5709b8ffab19bfd849cd11d98f75b60af7733253ad0d67b12382a102cb4ff",
     "kokoro": "0.9.4",
-    "torch": "2.15.0+cpu",
-    "python": "3.11.9",
+    "torch": "2.15.0",
+    "python": "3.11.17",
     "semente": 20261111,
     "fios": 2,
     "taxa": 24000
@@ -15,37 +15,37 @@
   "falas": {
     "gancho": {
       "arquivo": "brutos/gancho.wav",
-      "sha256": "893bc13f1a962cd914730cb89fbf745945ef381d465b49f88543c10310d5c8da",
+      "sha256": "6c99723a1f2fe42235bb2ebd66fe5d92d022ce01a10c4a7aff38587e75d29fd3",
       "amostras": 72000,
       "duracao": 3.0
     },
     "problema": {
       "arquivo": "brutos/problema.wav",
-      "sha256": "badaa0b187069b40951778c9e50725ab2ffeb3928de33c9108978574296cb3da",
+      "sha256": "1fddd7da31b3da3c503a38cf827d9731892e015df277d70d9a86494b68fe2990",
       "amostras": 64200,
       "duracao": 2.675
     },
     "leitura": {
       "arquivo": "brutos/leitura.wav",
-      "sha256": "c8b5778cd60ce1ef5fe030ede520457f45d3f30f207ddec075a7dc3a92071d29",
+      "sha256": "e3b9264e218ca56b86127a0c374e3d817197572eabf4a5af9d394d9fac98cdd9",
       "amostras": 123600,
       "duracao": 5.15
     },
     "variante": {
       "arquivo": "brutos/variante.wav",
-      "sha256": "c8df9da2c805f15dbd1222a63b93292ed5ec39417d8f8ad7ae53df92b1bac40b",
+      "sha256": "60c80c2e79309642ab42ac802fdd285e6eaa32a1323aed243168cfc3aabee5fb",
       "amostras": 84000,
       "duracao": 3.5
     },
     "marca": {
       "arquivo": "brutos/marca.wav",
-      "sha256": "251c8469280a3072ac2b43ba53e02d61189dbcf259f9b704f41c1cc6d2862c44",
+      "sha256": "c2fdad471a95d7980e7b753d54d422ec1e7c45022cf51e4216014dea42660b71",
       "amostras": 60600,
       "duracao": 2.525
     },
     "chamada": {
       "arquivo": "brutos/chamada.wav",
-      "sha256": "df7244a3fbe94e4f6be18ac21723016386154cf95a8c9323f7e177496a5dee57",
+      "sha256": "0df2cbb14428097ca0e2e5afe42a10e5dc4104db19529b97f293b7de998c2f13",
       "amostras": 58800,
       "duracao": 2.45
     }

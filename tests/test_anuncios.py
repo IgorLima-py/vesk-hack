@@ -87,3 +87,20 @@ def test_texto_na_tela_por_historia():
             assert s["tela"]["2"] == s["tela"]["3"]
     so_da_2 = {t["texto"] for t in a["textos"]["2"]} - {t["texto"] for t in a["textos"]["3"]}
     assert "Viewers" in so_da_2 and "?" in so_da_2
+
+
+# evita: o sopro em cima do logo sonoro da cartela e o clique fora da palavra da ação na tela
+def test_efeitos_fora_da_cartela_e_na_palavra():
+    from anuncios.som import SOPRO_ANTES_S, onde_os_efeitos
+
+    for anuncio in ("a", "b"):
+        linha = montar(_params(anuncio), _falas_sinteticas())
+        por_quadro = linha["taxa_do_som"] // linha["fps"]
+        efeitos = onde_os_efeitos(linha)
+        sopros = [i for nome, i in efeitos if nome == "whoosh-short"]
+        antes = round(SOPRO_ANTES_S * linha["taxa_do_som"])
+        assert sopros == [c * por_quadro - antes for c in linha["cortes"] if c != linha["marca_em"]]
+        assert len(sopros) == len(linha["cortes"]) - 1
+        palavras = {p["texto"]: p["inicio"] for s in linha["segmentos"] for p in s["palavras"]}
+        assert [i for nome, i in efeitos if nome == "click-soft"] == sorted(
+            [palavras["one"] * por_quadro, palavras["Upload"] * por_quadro])
