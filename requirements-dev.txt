@@ -3,3 +3,4 @@ pytest
 jsonschema
 Pillow
 requests
+statsmodels
