@@ -139,3 +139,24 @@ Ele pediu skills e plugins que ajudem. No catálogo do claude.ai, os que servem 
 - o **Design**: crítica de design.
 
 A busca de skills não achou nada de movimento nem de som.
+
+## O plano da terceira volta (16/11, depois da pesquisa)
+
+A pesquisa (skill `pesquisa`, modo fundo, conferida) achou a fonte mais útil no próprio motor: as referências
+oficiais do HyperFrames, `skills/hyperframes/references/motion.md` e `sound.md`. Elas estão também no
+`node_modules/hyperframes/dist/skills/` da 0.9.33. A volta segue nesta ordem:
+- **Movimento:**
+  - a câmera nunca para: aproximação lenta em escala logarítmica em cada cena e profundidade em três planos;
+  - as entradas têm direção e peso (molas, uma curva por papel), e não «tudo entra com fade»;
+  - algo novo acontece a cada 2 a 4 s;
+  - o corte continua de verdade, como o Igor decidiu.
+- **Cor:** fundos e cartões com a paleta, sem cenas quase pretas.
+- **Som:**
+  - o logo sonoro é novo: três notas de sino em FM, uma para cada ponto do selo, com 2 a 3 s;
+  - uma trilha discreta, sintetizada com o `dsp.py` do Motion Reel (MIT, origem anotada), de 18 a 24 dB abaixo da
+    voz;
+  - dois ou três takes do sopro, alternados, com o pico um quadro depois da imagem;
+  - a mistura vai a cerca de -14 LUFS e -1 dBTP.
+- **Crítica antes de mostrar:** três rodadas na folha de quadros, com o prompt de crítica do Motion Reel e a skill de
+  crítica do Design, até nota 8 em gancho, leitura no celular, movimento, variedade, marca e sincronia do som.
+- **O endereço:** `vesklab.com`, já trocado.
