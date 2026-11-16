@@ -111,7 +111,9 @@ Com a C3 na `main`, abrem duas frentes:
   dependência.
 - O domínio `hack.vesklab.com` (C2), a conta do Modal e a do Resend são do Igor.
 - O arquivo das palavras proibidas (`vesk-hack-videos/proibido.txt`, fora do git) existe só na máquina que escreveu
-  este repositório. Em outra, o `test -s` do bloco 3 barra a fatia até o arquivo ser copiado de lá.
+  este repositório. Em outra, o `test -s` do bloco 3 barra a fatia até o arquivo ser copiado de lá. No Mac, desde
+  16/11, há uma versão provisória escrita pela C5 a pedido do Igor (a seção da C5, abaixo).
+- No Mac, o `ffmpeg` com `flite` é o de `~/.local/ffmpeg-full/bin` (C5, 16/11); o do Homebrew não roda o `E1`.
 - Bateria: o `python -m pytest -q` não acha teste (`no tests ran`, sai 5), porque ainda não há código. A trava do
   playbook barrou o primeiro push do C0, e ele subiu no segundo, com este registro. A C2 põe os testes no push.
 - [V] A bateria da C3 na Karen, pela trava, ficou em 9 testes: 4 passaram, 0 falharam e 5 foram pulados (os 5 de
@@ -319,6 +321,63 @@ Continuação da terceira sessão, na `main` da Karen, depois de um resumo de co
 - Sem segunda opinião em Opus: a fatia não fechou (falta o desenho aprovado, o A e o B e o `verificar:`), e o ponteiro
   é do orquestrador.
 - A sessão passou de ~320k de contexto antes do resumo e voltou a ~190k.
+
+## C5 (16/11/2026, adiantada, no Mac): não fechou — a parte do `E1` está pronta; faltam a variante do `A` e o teste A/B
+
+A Karen está no conserto desde ~14/11. Por decisão do Igor, a C5 abriu antes de a C1v fechar, num worktree próprio
+(`c5-variante-ecdf65`) no Mac (macOS arm64), só com a parte que roda com o `E1`. Ela rodou com Opus e esforço `high`
+medido pelo Bash [V], como o `dificil` pede, em plan mode, com o plano aprovado pelo Igor. O ponteiro continua no O.
+
+- [V] O `falha antes:` deu vermelho antes do código: `python -m variante --help` → `No module named variante`, sai 1.
+- **O ffmpeg do Mac.** O do Homebrew (9.0.2) não tem `flite`, `subtitles` nem `drawtext`. A C5 compilou o mesmo 9.0.2
+  do fonte da fórmula do Homebrew (sha256 conferido), ao lado dele, pela fila (job 54, 5 min):
+  - [V] `~/.local/ffmpeg-full/bin/ffmpeg -hide_banner -filters` lista `flite`, `ass`, `subtitles` e `drawtext`, e o
+    `-encoders` lista o `libx264`;
+  - use com `export PATH=$HOME/.local/ffmpeg-full/bin:$PATH`; a sessão `c1v` recebeu o caminho;
+  - o `brew install flite libass nasm pkgconf` rodou a limpeza automática do Homebrew (versões velhas e caches).
+- **O `proibido.txt` do Mac.** Ele não existia aqui, e o Igor não lembrava do conteúdo. A pedido dele, a C5 escreveu
+  `$VIDEOS/proibido.txt` com o que é de terceiros e interno, e mais 6 padrões de chave (Meta, Resend, Modal, Stripe,
+  GitHub, chave privada):
+  - [V] o `test -s` sai 0, o `git grep` em todas as revisões sai 1, e um clone com uma palavra da lista plantada é pego;
+  - o `faster-whisper` ficou de fora, porque a C1v o usa na legenda e ele já está no histórico;
+  - falta o Igor pôr o e-mail, o telefone e a palavra proibida (há um rascunho em `$VIDEOS/proibido.rascunho.txt`) e,
+    quando a Karen voltar, juntar com o original de lá.
+- **O que está feito**, tudo novo:
+  - `variante/`: `gerar` troca cada quadro do 1º segundo pelo primeiro quadro com pts ≥ `marca_em`. Os quadros vão em
+    cru, no formato de pixel do original, para o x264 sem perda (`-qp 0`), e o áudio é copiado. O `certificado.json`
+    traz o original (caminho e sha256), o trecho `[0, 1 s)`, o quadro da marca e o sha256 de cada quadro fora do
+    trecho. `conferir` decodifica de novo os dois vídeos e recusa vídeo de taxa variável;
+  - `teste/`: `poder` dá o n por braço pelo `h` de Cohen (1988, cap. 6), escrito com `math` e `NormalDist`, e procura o
+    menor n inteiro com o poder pedido;
+  - `tests/test_variante.py` (os três testes da seção) e `tests/test_poder.py` (5 pares contra o `statsmodels`, e o
+    caso sem efeito); o `statsmodels` no `requirements-dev.txt`.
+- [V] O `verificar:`, os itens do `E1`, no Mac:
+  - um `python -c` fora do pacote conferiu: 450 quadros nos dois, o trecho `[0, 30)` e os 420 de fora idênticos; a
+    variante em 0,5 s é igual ao original em 4 s e diferente do original em 0,5 s; 720×1280 e 15,000 s nos dois; o
+    `trecho.inicio` é 0;
+  - duas gerações deram o mesmo sha256 (`c3037883…`);
+  - controles negativos: um quadro mexido (o 333) faz o `conferir` sair 1 apontando o quadro; uma cópia do original
+    com o certificado de mudança faz sair 1 com «cópia»;
+  - o `teste poder` dá 3762, 3835 e 1565, iguais ao `statsmodels`; com `--p1 0.05 --p2 0.05`, sai 2 com a mensagem.
+- **O que falta, em ordem:**
+  1. Com o `A` da C1v: `python -m variante gerar --video $VIDEOS/a.mp4 --marca-em <marca_em de $VIDEOS/a.gabarito.json>
+     --mudanca marca_no_inicio --saida $VIDEOS/variante-a`, e depois `python -m variante conferir $VIDEOS/variante-a`.
+  2. Risco: a variante sai em H.264 sem perda, no perfil High 4:4:4 Predictive. Antes do teste, ver se o Gerenciador
+     da Meta aceita o arquivo.
+  3. Com a C1 ✅: o Igor monta o teste A/B (o `A` contra a variante, com o teto dele), e a linha
+     `- teste A/B no ar desde 2026-11-DD, teto de R$ <N>, variante sha256 <hash>` entra em `docs/anuncios.md`. O
+     `python -m teste poder` dá o n por braço do plano.
+  4. O resto do `verificar:` (a linha do `docs/anuncios.md` e o `conferir` do `A`), e então o ✅ na fila.
+- Os sha256 do `E1` e da variante valem neste Mac, com este ffmpeg; na Karen eles mudam.
+- [V] Bateria desta sessão, pela trava, com o ffmpeg de `~/.local/ffmpeg-full` no `PATH`, depois do conserto da
+  segunda opinião: 25 testes, 20 passaram, 0 falharam, 5 pulados (os 5 de contrato, sem `MOTOR_URL`), em 70 s; o `-k`
+  dos três da seção deu `3 passed` (pela fila, antes do conserto, que não mexeu em `variante/`).
+- [V] A segunda opinião (Opus, contexto limpo, diff desde o `1a4fea6`) achou o `sai:` desta sessão entregue e um
+  achado de severidade baixa, já consertado (`ed95015`): o `teste poder` caía com traceback ou travava quando `p1` e
+  `p2` só diferiam no float (`0.3` contra `0.30000000000000004`). Agora `h` igual a 0 e n acima de 1e9 por braço saem
+  2 com «não há efeito a detectar», a busca do n é binária, e o `test_poder_sem_efeito` cobre os três casos.
+- Para quando a variante do `A` for gerada: o certificado grava o caminho absoluto do original. Um `conferir` feito
+  em outra máquina, com a `$VIDEOS` em outro caminho, diria que o original não existe. Gere e confira na mesma máquina.
 
 ## Madrugada 10/11 — decisões para o Igor conferir
 
