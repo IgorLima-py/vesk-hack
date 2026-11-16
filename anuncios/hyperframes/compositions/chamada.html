@@ -45,7 +45,7 @@
     (function () {
       /* A chamada: o anúncio no feed, à esquerda, e o relatório vazio, à direita. Em «Upload», pontos da paleta
          correm do anúncio para o relatório; em «report», as linhas da leitura e o próximo teste aparecem no lugar do
-         esqueleto. O endereço em mono está inteiro desde o corte, porque o gabarito o põe no começo da fala, e o
+         esqueleto, todas no quadro de «report», que é onde o gabarito as põe. O endereço em mono está inteiro desde o corte, porque o gabarito o põe no começo da fala, e o
          grifo o sublinha em «Upload». A faixa de pontos passa por baixo, apagada na legenda. */
       const K = window.VeskKit, seg = K.segmento("chamada"), dur = seg.quadros / K.FPS;
       const em = (w) => K.q(K.palavra(seg, w).inicio);
@@ -68,7 +68,7 @@
       linhas.forEach((el) => tl.set(el, { opacity: 0 }, 0));
       tl.fromTo(".ch-esqueleto", { opacity: 1 }, { opacity: 0, duration: 0.12, ease: "none" }, relatorio);
       linhas.forEach((el, i) => tl.fromTo(el, { opacity: 0, filter: "blur(8px)" },
-        { opacity: 1, filter: "blur(0px)", duration: 0.14, ease: "power3.out" }, relatorio + i * 0.07));
+        { opacity: 1, filter: "blur(0px)", duration: 0.14, ease: "power3.out" }, relatorio));
       K.grifar(tl, document.getElementById("ch-grifo"), relatorio + 0.3, 0.3);
       const campo = new K.Campo(document.getElementById("ch-campo"), { passo: 24, semente: 21 });
       const ruido = K.ruido(13);

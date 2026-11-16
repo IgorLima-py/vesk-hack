@@ -68,3 +68,22 @@ def test_marca_em_e_cortes_saem_da_ordem():
         # o logo sonoro toca no marca_em, e a voz da marca entra depois dele e da pausa
         assert marca["voz_inicio_amostra"] == marca["inicio"] * 800 + round((0.2 + 0.5) * 24000)
     assert b["marca_em"] < a["marca_em"]
+
+
+# evita: o texto na tela de uma história no gabarito da outra, número escrito na tela e texto que entra depois de sair
+def test_texto_na_tela_por_historia():
+    from anuncios.falas import HISTORIAS
+
+    a = montar(_params("a"), _falas_sinteticas())
+    assert set(a["textos"]) == set(HISTORIAS)
+    legendas = {(leg["texto"], leg["inicio"], leg["fim"]) for leg in a["legendas"]}
+    for h in HISTORIAS:
+        textos = a["textos"][h]
+        assert not any(ch.isdigit() for t in textos for ch in t["texto"])
+        assert all(t["inicio"] < t["fim"] for t in textos)
+        assert legendas <= {(t["texto"], t["inicio"], t["fim"]) for t in textos}
+    for s in a["segmentos"]:
+        if s["chave"] in ("marca", "chamada"):
+            assert s["tela"]["2"] == s["tela"]["3"]
+    so_da_2 = {t["texto"] for t in a["textos"]["2"]} - {t["texto"] for t in a["textos"]["3"]}
+    assert "Viewers" in so_da_2 and "?" in so_da_2

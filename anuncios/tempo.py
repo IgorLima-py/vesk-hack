@@ -12,7 +12,7 @@ import json
 import math
 
 from anuncios.caminhos import FALA, LINHA, parametros
-from anuncios.falas import CHAVE_DA_MARCA, CHAVES, FALAS
+from anuncios.falas import CHAVE_DA_MARCA, CHAVES, FALAS, HISTORIAS
 
 VERSAO = 1
 QUEBRA_DA_LEGENDA = (",", ".", "?", "!", ";", ":")  # a legenda quebra na pontuação do roteiro, e só nela
@@ -74,15 +74,16 @@ def montar(params: dict, falas: dict[str, dict]) -> dict:
             inicio = min(max(round((voz_s + p["inicio"]) * fps), q), q + n - 1)
             fim = min(max(round((voz_s + p["fim"]) * fps), inicio + 1), q + n)
             palavras.append({"texto": p["texto"], "inicio": inicio, "fim": fim})
-        tela = []
-        for item in FALAS[chave]["tela"]:
-            if item["papel"] == "frase_palavra_a_palavra":
-                inicio = palavras[0]["inicio"]
-            elif "desde_palavra" in item:
-                inicio = _palavra(palavras, item["desde_palavra"])["inicio"]
-            else:
-                inicio = q
-            tela.append({**item, "inicio": inicio, "fim": q + n})
+        tela = {}
+        for historia, itens in FALAS[chave]["tela"].items():
+            tela[historia] = []
+            for item in itens:
+                inicio = _palavra(palavras, item["desde_palavra"])["inicio"] if "desde_palavra" in item else q
+                fim = _palavra(palavras, item["ate_palavra"])["inicio"] if "ate_palavra" in item else q + n
+                if not inicio < fim:
+                    raise ValueError(f"o texto {item['texto']!r} da fala {chave} (história {historia}) não fica "
+                                     f"na tela: quadros {inicio} a {fim}")
+                tela[historia].append({**item, "inicio": inicio, "fim": fim})
         segmentos.append({
             "chave": chave,
             "inicio": q,
@@ -100,9 +101,12 @@ def montar(params: dict, falas: dict[str, dict]) -> dict:
 
     marca = next(s for s in segmentos if s["chave"] == CHAVE_DA_MARCA)
     legendas = [leg for s in segmentos if s["legenda"] for leg in _legendas(s)]
-    textos = sorted([{"texto": t["texto"], "inicio": t["inicio"], "fim": t["fim"]} for s in segmentos for t in s["tela"]]
-                    + [{"texto": leg["texto"], "inicio": leg["inicio"], "fim": leg["fim"]} for leg in legendas],
-                    key=lambda t: (t["inicio"], t["texto"]))
+    # O gabarito de cada história: o texto que o motor escreve nela e a legenda, que é a mesma nas duas.
+    textos = {h: sorted([{"texto": t["texto"], "inicio": t["inicio"], "fim": t["fim"]}
+                         for s in segmentos for t in s["tela"][h]]
+                        + [{"texto": leg["texto"], "inicio": leg["inicio"], "fim": leg["fim"]} for leg in legendas],
+                        key=lambda t: (t["inicio"], t["texto"]))
+              for h in HISTORIAS}
     return {
         "versao": VERSAO,
         "fps": fps,

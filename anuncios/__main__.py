@@ -5,7 +5,7 @@
     tempo a|b             a linha do tempo, a única entrada dos motores
     som a|b               o áudio: as falas no quadro delas e o logo sonoro na cartela da marca
     cenas a|b [--historia N]  a raiz do projeto do HyperFrames (anuncios/hyperframes/index.html)
-    final a|b --imagem X  queima a legenda na imagem muda do motor, junta o som, grava o mp4 e o gabarito
+    final a|b --historia N --imagem X  queima a legenda na imagem muda do motor, junta o som, grava o mp4 e o gabarito
     prova <motor> ...     as medidas de uma frente da prova dos motores
 
 Cada comando importa só o que usa: os testes e o Python 3.14 não precisam do kokoro.
@@ -33,12 +33,15 @@ def main(argv: list[str] | None = None) -> int:
 
     cenas = sub.add_parser("cenas", help="a raiz do projeto do HyperFrames")
     cenas.add_argument("anuncio", choices=("a", "b"))
-    cenas.add_argument("--historia", default="2", help="a linha de história de anuncios/storylines.md (2 ou 3)")
+    cenas.add_argument("--historia", choices=("2", "3"), default="2",
+                       help="a linha de história de anuncios/storylines.md")
 
     final = sub.add_parser("final", help="legenda, som, mp4 e gabarito")
     final.add_argument("anuncio", choices=("a", "b"))
+    final.add_argument("--historia", choices=("2", "3"), required=True,
+                       help="a linha de história de anuncios/storylines.md, que escolhe o gabarito do texto na tela")
     final.add_argument("--imagem", type=Path, required=True, help="o mp4 mudo que o motor renderizou")
-    final.add_argument("--saida", type=Path, help="o mp4 final (padrão: $VIDEOS/<a|b>.mp4)")
+    final.add_argument("--saida", type=Path, help="o mp4 final (padrão: $VIDEOS/<a|b><historia>.mp4)")
 
     prova = sub.add_parser("prova", help="as medidas de uma frente da prova")
     prova.add_argument("motor")
@@ -66,7 +69,7 @@ def main(argv: list[str] | None = None) -> int:
         return m.main(a.anuncio, a.historia)
     if a.comando == "final":
         from anuncios import final as m
-        return m.main(a.anuncio, a.imagem, a.saida)
+        return m.main(a.anuncio, a.historia, a.imagem, a.saida)
     if a.comando == "prova":
         from anuncios import prova as m
         return m.main(a.motor, a.render, a.projeto, a.pacote, a.linha)

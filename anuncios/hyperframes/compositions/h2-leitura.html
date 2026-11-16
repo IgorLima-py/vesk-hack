@@ -104,14 +104,11 @@
         corte.style.clipPath = `inset(0 ${(1 - ate) * 100}% 0 0)`;
       }
       K.relogio(tl, dur, desenhar);
-      // As linhas da leitura entram quando o cabeçote passa pela tomada delas.
-      const quando = (alvo) => {
-        for (let t = ida[0]; t < ida[1]; t += 1 / K.FPS) if (posicao(t) >= alvo) return t;
-        return ida[1];
-      };
-      [["#h2l-item1", 0.04], ["#h2l-item2", 0.3], ["#h2l-item3", 0.52]].forEach(([sel, alvo]) =>
+      // As linhas da leitura entram em «video», «second» e «and», as palavras que o gabarito declara para elas, com o
+      // cabeçote passando pela tomada de cada uma.
+      [["#h2l-item1", "video"], ["#h2l-item2", "second"], ["#h2l-item3", "and"]].forEach(([sel, palavra]) =>
         tl.fromTo(sel, { opacity: 0, filter: "blur(8px)" },
-          { opacity: 1, filter: "blur(0px)", duration: 0.15, ease: "power3.out" }, quando(alvo)));
+          { opacity: 1, filter: "blur(0px)", duration: 0.15, ease: "power3.out" }, em(palavra)));
       K.grifar(tl, document.getElementById("h2l-grifo"), em("drop"), 0.4);
       window.__timelines["h2-leitura"] = tl;
     })();

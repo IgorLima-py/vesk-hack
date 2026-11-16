@@ -82,7 +82,7 @@ def _sonda(video: Path) -> dict:
             "quadros": int(s["nb_read_frames"])}
 
 
-def gabarito(linha: dict, video_sha256: str) -> dict:
+def gabarito(linha: dict, historia: str, video_sha256: str) -> dict:
     fps = linha["fps"]
     return {
         "versao": VERSAO_GABARITO,
@@ -95,12 +95,12 @@ def gabarito(linha: dict, video_sha256: str) -> dict:
         "fala": [{"texto": s["texto"], "inicio": s["fala_inicio_s"], "fim": s["fala_fim_s"],
                   "tem_marca": s["chave"] == "marca"} for s in linha["segmentos"]],
         "texto": [{"texto": t["texto"], "inicio": _numero(t["inicio"] / fps), "fim": _numero(t["fim"] / fps)}
-                  for t in linha["textos"]],
+                  for t in linha["textos"][historia]],
         "video_sha256": video_sha256,
     }
 
 
-def main(anuncio: str, imagem: Path, saida: Path | None = None) -> int:
+def main(anuncio: str, historia: str, imagem: Path, saida: Path | None = None) -> int:
     linha = json.loads((LINHA / f"{anuncio}.json").read_text(encoding="utf-8"))
     pasta = MONTAGEM / anuncio
     som = pasta / "som.wav"
@@ -119,7 +119,7 @@ def main(anuncio: str, imagem: Path, saida: Path | None = None) -> int:
         shutil.copyfile(ttf, fontes / ttf.name)
     (pasta / "legenda.ass").write_text(ass(linha), encoding="utf-8")
 
-    saida = Path(saida or VIDEOS / f"{anuncio}.mp4").resolve()
+    saida = Path(saida or VIDEOS / f"{anuncio}{historia}.mp4").resolve()
     saida.parent.mkdir(parents=True, exist_ok=True)
     feito = subprocess.run([
         _ffmpeg(), "-hide_banner", "-y", "-v", "info",
@@ -143,7 +143,7 @@ def main(anuncio: str, imagem: Path, saida: Path | None = None) -> int:
         raise SystemExit(f"o libass não usou a {familia} na legenda: {escolhas or 'nenhuma fontselect no log'}")
 
     sha = hashlib.sha256(saida.read_bytes()).hexdigest()
-    g = gabarito(linha, sha)
+    g = gabarito(linha, historia, sha)
     (saida.parent / f"{saida.stem}.gabarito.json").write_text(json.dumps(g, ensure_ascii=False, indent=2) + "\n",
                                                               encoding="utf-8")
     print(f"{saida} ({g['duracao']} s, marca_em {g['marca_em']} s, sha256 {sha[:12]}); fontes da legenda: {escolhas}")

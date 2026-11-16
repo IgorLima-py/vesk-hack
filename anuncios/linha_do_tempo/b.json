@@ -121,16 +121,53 @@
           "fim": 76
         }
       ],
-      "tela": [
-        {
-          "texto": "Your ad is losing people in the first seconds.",
-          "papel": "frase_palavra_a_palavra",
-          "inicio": 10,
-          "fim": 90
-        }
-      ],
+      "tela": {
+        "2": [
+          {
+            "texto": "Your ad is losing people in the first seconds.",
+            "papel": "frase_em_cinza",
+            "inicio": 0,
+            "fim": 90
+          },
+          {
+            "texto": "yourbrand",
+            "papel": "cartao",
+            "inicio": 0,
+            "fim": 90
+          },
+          {
+            "texto": "Sponsored",
+            "papel": "cartao",
+            "inicio": 0,
+            "fim": 90
+          },
+          {
+            "texto": "Shop now",
+            "papel": "cartao",
+            "inicio": 0,
+            "fim": 90
+          },
+          {
+            "texto": "Viewers",
+            "papel": "rotulo",
+            "inicio": 0,
+            "fim": 90
+          }
+        ],
+        "3": [
+          {
+            "texto": "Your ad is losing people in the first seconds.",
+            "papel": "frase_em_cinza",
+            "inicio": 0,
+            "fim": 90
+          }
+        ]
+      },
       "legenda": false,
-      "desenho": "A frase entra palavra a palavra, cada palavra no quadro em que é dita (segmento.palavras), em serifa (Newsreader), na cor do texto, no terço de cima da zona segura. Embaixo dela, uma curva de retenção desenhada como ilustração (uma linha só, na cor do texto) cai da esquerda para a direita enquanto o segmento corre. Sem eixo, sem rótulo, sem número."
+      "desenho": {
+        "2": "O anúncio no feed, rodando a abertura, e à direita quem o assiste, um ponto por pessoa; no penhasco dos primeiros segundos, os pontos se apagam. A frase está em cinza desde o quadro 0, e cada palavra vira tinta quando é dita; «first seconds.» ganha o grifo.",
+        "3": "«losing people» enorme sobre uma mancha de pontos que se apaga ponto a ponto. A frase está em cinza desde o quadro 0, e cada palavra vira tinta quando é dita; «first seconds.» ganha o grifo."
+      }
     },
     {
       "chave": "marca",
@@ -162,22 +199,41 @@
           "fim": 170
         }
       ],
-      "tela": [
-        {
-          "texto": "Vesk",
-          "papel": "wordmark",
-          "inicio": 90,
-          "fim": 184
-        },
-        {
-          "texto": "The creative autopilot.",
-          "papel": "assinatura",
-          "inicio": 90,
-          "fim": 184
-        }
-      ],
+      "tela": {
+        "2": [
+          {
+            "texto": "Vesk",
+            "papel": "wordmark",
+            "inicio": 90,
+            "fim": 184
+          },
+          {
+            "texto": "The creative autopilot for video ads.",
+            "papel": "assinatura",
+            "inicio": 90,
+            "fim": 184
+          }
+        ],
+        "3": [
+          {
+            "texto": "Vesk",
+            "papel": "wordmark",
+            "inicio": 90,
+            "fim": 184
+          },
+          {
+            "texto": "The creative autopilot for video ads.",
+            "papel": "assinatura",
+            "inicio": 90,
+            "fim": 184
+          }
+        ]
+      },
       "legenda": false,
-      "desenho": "A cartela da marca: fundo preto; o wordmark «Vesk» em Newsreader peso 500, na cor do texto, centrado, logo acima da barra; a barra do grifo (a mesma do h1 do site) ocupa exatamente o retângulo cartela_marca.barra; e «The creative autopilot.» em Schibsted Grotesk, na cor mudo, logo abaixo dela. Tudo entra inteiro no primeiro quadro do segmento, que é o marca_em, sem animação de entrada. Nada no grifo pode ocupar o retângulo da barra antes desse quadro."
+      "desenho": {
+        "2": "A cartela da marca: fundo preto; o selo de três pontos do site, grande, com o degradê da paleta do campo; o wordmark «Vesk» em Newsreader peso 500, centrado, logo acima da barra; a barra do grifo ocupa exatamente o retângulo cartela_marca.barra; e «The creative autopilot for video ads.» em Schibsted Grotesk logo abaixo dela. Tudo entra inteiro no primeiro quadro do segmento, que é o marca_em, sem animação de entrada. Nada no grifo pode ocupar o retângulo da barra antes desse quadro.",
+        "3": "A cartela da marca: fundo preto; o selo de três pontos do site, grande, com o degradê da paleta do campo; o wordmark «Vesk» em Newsreader peso 500, centrado, logo acima da barra; a barra do grifo ocupa exatamente o retângulo cartela_marca.barra; e «The creative autopilot for video ads.» em Schibsted Grotesk logo abaixo dela. Tudo entra inteiro no primeiro quadro do segmento, que é o marca_em, sem animação de entrada. Nada no grifo pode ocupar o retângulo da barra antes desse quadro."
+      }
     },
     {
       "chave": "problema",
@@ -229,17 +285,52 @@
           "fim": 250
         }
       ],
-      "tela": [
-        {
-          "texto": "?",
-          "papel": "interrogacao",
-          "desde_palavra": "Not",
-          "inicio": 232,
-          "fim": 265
-        }
-      ],
+      "tela": {
+        "2": [
+          {
+            "texto": "Drop-off",
+            "papel": "rotulo",
+            "desde_palavra": "when",
+            "inicio": 205,
+            "fim": 265
+          },
+          {
+            "texto": "?",
+            "papel": "interrogacao",
+            "desde_palavra": "Not",
+            "inicio": 232,
+            "fim": 265
+          }
+        ],
+        "3": [
+          {
+            "texto": "You can see when they leave.",
+            "papel": "frase_em_cinza",
+            "ate_palavra": "Not",
+            "inicio": 184,
+            "fim": 232
+          },
+          {
+            "texto": "Not",
+            "papel": "frase",
+            "desde_palavra": "Not",
+            "inicio": 232,
+            "fim": 265
+          },
+          {
+            "texto": "why.",
+            "papel": "frase",
+            "desde_palavra": "why",
+            "inicio": 239,
+            "fim": 265
+          }
+        ]
+      },
       "legenda": true,
-      "desenho": "A curva inteira, parada, e o ponto onde ela despenca marcado por um círculo no grifo. Ao lado do ponto, um «?» grande em serifa, na cor do grifo, entra na primeira palavra de «Not why.». Sem número."
+      "desenho": {
+        "2": "De perto, no penhasco: o anel e «Drop-off» em «when»; o «?» enorme no vazio de quem saiu, em «Not».",
+        "3": "A frase chega palavra a palavra; em «Not», sai num borrão, e «Not why.» ocupa a largura, com «why.» grifado."
+      }
     },
     {
       "chave": "leitura",
@@ -331,9 +422,75 @@
           "fim": 406
         }
       ],
-      "tela": [],
+      "tela": {
+        "2": [
+          {
+            "texto": "Readout",
+            "papel": "rotulo",
+            "inicio": 265,
+            "fim": 420
+          },
+          {
+            "texto": "Logo",
+            "papel": "rotulo",
+            "inicio": 265,
+            "fim": 420
+          },
+          {
+            "texto": "Product",
+            "papel": "rotulo",
+            "inicio": 265,
+            "fim": 420
+          },
+          {
+            "texto": "Cut",
+            "papel": "rotulo",
+            "inicio": 265,
+            "fim": 420
+          },
+          {
+            "texto": "Logo only, no product",
+            "papel": "leitura",
+            "desde_palavra": "video",
+            "inicio": 288,
+            "fim": 420
+          },
+          {
+            "texto": "Product enters late",
+            "papel": "leitura",
+            "desde_palavra": "second",
+            "inicio": 312,
+            "fim": 420
+          },
+          {
+            "texto": "Close-up, no text",
+            "papel": "leitura",
+            "desde_palavra": "and",
+            "inicio": 346,
+            "fim": 420
+          }
+        ],
+        "3": [
+          {
+            "texto": "second",
+            "papel": "rolo",
+            "inicio": 265,
+            "fim": 420
+          },
+          {
+            "texto": "Drop-off",
+            "papel": "rotulo",
+            "desde_palavra": "drop",
+            "inicio": 384,
+            "fim": 420
+          }
+        ]
+      },
       "legenda": true,
-      "desenho": "A curva no alto e, embaixo dela, uma tira horizontal de quadros (retângulos com composições abstratas, na cor do cartão, com borda) correndo da direita para a esquerda. Uma linha vertical no grifo percorre a curva e a tira juntas, da esquerda para a direita, durante o segmento, e para no ponto da queda. Sem texto."
+      "desenho": {
+        "2": "A tela do produto: o anúncio lido em mosaico, as linhas da leitura com o selo, a curva e as faixas do que estava na tela. O cabeçote corre o anúncio, volta ao penhasco em «match», e a linha que explica a saída é grifada em «drop».",
+        "3": "Um rolo de «second» corre pelo cabeçote; freia em «match», e em «drop» o segundo parado no cabeçote é grifado e ganha «Drop-off»."
+      }
     },
     {
       "chave": "variante",
@@ -400,9 +557,80 @@
           "fim": 511
         }
       ],
-      "tela": [],
+      "tela": {
+        "2": [
+          {
+            "texto": "Control",
+            "papel": "rotulo",
+            "inicio": 420,
+            "fim": 525
+          },
+          {
+            "texto": "Variant",
+            "papel": "rotulo",
+            "desde_palavra": "variant",
+            "inicio": 443,
+            "fim": 525
+          },
+          {
+            "texto": "yourbrand",
+            "papel": "cartao",
+            "inicio": 420,
+            "fim": 525
+          },
+          {
+            "texto": "Sponsored",
+            "papel": "cartao",
+            "inicio": 420,
+            "fim": 525
+          },
+          {
+            "texto": "Shop now",
+            "papel": "cartao",
+            "inicio": 420,
+            "fim": 525
+          },
+          {
+            "texto": "One change",
+            "papel": "etiqueta",
+            "desde_palavra": "one",
+            "inicio": 458,
+            "fim": 525
+          }
+        ],
+        "3": [
+          {
+            "texto": "Control",
+            "papel": "rotulo",
+            "inicio": 420,
+            "fim": 525
+          },
+          {
+            "texto": "Variant",
+            "papel": "rotulo",
+            "inicio": 420,
+            "fim": 525
+          },
+          {
+            "texto": "Logo first.",
+            "papel": "frase",
+            "inicio": 420,
+            "fim": 525
+          },
+          {
+            "texto": "Bottle first.",
+            "papel": "frase",
+            "desde_palavra": "one",
+            "inicio": 458,
+            "fim": 525
+          }
+        ]
+      },
       "legenda": true,
-      "desenho": "Dois quadros verticais lado a lado, iguais, de um anúncio abstrato (retângulos e um círculo na cor do texto, sobre o cartão). No da direita, um elemento só aparece trocado e contornado no grifo, a partir da palavra «one». Sem texto."
+      "desenho": {
+        "2": "Control e variant, os dois no cartão do feed, iguais; em «one», só a variante muda: o frasco entra na abertura, contornado no grifo, com a etiqueta «One change».",
+        "3": "Control e variant, «Logo first.» nas duas; em «one», a linha da variante roda e para em «Bottle first.», com «Bottle» grifado, e a do controle ganha um risco."
+      }
     },
     {
       "chave": "chamada",
@@ -444,16 +672,147 @@
           "fim": 586
         }
       ],
-      "tela": [
-        {
-          "texto": "hack.vesklab.com",
-          "papel": "endereco",
-          "inicio": 525,
-          "fim": 599
-        }
-      ],
+      "tela": {
+        "2": [
+          {
+            "texto": "hack.vesklab.com",
+            "papel": "endereco",
+            "inicio": 525,
+            "fim": 599
+          },
+          {
+            "texto": "yourbrand",
+            "papel": "cartao",
+            "inicio": 525,
+            "fim": 599
+          },
+          {
+            "texto": "Sponsored",
+            "papel": "cartao",
+            "inicio": 525,
+            "fim": 599
+          },
+          {
+            "texto": "Shop now",
+            "papel": "cartao",
+            "inicio": 525,
+            "fim": 599
+          },
+          {
+            "texto": "Readout",
+            "papel": "rotulo",
+            "inicio": 525,
+            "fim": 599
+          },
+          {
+            "texto": "Logo only, no product",
+            "papel": "leitura",
+            "desde_palavra": "report",
+            "inicio": 569,
+            "fim": 599
+          },
+          {
+            "texto": "Product enters late",
+            "papel": "leitura",
+            "desde_palavra": "report",
+            "inicio": 569,
+            "fim": 599
+          },
+          {
+            "texto": "Close-up, no text",
+            "papel": "leitura",
+            "desde_palavra": "report",
+            "inicio": 569,
+            "fim": 599
+          },
+          {
+            "texto": "Next test",
+            "papel": "rotulo",
+            "desde_palavra": "report",
+            "inicio": 569,
+            "fim": 599
+          },
+          {
+            "texto": "Product first vs. logo first",
+            "papel": "leitura",
+            "desde_palavra": "report",
+            "inicio": 569,
+            "fim": 599
+          }
+        ],
+        "3": [
+          {
+            "texto": "hack.vesklab.com",
+            "papel": "endereco",
+            "inicio": 525,
+            "fim": 599
+          },
+          {
+            "texto": "yourbrand",
+            "papel": "cartao",
+            "inicio": 525,
+            "fim": 599
+          },
+          {
+            "texto": "Sponsored",
+            "papel": "cartao",
+            "inicio": 525,
+            "fim": 599
+          },
+          {
+            "texto": "Shop now",
+            "papel": "cartao",
+            "inicio": 525,
+            "fim": 599
+          },
+          {
+            "texto": "Readout",
+            "papel": "rotulo",
+            "inicio": 525,
+            "fim": 599
+          },
+          {
+            "texto": "Logo only, no product",
+            "papel": "leitura",
+            "desde_palavra": "report",
+            "inicio": 569,
+            "fim": 599
+          },
+          {
+            "texto": "Product enters late",
+            "papel": "leitura",
+            "desde_palavra": "report",
+            "inicio": 569,
+            "fim": 599
+          },
+          {
+            "texto": "Close-up, no text",
+            "papel": "leitura",
+            "desde_palavra": "report",
+            "inicio": 569,
+            "fim": 599
+          },
+          {
+            "texto": "Next test",
+            "papel": "rotulo",
+            "desde_palavra": "report",
+            "inicio": 569,
+            "fim": 599
+          },
+          {
+            "texto": "Product first vs. logo first",
+            "papel": "leitura",
+            "desde_palavra": "report",
+            "inicio": 569,
+            "fim": 599
+          }
+        ]
+      },
       "legenda": true,
-      "desenho": "A cartela final: «hack.vesklab.com» em IBM Plex Mono, na cor do texto, centrado, sublinhado no grifo. A legenda queimada traz a frase; o motor só escreve o endereço."
+      "desenho": {
+        "2": "O anúncio no feed à esquerda e o relatório vazio à direita; em «Upload», pontos correm de um para o outro e o endereço em mono ganha o sublinhado no grifo; em «report», a leitura e o próximo teste aparecem no lugar do esqueleto. O endereço está inteiro desde o primeiro quadro.",
+        "3": "O anúncio no feed à esquerda e o relatório vazio à direita; em «Upload», pontos correm de um para o outro e o endereço em mono ganha o sublinhado no grifo; em «report», a leitura e o próximo teste aparecem no lugar do esqueleto. O endereço está inteiro desde o primeiro quadro."
+      }
     }
   ],
   "legendas": [
@@ -512,76 +871,370 @@
       "chave": "chamada"
     }
   ],
-  "textos": [
-    {
-      "texto": "Your ad is losing people in the first seconds.",
-      "inicio": 10,
-      "fim": 90
-    },
-    {
-      "texto": "The creative autopilot.",
-      "inicio": 90,
-      "fim": 184
-    },
-    {
-      "texto": "Vesk",
-      "inicio": 90,
-      "fim": 184
-    },
-    {
-      "texto": "You can see when they leave.",
-      "inicio": 194,
-      "fim": 232
-    },
-    {
-      "texto": "?",
-      "inicio": 232,
-      "fim": 265
-    },
-    {
-      "texto": "Not why.",
-      "inicio": 232,
-      "fim": 265
-    },
-    {
-      "texto": "We read your video,",
-      "inicio": 275,
-      "fim": 312
-    },
-    {
-      "texto": "second by second,",
-      "inicio": 312,
-      "fim": 346
-    },
-    {
-      "texto": "and match it to the moment people drop off.",
-      "inicio": 346,
-      "fim": 420
-    },
-    {
-      "texto": "Then you get a variant with one change,",
-      "inicio": 430,
-      "fim": 484
-    },
-    {
-      "texto": "ready to test.",
-      "inicio": 484,
-      "fim": 525
-    },
-    {
-      "texto": "hack.vesklab.com",
-      "inicio": 525,
-      "fim": 599
-    },
-    {
-      "texto": "Upload your ad.",
-      "inicio": 534,
-      "fim": 563
-    },
-    {
-      "texto": "Get the report.",
-      "inicio": 563,
-      "fim": 599
-    }
-  ]
+  "textos": {
+    "2": [
+      {
+        "texto": "Shop now",
+        "inicio": 0,
+        "fim": 90
+      },
+      {
+        "texto": "Sponsored",
+        "inicio": 0,
+        "fim": 90
+      },
+      {
+        "texto": "Viewers",
+        "inicio": 0,
+        "fim": 90
+      },
+      {
+        "texto": "Your ad is losing people in the first seconds.",
+        "inicio": 0,
+        "fim": 90
+      },
+      {
+        "texto": "yourbrand",
+        "inicio": 0,
+        "fim": 90
+      },
+      {
+        "texto": "The creative autopilot for video ads.",
+        "inicio": 90,
+        "fim": 184
+      },
+      {
+        "texto": "Vesk",
+        "inicio": 90,
+        "fim": 184
+      },
+      {
+        "texto": "You can see when they leave.",
+        "inicio": 194,
+        "fim": 232
+      },
+      {
+        "texto": "Drop-off",
+        "inicio": 205,
+        "fim": 265
+      },
+      {
+        "texto": "?",
+        "inicio": 232,
+        "fim": 265
+      },
+      {
+        "texto": "Not why.",
+        "inicio": 232,
+        "fim": 265
+      },
+      {
+        "texto": "Cut",
+        "inicio": 265,
+        "fim": 420
+      },
+      {
+        "texto": "Logo",
+        "inicio": 265,
+        "fim": 420
+      },
+      {
+        "texto": "Product",
+        "inicio": 265,
+        "fim": 420
+      },
+      {
+        "texto": "Readout",
+        "inicio": 265,
+        "fim": 420
+      },
+      {
+        "texto": "We read your video,",
+        "inicio": 275,
+        "fim": 312
+      },
+      {
+        "texto": "Logo only, no product",
+        "inicio": 288,
+        "fim": 420
+      },
+      {
+        "texto": "Product enters late",
+        "inicio": 312,
+        "fim": 420
+      },
+      {
+        "texto": "second by second,",
+        "inicio": 312,
+        "fim": 346
+      },
+      {
+        "texto": "Close-up, no text",
+        "inicio": 346,
+        "fim": 420
+      },
+      {
+        "texto": "and match it to the moment people drop off.",
+        "inicio": 346,
+        "fim": 420
+      },
+      {
+        "texto": "Control",
+        "inicio": 420,
+        "fim": 525
+      },
+      {
+        "texto": "Shop now",
+        "inicio": 420,
+        "fim": 525
+      },
+      {
+        "texto": "Sponsored",
+        "inicio": 420,
+        "fim": 525
+      },
+      {
+        "texto": "yourbrand",
+        "inicio": 420,
+        "fim": 525
+      },
+      {
+        "texto": "Then you get a variant with one change,",
+        "inicio": 430,
+        "fim": 484
+      },
+      {
+        "texto": "Variant",
+        "inicio": 443,
+        "fim": 525
+      },
+      {
+        "texto": "One change",
+        "inicio": 458,
+        "fim": 525
+      },
+      {
+        "texto": "ready to test.",
+        "inicio": 484,
+        "fim": 525
+      },
+      {
+        "texto": "Readout",
+        "inicio": 525,
+        "fim": 599
+      },
+      {
+        "texto": "Shop now",
+        "inicio": 525,
+        "fim": 599
+      },
+      {
+        "texto": "Sponsored",
+        "inicio": 525,
+        "fim": 599
+      },
+      {
+        "texto": "hack.vesklab.com",
+        "inicio": 525,
+        "fim": 599
+      },
+      {
+        "texto": "yourbrand",
+        "inicio": 525,
+        "fim": 599
+      },
+      {
+        "texto": "Upload your ad.",
+        "inicio": 534,
+        "fim": 563
+      },
+      {
+        "texto": "Get the report.",
+        "inicio": 563,
+        "fim": 599
+      },
+      {
+        "texto": "Close-up, no text",
+        "inicio": 569,
+        "fim": 599
+      },
+      {
+        "texto": "Logo only, no product",
+        "inicio": 569,
+        "fim": 599
+      },
+      {
+        "texto": "Next test",
+        "inicio": 569,
+        "fim": 599
+      },
+      {
+        "texto": "Product enters late",
+        "inicio": 569,
+        "fim": 599
+      },
+      {
+        "texto": "Product first vs. logo first",
+        "inicio": 569,
+        "fim": 599
+      }
+    ],
+    "3": [
+      {
+        "texto": "Your ad is losing people in the first seconds.",
+        "inicio": 0,
+        "fim": 90
+      },
+      {
+        "texto": "The creative autopilot for video ads.",
+        "inicio": 90,
+        "fim": 184
+      },
+      {
+        "texto": "Vesk",
+        "inicio": 90,
+        "fim": 184
+      },
+      {
+        "texto": "You can see when they leave.",
+        "inicio": 184,
+        "fim": 232
+      },
+      {
+        "texto": "You can see when they leave.",
+        "inicio": 194,
+        "fim": 232
+      },
+      {
+        "texto": "Not",
+        "inicio": 232,
+        "fim": 265
+      },
+      {
+        "texto": "Not why.",
+        "inicio": 232,
+        "fim": 265
+      },
+      {
+        "texto": "why.",
+        "inicio": 239,
+        "fim": 265
+      },
+      {
+        "texto": "second",
+        "inicio": 265,
+        "fim": 420
+      },
+      {
+        "texto": "We read your video,",
+        "inicio": 275,
+        "fim": 312
+      },
+      {
+        "texto": "second by second,",
+        "inicio": 312,
+        "fim": 346
+      },
+      {
+        "texto": "and match it to the moment people drop off.",
+        "inicio": 346,
+        "fim": 420
+      },
+      {
+        "texto": "Drop-off",
+        "inicio": 384,
+        "fim": 420
+      },
+      {
+        "texto": "Control",
+        "inicio": 420,
+        "fim": 525
+      },
+      {
+        "texto": "Logo first.",
+        "inicio": 420,
+        "fim": 525
+      },
+      {
+        "texto": "Variant",
+        "inicio": 420,
+        "fim": 525
+      },
+      {
+        "texto": "Then you get a variant with one change,",
+        "inicio": 430,
+        "fim": 484
+      },
+      {
+        "texto": "Bottle first.",
+        "inicio": 458,
+        "fim": 525
+      },
+      {
+        "texto": "ready to test.",
+        "inicio": 484,
+        "fim": 525
+      },
+      {
+        "texto": "Readout",
+        "inicio": 525,
+        "fim": 599
+      },
+      {
+        "texto": "Shop now",
+        "inicio": 525,
+        "fim": 599
+      },
+      {
+        "texto": "Sponsored",
+        "inicio": 525,
+        "fim": 599
+      },
+      {
+        "texto": "hack.vesklab.com",
+        "inicio": 525,
+        "fim": 599
+      },
+      {
+        "texto": "yourbrand",
+        "inicio": 525,
+        "fim": 599
+      },
+      {
+        "texto": "Upload your ad.",
+        "inicio": 534,
+        "fim": 563
+      },
+      {
+        "texto": "Get the report.",
+        "inicio": 563,
+        "fim": 599
+      },
+      {
+        "texto": "Close-up, no text",
+        "inicio": 569,
+        "fim": 599
+      },
+      {
+        "texto": "Logo only, no product",
+        "inicio": 569,
+        "fim": 599
+      },
+      {
+        "texto": "Next test",
+        "inicio": 569,
+        "fim": 599
+      },
+      {
+        "texto": "Product enters late",
+        "inicio": 569,
+        "fim": 599
+      },
+      {
+        "texto": "Product first vs. logo first",
+        "inicio": 569,
+        "fim": 599
+      }
+    ]
+  }
 }
