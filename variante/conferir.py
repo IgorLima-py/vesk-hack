@@ -50,8 +50,9 @@ def conferir(pasta: Path) -> list[Checagem]:
         r.append(Checagem(False, f"o original {original} não existe"))
         return r
     sha_original = q.sha256_do_arquivo(original)
-    r.append(Checagem(sha_original == cert["original"]["sha256"],
-                      f"o original {original} tem o sha256 do certificado ({sha_original[:12]})"))
+    igual = sha_original == cert["original"]["sha256"]
+    r.append(Checagem(igual, f"o original {original} {'tem' if igual else 'não tem'} o sha256 do certificado "
+                             f"({sha_original[:12]}, certificado {cert['original']['sha256'][:12]})"))
     if not variante.is_file():
         r.append(Checagem(False, f"a variante {variante} não existe"))
         return r
@@ -133,6 +134,7 @@ def conferir(pasta: Path) -> list[Checagem]:
 
     # 7. O arquivo é o que o certificado registrou.
     sha_variante = q.sha256_do_arquivo(variante)
-    r.append(Checagem(sha_variante == cert["variante"]["sha256"],
-                      f"a variante tem o sha256 do certificado ({sha_variante[:12]})"))
+    igual = sha_variante == cert["variante"]["sha256"]
+    r.append(Checagem(igual, f"a variante {'tem' if igual else 'não tem'} o sha256 do certificado "
+                             f"({sha_variante[:12]}, certificado {cert['variante']['sha256'][:12]})"))
     return r
