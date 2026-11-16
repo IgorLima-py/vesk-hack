@@ -110,4 +110,17 @@ Na frase que já começa em cinza, o texto vale desde o começo da fala. A voz, 
 
 ## A escolha
 
-Ainda não feita: decisão do Igor, pelo storyboard.
+Em 16/11, depois da segunda volta, o Igor escolheu as duas: «faz os dois, gostei dos dois». Cada história sai em A e
+em B, e A e B continuam diferindo só na `ordem`. São quatro vídeos: A2, B2, A3 e B3. A voz, os cortes e o `marca_em`
+são os mesmos nos quatro.
+
+O que isso muda no código, antes da Fase 3:
+- **O texto na tela por história:** o `tela` de `anuncios/falas.py` passa a ter uma lista por história. A marca e a
+  chamada são as mesmas nas duas.
+- **A linha do tempo por história:** `python -m anuncios tempo` gera uma linha do tempo para cada par de anúncio e
+  história, e o gabarito de cada vídeo vem da dele.
+- **O `cenas` e o `final` recebem `--historia`,** e os vídeos saem com a história no nome.
+- **O `roteiro.md` e o `verificar:`** cobrem os quatro vídeos. Os dois renders iguais (o mesmo framemd5) valem para
+  o A de cada história.
+
+Fica em aberto, para o Igor: o teste A/B da ordem roda com uma história ou com as duas.
