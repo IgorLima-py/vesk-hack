@@ -34,14 +34,16 @@
         { color: "#eeedf4", opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power3.out" }, em("why"));
       K.grifar(tl, document.getElementById("h3p-grifo"), em("why") + 0.1, 0.35);
       const campo = new K.Campo(document.getElementById("h3p-campo"), { passo: 24, semente: 57 });
-      const ruido = K.ruido(59);
+      const cor = K.aura([
+        { x: 260, y: 1560, rx: 760, ry: 560, u: 0.8 },
+        { x: 1080, y: 1300, rx: 480, ry: 420, u: 0.6, forca: 0.8 },
+        { x: 900, y: 140, rx: 420, ry: 260, u: 0.5, forca: 0.6 },
+      ], { semente: 59, apaga: [K.LEGENDA.concat(0.55), [50, 300, 1000, 520, 0.75]] });
       function desenhar(t) {
         const f = K.clamp(t / dur, 0, 1);
         campo.desenhar((p) => {
-          const d = Math.hypot((p.x - 260) / 560, (p.y - 1500) / 420);
-          const legenda = 1 - 0.55 * K.suave(1050, 1090, p.y) * K.suave(1290, 1250, p.y);
-          const v = K.suave(1, 0.2, d) * (0.35 + 0.65 * ruido(p.x / 130, p.y / 130 - t * 0.25)) * legenda;
-          return { v, u: 0.75 - 0.65 * f - 0.15 * (p.x / 1080) };
+          const o = cor(p, t);
+          return o && { v: o.v, u: K.clamp(o.u - 0.6 * f, 0, 1) };
         }, "#000");
       }
       K.relogio(tl, dur, desenhar);

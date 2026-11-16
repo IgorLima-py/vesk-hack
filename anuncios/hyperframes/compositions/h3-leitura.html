@@ -9,6 +9,7 @@
     .h3l-seg { position: absolute; left: 0; margin: 0; font-size: 200px; line-height: 1; white-space: nowrap;
       color: #3b3a46; }
     #h3l-cabeca { position: absolute; left: 65px; top: 655px; width: 56px; height: 4px; background: var(--tinta); }
+    #h3l-rotulo { position: absolute; left: 790px; top: 640px; margin: 0; font-size: 28px; color: var(--tinta); }
     #h3l-cabeca::after { content: ""; position: absolute; right: -10px; top: -8px; width: 20px; height: 20px;
       border-radius: 50%; background: var(--tinta); }
   </style>
@@ -16,6 +17,7 @@
     <canvas id="h3l-campo" width="1080" height="1920" data-layout-allow-overflow></canvas>
     <div id="h3l-janela" data-layout-allow-overflow><div id="h3l-rolo"></div></div>
     <div id="h3l-cabeca"></div>
+    <p id="h3l-rotulo" class="vk-rotulo">Drop-off</p>
   </div>
   <script>
     (function () {
@@ -40,6 +42,10 @@
       };
       const campo = new K.Campo(document.getElementById("h3l-campo"), { passo: 24, semente: 61 });
       const ruido = K.ruido(67);
+      const cor = K.aura([
+        { x: 1080, y: 640, rx: 560, ry: 760, u: 0.15 },
+        { x: 0, y: 1600, rx: 640, ry: 460, u: 0.8 },
+      ], { semente: 67, vel: 0.4, apaga: [K.LEGENDA.concat(0.6)] });
       function desenhar(t) {
         const yy = y(t);
         rolo.style.transform = `translateY(${yy}px)`;
@@ -49,14 +55,14 @@
           if (i !== 9 || t < em("drop")) el.style.color = K.css(c);
         });
         campo.desenhar((p) => {
-          const d = Math.hypot((p.x - 1080) / 520, (p.y - 640) / 700);
-          const legenda = 1 - 0.55 * K.suave(1050, 1090, p.y) * K.suave(1290, 1250, p.y);
-          const v = K.suave(1, 0.15, d) * (0.3 + 0.7 * ruido(p.x / 120, p.y / 120 + t * 0.6)) * legenda;
-          return { v, u: 0.1 + 0.6 * (p.y / 1920) };
+          const o = cor(p, t);
+          return o && { v: o.v * (0.75 + 0.25 * ruido(p.x / 120, p.y / 120 + t * 0.6)), u: o.u };
         }, "#000");
       }
       K.relogio(tl, dur, desenhar);
       K.grifar(tl, document.getElementById("h3l-grifo"), em("drop"), 0.4);
+      tl.fromTo("#h3l-rotulo", { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.2, ease: "expo.out" },
+        em("drop") + 0.2);
       window.__timelines["h3-leitura"] = tl;
     })();
   </script>

@@ -2,9 +2,9 @@
   <style>
     #root { position: absolute; inset: 0; background: #000; overflow: hidden; }
     #h2v-fundo { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
-    #h2v-a { left: 90px; top: 340px; width: 400px; height: 740px; }
-    #h2v-b { left: 590px; top: 340px; width: 400px; height: 740px; }
-    .h2v-rotulo { position: absolute; top: 284px; margin: 0; }
+    #h2v-a { left: 90px; top: 369px; }
+    #h2v-b { left: 590px; top: 369px; }
+    .h2v-rotulo { position: absolute; top: 300px; margin: 0; }
     #h2v-contorno { position: absolute; left: 716px; top: 526px; width: 148px; height: 324px;
       border: 6px solid var(--grifo); border-radius: 8px; box-sizing: border-box; }
     #h2v-etiqueta { position: absolute; left: 716px; top: 478px; margin: 0; padding: 4px 12px;
@@ -13,35 +13,36 @@
   </style>
   <div id="root" data-composition-id="h2-variante" data-width="1080" data-height="1920">
     <canvas id="h2v-fundo" width="1080" height="1920" data-layout-allow-overflow></canvas>
-    <p class="h2v-rotulo vk-rotulo" style="left:90px">Original</p>
+    <p class="h2v-rotulo vk-rotulo" style="left:90px">Control</p>
     <p id="h2v-rotulo-b" class="h2v-rotulo vk-rotulo" style="left:590px">Variant</p>
-    <div id="h2v-a" class="vk-janela"><canvas id="h2v-ca" width="394" height="711"></canvas></div>
-    <div id="h2v-b" class="vk-janela"><canvas id="h2v-cb" width="394" height="711"></canvas></div>
+    <div id="h2v-a"></div>
+    <div id="h2v-b"></div>
     <div id="h2v-contorno"></div>
     <p id="h2v-etiqueta">One change</p>
   </div>
   <script>
     (function () {
-      /* A variante: o anúncio e a cópia dele lado a lado, iguais. Em «one», uma coisa só muda na cópia: o frasco entra
-         já na abertura, contornado no grifo. É o teste do site (o produto primeiro), com uma troca só. */
+      /* A variante: o anúncio e a cópia dele lado a lado, iguais, os dois no cartão do feed, com os nomes do teste A/B
+         (controle e variante). Em «one», uma coisa só muda na cópia: o frasco entra já na abertura, contornado no
+         grifo. É o teste do site (o produto primeiro), com uma troca só. */
       const K = window.VeskKit, seg = K.segmento("variante"), dur = seg.quadros / K.FPS;
       const em = (w) => K.q(K.palavra(seg, w).inicio);
       const tl = gsap.timeline({ paused: true });
-      const a = new K.Mosaico(document.getElementById("h2v-ca"), 36);
-      const b = new K.Mosaico(document.getElementById("h2v-cb"), 36);
+      const a = new K.Anuncio(document.getElementById("h2v-a"), { largura: 400, altura: 711, colunas: 36 });
+      const b = new K.Anuncio(document.getElementById("h2v-b"), { largura: 400, altura: 711, colunas: 36 });
       const fundo = new K.Campo(document.getElementById("h2v-fundo"), { passo: 24, semente: 37 });
-      const ruido = K.ruido(43);
+      const cor = K.aura([
+        { x: 60, y: 1660, rx: 640, ry: 420, u: 0.85 },
+        { x: 1080, y: 1500, rx: 520, ry: 380, u: 0.2 },
+        { x: 1040, y: 180, rx: 420, ry: 260, u: 0.45, forca: 0.7 },
+      ], { semente: 43, apaga: [K.LEGENDA.concat(0.8)] });
       const troca = em("one");
       function desenhar(t) {
         const f = (t / dur) * 0.6;
-        a.desenhar("abertura", f);
-        b.desenhar(t < troca ? "abertura" : "frasco", f);
-        fundo.desenhar((p) => {
-          const d = Math.hypot((p.x - 80) / 560, (p.y - 1640) / 360);
-          const legenda = 1 - 0.8 * K.suave(1050, 1090, p.y) * K.suave(1290, 1250, p.y);
-          return { v: K.suave(1, 0.15, d) * (0.4 + 0.6 * ruido(p.x / 120 - t * 0.3, p.y / 120)) * legenda,
-            u: 0.55 + 0.4 * (1 - p.x / 1080) };
-        }, "#000");
+        const andamento = 0.1 + 0.25 * (t / dur);
+        a.desenhar("abertura", f, andamento);
+        b.desenhar(t < troca ? "abertura" : "frasco", f, andamento);
+        fundo.desenhar((p) => cor(p, t), "#000");
       }
       K.relogio(tl, dur, desenhar);
       tl.fromTo("#h2v-rotulo-b", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "none" }, em("variant"));

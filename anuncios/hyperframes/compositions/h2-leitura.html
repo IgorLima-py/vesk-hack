@@ -75,6 +75,12 @@
         x0: 6, y0: 6 });
       const anuncio = new K.Mosaico(document.getElementById("h2l-anuncio"), 28);
       const ruido = K.ruido(41);
+      // O fundo: manchas da paleta em volta do cartão, como as do site atrás dos cartões, e apagado na legenda.
+      const cor = K.aura([
+        { x: 1040, y: 1620, rx: 620, ry: 440, u: 0.2 },
+        { x: 40, y: 1500, rx: 560, ry: 420, u: 0.85 },
+        { x: 540, y: 120, rx: 760, ry: 200, u: 0.5, forca: 0.75 },
+      ], { semente: 41, apaga: [K.LEGENDA.concat(0.8)] });
       const permanece = (u) => 1 - 0.56 * K.suave(0.1, 0.24, u) - 0.16 * u;
       const corte = document.getElementById("h2l-f-corte");
       corte.innerHTML = CORTES.map((c) => `<i style="position:absolute;left:${c * W - 3}px;top:0;width:6px;height:24px;
@@ -82,11 +88,7 @@
       function desenhar(t) {
         const u = posicao(t), ate = Math.max(u, t >= volta ? 1 : 0);
         // O fundo: o campo apagado com um brilho só, longe do texto, como as manchas do site atrás dos cartões.
-        fundo.desenhar((p) => {
-          const d = Math.hypot((p.x - 1010) / 520, (p.y - 1600) / 380);
-          const legenda = 1 - 0.8 * K.suave(1050, 1090, p.y) * K.suave(1290, 1250, p.y);
-          return { v: K.suave(1, 0.2, d) * (0.4 + 0.6 * ruido(p.x / 120 + t * 0.3, p.y / 120)) * legenda, u: 0.25 + 0.5 * (p.x / 1080) };
-        }, "#000");
+        fundo.desenhar((p) => cor(p, t), "#000");
         curva.desenhar((p) => {
           const x = p.x / W, topo = 6 + (1 - permanece(x)) * 84;
           if (p.y < topo) return null;

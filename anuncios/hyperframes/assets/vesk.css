@@ -102,3 +102,70 @@
   width: 100%;
   height: calc(100% - 29px);
 }
+
+/* O cartão do anúncio no feed (VeskKit.Anuncio): um vídeo patrocinado genérico, sem a marca de plataforma nenhuma.
+   --e é a escala do cartão (largura / 300). */
+.vk-ad {
+  position: absolute;
+  overflow: hidden;
+  border-radius: calc(22px * var(--e, 1));
+  background: #0b0b10;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.16), 0 24px 60px rgba(0, 0, 0, 0.6);
+}
+.vk-ad canvas { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+.vk-ad-veu {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0, rgba(0, 0, 0, 0) 24%, rgba(0, 0, 0, 0) 70%,
+    rgba(0, 0, 0, 0.55) 100%);
+}
+.vk-ad-barra {
+  position: absolute;
+  left: calc(14px * var(--e, 1));
+  right: calc(14px * var(--e, 1));
+  top: calc(12px * var(--e, 1));
+  height: calc(4px * var(--e, 1));
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.35);
+  overflow: hidden;
+}
+.vk-ad-barra i { display: block; height: 100%; width: 0; background: #fff; }
+.vk-ad-topo {
+  position: absolute;
+  left: calc(14px * var(--e, 1));
+  right: calc(14px * var(--e, 1));
+  top: calc(28px * var(--e, 1));
+  display: flex;
+  align-items: center;
+  gap: calc(10px * var(--e, 1));
+  font-family: var(--texto);
+  color: #fff;
+  line-height: 1.15;
+}
+.vk-ad-avatar {
+  flex: none;
+  width: calc(36px * var(--e, 1));
+  height: calc(36px * var(--e, 1));
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffb84a, #f43ca7);
+}
+.vk-ad-topo b { display: block; font-weight: 600; font-size: calc(19px * var(--e, 1)); }
+.vk-ad-topo em { display: block; font-style: normal; font-weight: 400; font-size: calc(16px * var(--e, 1)); opacity: 0.85; }
+.vk-ad-cta {
+  position: absolute;
+  left: calc(14px * var(--e, 1));
+  right: calc(14px * var(--e, 1));
+  bottom: calc(16px * var(--e, 1));
+  height: calc(50px * var(--e, 1));
+  border-radius: calc(12px * var(--e, 1));
+  background: rgba(255, 255, 255, 0.95);
+  color: #0b0b10;
+  font-family: var(--texto);
+  font-weight: 600;
+  font-size: calc(21px * var(--e, 1));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* O selo ∵ da Vesk, em cor: os três pontos cheios com o degradê da paleta do campo correndo pelos três. */
+.vk-selo { position: absolute; overflow: visible; }

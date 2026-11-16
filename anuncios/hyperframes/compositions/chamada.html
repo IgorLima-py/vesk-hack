@@ -2,38 +2,85 @@
   <style>
     #root { position: absolute; inset: 0; background: #000; overflow: hidden; }
     #ch-campo { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
-    #ch-selo { position: absolute; left: 540px; top: 470px; width: 0; height: 0; }
-    #ch-selo i { position: absolute; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%;
-      background: #eeedf4; }
-    #ch-endereco { position: absolute; left: 0; width: 1080px; top: 560px; margin: 0; text-align: center;
+    #ch-anuncio { left: 80px; top: 330px; }
+    #ch-relatorio { left: 480px; top: 330px; width: 520px; height: 533px; box-sizing: border-box; }
+    #ch-titulo { position: absolute; left: 30px; top: 26px; margin: 0; font-size: 26px; }
+    #ch-relatorio hr { position: absolute; left: 30px; right: 30px; top: 74px; margin: 0; border: 0;
+      border-top: 2px solid var(--borda); }
+    .ch-linha { position: absolute; left: 30px; right: 24px; height: 64px; display: flex; align-items: center;
+      gap: 16px; }
+    .ch-linha i { flex: none; width: 14px; height: 14px; border-radius: 50%; background: var(--tinta-2); }
+    .ch-linha p { margin: 0; font-family: var(--texto); font-size: 30px; color: var(--tinta); white-space: nowrap; }
+    .ch-esqueleto { position: absolute; left: 60px; height: 18px; border-radius: 9px; background: #26252f; }
+    #ch-proximo { position: absolute; left: 30px; top: 392px; margin: 0; font-size: 24px; }
+    #ch-teste { position: absolute; left: 30px; top: 432px; margin: 0; font-family: var(--texto); font-size: 30px;
+      color: var(--tinta); white-space: nowrap; }
+    .ch-fluxo { position: absolute; top: 590px; width: 14px; height: 14px; border-radius: 50%; }
+    #ch-endereco { position: absolute; left: 0; width: 1080px; top: 900px; margin: 0; text-align: center;
       font-family: var(--mono); font-weight: 400; font-size: 88px; letter-spacing: -0.01em; color: var(--tinta); }
-    #ch-traco { position: absolute; left: 118px; top: 690px; width: 844px; height: 12px; background: var(--grifo);
+    #ch-traco { position: absolute; left: 118px; top: 1030px; width: 844px; height: 12px; background: var(--grifo);
       transform-origin: 0 50%; }
   </style>
   <div id="root" data-composition-id="chamada" data-width="1080" data-height="1920">
     <canvas id="ch-campo" width="1080" height="1920" data-layout-allow-overflow></canvas>
-    <div id="ch-selo"><i style="left:-22px;top:-12px"></i><i style="left:22px;top:-12px"></i><i
-        style="left:-4px;top:23px"></i></div>
+    <div id="ch-anuncio"></div>
+    <i class="ch-fluxo" style="left:396px;background:#7c4aff"></i><i class="ch-fluxo"
+      style="left:420px;background:#f43ca7"></i><i class="ch-fluxo" style="left:444px;background:#ff7c44"></i>
+    <div id="ch-relatorio" class="vk-cartao">
+      <p id="ch-titulo" class="vk-rotulo">Readout</p>
+      <hr />
+      <div class="ch-linha" style="top:96px"><i></i><p><span id="ch-grifo" class="vk-grifo">Logo only, no product</span></p></div>
+      <div class="ch-linha" style="top:168px"><i></i><p>Product enters late</p></div>
+      <div class="ch-linha" style="top:240px"><i></i><p>Close-up, no text</p></div>
+      <div class="ch-esqueleto" style="top:119px;width:330px"></div>
+      <div class="ch-esqueleto" style="top:191px;width:280px"></div>
+      <div class="ch-esqueleto" style="top:263px;width:250px"></div>
+      <p id="ch-proximo" class="vk-rotulo">Next test</p>
+      <p id="ch-teste">Product first vs. logo first</p>
+    </div>
     <p id="ch-endereco">hack.vesklab.com</p>
     <div id="ch-traco"></div>
   </div>
   <script>
     (function () {
-      /* A chamada: o endereço em mono, sublinhado no grifo quando a voz diz «Upload», sobre a faixa de pontos do rodapé
-         do site. A frase fica na legenda; a faixa passa por baixo da legenda, apagada ali para ela ler. */
+      /* A chamada: o anúncio no feed, à esquerda, e o relatório vazio, à direita. Em «Upload», pontos da paleta
+         correm do anúncio para o relatório; em «report», as linhas da leitura e o próximo teste aparecem no lugar do
+         esqueleto. O endereço em mono está inteiro desde o corte, porque o gabarito o põe no começo da fala, e o
+         grifo o sublinha em «Upload». A faixa de pontos passa por baixo, apagada na legenda. */
       const K = window.VeskKit, seg = K.segmento("chamada"), dur = seg.quadros / K.FPS;
+      const em = (w) => K.q(K.palavra(seg, w).inicio);
       const tl = gsap.timeline({ paused: true });
-      // O endereço já está inteiro no quadro do corte, porque o gabarito o põe no começo da fala.
-      tl.fromTo("#ch-traco", { scaleX: 0 }, { scaleX: 1, duration: 0.45, ease: "expo.out" },
-        K.q(K.palavra(seg, "Upload").inicio));
+      const anuncio = new K.Anuncio(document.getElementById("ch-anuncio"), { largura: 300, altura: 533, colunas: 30 });
+      const sobe = em("Upload"), relatorio = em("report");
+      tl.fromTo("#ch-traco", { scaleX: 0 }, { scaleX: 1, duration: 0.45, ease: "expo.out" }, sobe);
+      // o envio: os três pontos acendem em onda, do anúncio para o relatório, duas vezes
+      const fluxo = [...document.querySelectorAll(".ch-fluxo")];
+      fluxo.forEach((el) => tl.set(el, { opacity: 0.15 }, 0));
+      for (let volta = 0; volta < 3; volta++)
+        fluxo.forEach((el, i) => {
+          const t0 = sobe + volta * 0.36 + i * 0.09;
+          tl.fromTo(el, { opacity: 0.15, scale: 0.8 }, { opacity: 1, scale: 1.25, duration: 0.1, ease: "power2.out" }, t0);
+          tl.fromTo(el, { opacity: 1, scale: 1.25 }, { opacity: 0.15, scale: 0.8, duration: 0.2, ease: "power2.in",
+            immediateRender: false }, t0 + 0.1);
+        });
+      // o relatório: o esqueleto some e as linhas entram uma a uma
+      const linhas = [...document.querySelectorAll(".ch-linha p, #ch-proximo, #ch-teste")];
+      linhas.forEach((el) => tl.set(el, { opacity: 0 }, 0));
+      tl.fromTo(".ch-esqueleto", { opacity: 1 }, { opacity: 0, duration: 0.12, ease: "none" }, relatorio);
+      linhas.forEach((el, i) => tl.fromTo(el, { opacity: 0, filter: "blur(8px)" },
+        { opacity: 1, filter: "blur(0px)", duration: 0.14, ease: "power3.out" }, relatorio + i * 0.07));
+      K.grifar(tl, document.getElementById("ch-grifo"), relatorio + 0.3, 0.3);
       const campo = new K.Campo(document.getElementById("ch-campo"), { passo: 24, semente: 21 });
       const ruido = K.ruido(13);
       function desenhar(t) {
+        anuncio.desenhar("abertura", (t / dur) * 0.5, 0.15 + 0.85 * (t / dur));
         campo.desenhar((p) => {
-          const meio = 1420 - 0.32 * (p.x - 540) + 90 * Math.sin(p.x / 230 - t * 0.7);
+          const meio = 1460 - 0.32 * (p.x - 540) + 90 * Math.sin(p.x / 230 - t * 0.7);
           const legenda = 1 - 0.75 * K.suave(1060, 1100, p.y) * K.suave(1280, 1240, p.y);
-          const v = K.suave(240, 50, Math.abs(p.y - meio)) * (0.5 + 0.5 * ruido(p.x / 110 - t * 0.5, p.y / 110));
-          return { v: v * legenda, u: p.x / 1080 };
+          const faixa = K.suave(320, 50, Math.abs(p.y - meio)) * (0.55 + 0.45 * ruido(p.x / 110 - t * 0.5, p.y / 110));
+          const topo = 0.35 * K.suave(1, 0.1, Math.hypot((p.x - 540) / 700, (p.y - 200) / 240)) *
+            (0.4 + 0.6 * ruido(p.x / 90 + t * 0.3, p.y / 90));
+          return faixa >= topo ? { v: faixa * legenda, u: p.x / 1080 } : { v: topo, u: 0.15 + 0.6 * (p.x / 1080) };
         }, "#000");
       }
       K.relogio(tl, dur, desenhar);

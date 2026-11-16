@@ -177,6 +177,55 @@
     }
   }
 
+  /* Manchas de cor para o campo: cada foco é {x, y, rx, ry, u, forca}. O ponto acende pela mancha mais forte e toma a
+     cor média das manchas, pesada pelo quanto cada uma acende ali. `apaga` são retângulos [x, y, w, h, quanto] onde o
+     campo baixa, de borda macia: texto por cima, a faixa da legenda. Devolve fn(p, t) para o Campo. */
+  function aura(focos, o = {}) {
+    const n = ruido(o.semente || 17), grao = o.grao || 130, vel = o.vel ?? 0.25, base = o.base ?? 0.35;
+    return function (p, t) {
+      let v = 0, su = 0, sp = 0;
+      for (const f of focos) {
+        const d = Math.hypot((p.x - f.x) / f.rx, (p.y - f.y) / f.ry);
+        const a = suave(1, 0.12, d) * (f.forca ?? 1);
+        if (a > v) v = a;
+        su += f.u * a;
+        sp += a;
+      }
+      if (v <= 0.001) return null;
+      let k = base + (1 - base) * n(p.x / grao + t * vel, p.y / grao - t * vel * 0.6);
+      for (const [x, y, w, h, q] of o.apaga || []) {
+        const dentro = suave(x - 40, x, p.x) * suave(x + w + 40, x + w, p.x) * suave(y - 40, y, p.y) *
+          suave(y + h + 40, y + h, p.y);
+        k *= 1 - q * dentro;
+      }
+      return { v: v * k, u: su / sp };
+    };
+  }
+  // A faixa da legenda queimada (y 1088 a 1248), para `apaga`.
+  const LEGENDA = [0, 1088, 1080, 160];
+
+  /* O anúncio no feed: o mosaico dentro do cartão de um vídeo patrocinado genérico, com a barra de progresso, o perfil
+     «yourbrand», «Sponsored» e o botão «Shop now», sem a marca de plataforma nenhuma. É o que diz «é sobre anúncio»
+     no primeiro olhar. O tamanho dos rótulos acompanha a largura do cartão (300 px é a escala 1). */
+  class Anuncio {
+    constructor(el, o = {}) {
+      const w = o.largura, h = o.altura;
+      el.classList.add("vk-ad");
+      Object.assign(el.style, { width: w + "px", height: h + "px" });
+      el.style.setProperty("--e", String(w / 300));
+      el.innerHTML = `<canvas width="${w}" height="${h}"></canvas><div class="vk-ad-veu"></div>` +
+        `<div class="vk-ad-barra"><i></i></div>` +
+        `<div class="vk-ad-topo"><span class="vk-ad-avatar"></span><span><b>yourbrand</b><em>Sponsored</em></span></div>` +
+        `<div class="vk-ad-cta">Shop now</div>`;
+      this.mosaico = new Mosaico(el.querySelector("canvas"), o.colunas || 30);
+      this.barra = el.querySelector(".vk-ad-barra i");
+    }
+    desenhar(tomada, t, progresso) {
+      this.mosaico.desenhar(tomada, t);
+      this.barra.style.width = (clamp(progresso, 0, 1) * 100).toFixed(3) + "%";
+    }
+  }
+
   /* O tempo das cenas. A raiz põe cada cena 1/4 de quadro antes do quadro dela (anuncios/cenas.py), e por isso a
      palavra que a linha do tempo põe no quadro q da cena aparece com um set em q/30 s, que cai entre os quadros
      q-1 e q, longe da igualdade de ponto flutuante. */
@@ -217,6 +266,7 @@
     desenhar(0);
   }
 
-  window.VeskKit = { PALETA, FPS, cor, css, mix, clamp, suave, prng, ruido, Campo, Mosaico, desenharAnuncio,
+  window.VeskKit = { PALETA, FPS, cor, css, mix, clamp, suave, prng, ruido, Campo, Mosaico, desenharAnuncio, aura,
+    LEGENDA, Anuncio,
     q, segmento, palavra, falarPalavras, grifar, relogio };
 })();

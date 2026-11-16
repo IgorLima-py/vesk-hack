@@ -2,29 +2,40 @@
   <style>
     #root { position: absolute; inset: 0; background: #000; overflow: hidden; }
     #mc-campo { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
-    #mc-selo { position: absolute; left: 540px; top: 548px; width: 0; height: 0; }
-    #mc-selo i { position: absolute; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%;
-      background: #eeedf4; }
+    #mc-selo { left: 394px; top: 326px; width: 292px; height: 258px; }
     #mc-nome { position: absolute; left: 0; width: 1080px; top: 0; margin: 0; text-align: center;
       font-family: var(--serifa); font-weight: 500; font-optical-sizing: auto; font-size: 240px;
       letter-spacing: -0.02em; line-height: 1; color: var(--tinta); }
     #mc-barra { position: absolute; background: var(--grifo); }
     #mc-assinatura { position: absolute; left: 0; width: 1080px; top: 922px; margin: 0; text-align: center;
-      font-family: var(--texto); font-weight: 400; font-size: 50px; color: var(--tinta-2); }
+      font-family: var(--texto); font-weight: 400; font-size: 48px; color: var(--tinta-2); }
+    #mc-assinatura b { font-weight: 500; color: var(--tinta); }
   </style>
   <div id="root" data-composition-id="marca" data-width="1080" data-height="1920">
     <canvas id="mc-campo" width="1080" height="1920" data-layout-allow-overflow></canvas>
-    <div id="mc-selo"><i style="left:-29px;top:-16px"></i><i style="left:29px;top:-16px"></i><i
-        style="left:-6px;top:30px"></i></div>
+    <svg id="mc-selo" class="vk-selo" viewBox="0 0 292 258" aria-hidden="true">
+      <defs>
+        <linearGradient id="mc-degrade" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="292" y2="0">
+          <stop offset="0" stop-color="#5762fe" /><stop offset="0.2" stop-color="#7c4aff" />
+          <stop offset="0.4" stop-color="#b53de8" /><stop offset="0.56" stop-color="#f43ca7" />
+          <stop offset="0.72" stop-color="#ff516e" /><stop offset="0.88" stop-color="#ff7c44" />
+          <stop offset="1" stop-color="#ffb84a" />
+        </linearGradient>
+      </defs>
+      <g fill="url(#mc-degrade)">
+        <circle cx="56" cy="56" r="56" /><circle cx="236" cy="56" r="56" /><circle cx="146" cy="202" r="56" />
+      </g>
+    </svg>
     <h1 id="mc-nome">Vesk</h1>
     <div id="mc-barra"></div>
-    <p id="mc-assinatura">The creative autopilot.</p>
+    <p id="mc-assinatura">The creative autopilot <b>for video ads.</b></p>
   </div>
   <script>
     (function () {
-      /* A cartela: tudo inteiro no primeiro quadro (o marca_em), sem entrada. A barra do grifo ocupa exatamente o
-         retângulo cartela_marca.barra da linha do tempo. O que se mexe é o mundo de trás: a faixa de pontos do rodapé
-         do vesklab.com, do laranja ao azul, correndo devagar. */
+      /* A cartela: tudo inteiro no primeiro quadro (o marca_em), sem entrada. O selo ∵ do site, grande e em cor: os
+         três pontos cheios com a paleta do campo correndo pelos três, do azul ao âmbar. A barra do grifo ocupa
+         exatamente o retângulo cartela_marca.barra da linha do tempo. Atrás, a faixa de pontos do rodapé do site,
+         larga e acesa, do laranja ao azul. */
       const K = window.VeskKit, seg = K.segmento("marca"), dur = seg.quadros / K.FPS;
       const barra = window.VESK.cartela_marca.barra;
       const b = document.getElementById("mc-barra");
@@ -38,9 +49,13 @@
       const ruido = K.ruido(9);
       function desenhar(t) {
         campo.desenhar((p) => {
-          const meio = 1560 + 120 * Math.sin(p.x / 260 + t * 0.6) - 0.18 * (p.x - 540);
-          const v = K.suave(210, 40, Math.abs(p.y - meio)) * (0.5 + 0.5 * ruido(p.x / 120 + t * 0.4, p.y / 120));
-          return { v, u: 1 - p.x / 1080 };
+          const meio = 1580 + 110 * Math.sin(p.x / 260 + t * 0.6) - 0.22 * (p.x - 540);
+          const faixa = K.suave(330, 50, Math.abs(p.y - meio)) * (0.55 + 0.45 * ruido(p.x / 120 + t * 0.4, p.y / 120));
+          // um brilho fraco nos cantos de cima, para o preto não ficar chapado
+          const canto = 0.32 * K.suave(1, 0.1, Math.hypot(p.x / 360, (p.y - 120) / 300)) +
+            0.32 * K.suave(1, 0.1, Math.hypot((1080 - p.x) / 360, (p.y - 120) / 300));
+          const v = Math.max(faixa, canto * (0.4 + 0.6 * ruido(p.x / 90, p.y / 90 - t * 0.3)));
+          return { v, u: faixa >= canto ? 1 - p.x / 1080 : (p.x < 540 ? 0.05 : 0.9) };
         }, "#000");
       }
       K.relogio(tl, dur, desenhar);

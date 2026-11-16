@@ -11,7 +11,7 @@
   </style>
   <div id="root" data-composition-id="h3-variante" data-width="1080" data-height="1920">
     <canvas id="h3v-campo" width="1080" height="1920" data-layout-allow-overflow></canvas>
-    <p class="h3v-rotulo vk-rotulo" style="top:300px">Original</p>
+    <p class="h3v-rotulo vk-rotulo" style="top:300px">Control</p>
     <h1 id="h3v-a" class="h3v-linha vk-serifa" style="top:352px">Logo first.</h1>
     <div id="h3v-risco"></div>
     <p class="h3v-rotulo vk-rotulo" style="top:600px">Variant</p>
@@ -32,13 +32,14 @@
         tl.fromTo("#h3v-risco", { width: 0 }, { width: 630, duration: 0.35, ease: "expo.out" }, um + 0.2);
         tl.fromTo("#h3v-a", { color: "#eeedf4" }, { color: "#5c5a6c", duration: 0.3, ease: "none" }, um + 0.2);
         const campo = new K.Campo(document.getElementById("h3v-campo"), { passo: 24, semente: 71 });
-        const ruido = K.ruido(73);
+        const cor = K.aura([
+          { x: 880, y: 1560, rx: 760, ry: 560, u: 0.75 },
+          { x: 80, y: 1700, rx: 520, ry: 380, u: 0.05 },
+          { x: 1080, y: 160, rx: 380, ry: 300, u: 0.4, forca: 0.6 },
+        ], { semente: 73, apaga: [K.LEGENDA.concat(0.55), [65, 300, 950, 560, 0.7]] });
         function desenhar(t) {
           campo.desenhar((p) => {
-            const d = Math.hypot((p.x - 860) / 520, (p.y - 1560) / 420);
-            const legenda = 1 - 0.55 * K.suave(1050, 1090, p.y) * K.suave(1290, 1250, p.y);
-            const v = K.suave(1, 0.2, d) * (0.35 + 0.65 * ruido(p.x / 130 - t * 0.3, p.y / 130)) * legenda;
-            return { v, u: 0.45 + 0.5 * (p.x / 1080) };
+            return cor(p, t);
           }, "#000");
         }
         K.relogio(tl, dur, desenhar);

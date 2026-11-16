@@ -76,9 +76,31 @@ atrás como atmosfera. Não há desenho de produto.
 
 ## A marca e a chamada (comuns)
 
-- **Marca:** o selo de três pontos, «Vesk» em Newsreader 500, a barra do grifo e «The creative autopilot.». Tudo está
-  inteiro no primeiro quadro. Só a faixa de pontos do rodapé do site se mexe atrás.
-- **Chamada:** «hack.vesklab.com» em IBM Plex Mono, sublinhado no grifo em «Upload», sobre a faixa de pontos.
+- **Marca:** o selo ∵ do site, grande e em cor: os três pontos cheios com o degradê da paleta do campo, do azul ao
+  âmbar. Embaixo, «Vesk» em Newsreader 500, a barra do grifo no retângulo de sempre e «The creative autopilot for video
+  ads.». Tudo está inteiro no primeiro quadro; só a faixa de pontos de trás se mexe.
+- **Chamada:** o anúncio no feed à esquerda e o relatório vazio à direita. Em «Upload», pontos da paleta correm de um
+  para o outro; em «report», a leitura e o próximo teste aparecem no lugar do esqueleto. Embaixo, «hack.vesklab.com»
+  em IBM Plex Mono, sublinhado no grifo em «Upload».
+
+## A segunda volta (16/11)
+
+O Igor viu o primeiro storyboard e achou «anos-luz melhor», com três notas: o logo ainda está ruim, falta cor, e o
+anúncio precisa dar a entender que é sobre anúncio, na língua de quem compra para empresa (B2B). As folhas novas estão
+em `$VIDEOS/historias/storyboard-historia-2-v2.png` e `-3-v2.png`.
+
+- **O logo:** o selo de três pontos, que era pequeno e branco em cima do nome, virou a marca: grande e com a paleta.
+- **A cor:** as cenas ganharam manchas da paleta em volta do texto e dos cartões (`VeskKit.aura`), apagadas embaixo
+  do texto e na faixa da legenda.
+- **É sobre anúncio:** o anúncio fictício aparece como anúncio, no cartão de um vídeo patrocinado genérico
+  (`VeskKit.Anuncio`): barra de progresso, perfil «yourbrand», «Sponsored» e «Shop now», sem a marca de plataforma
+  nenhuma. Na história 2, ele está no gancho, ao lado de quem o assiste, e na variante. Nas duas histórias, ele está na
+  chamada, virando relatório.
+- **A língua B2B:** na tela, as palavras do ofício de quem compra mídia: control e variant (os nomes do teste A/B),
+  drop-off, readout e next test, além de «for video ads» na assinatura. A voz não mudou: ela já fala do resultado
+  (a saída das pessoas, a variante com uma mudança, o teste), e mudar a fala refaz a voz, o tempo e o gabarito.
+- **O que a história 3 não resolve:** ela continua sem o anúncio na tela até a chamada, porque o desenho dela são as
+  palavras enormes. A história 2 mostra o anúncio desde o primeiro quadro.
 
 ## O texto na tela muda o gabarito
 

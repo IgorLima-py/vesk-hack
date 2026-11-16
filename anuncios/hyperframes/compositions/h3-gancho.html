@@ -30,11 +30,12 @@
       function desenhar(t) {
         const f = K.clamp((t - comeca) / (dur - comeca), 0, 1); // quanto da mancha já foi embora
         campo.desenhar((p) => {
-          const d = Math.hypot((p.x - 760) / 620, (p.y - 1180) / 640);
+          const d = Math.min(Math.hypot((p.x - 760) / 760, (p.y - 1180) / 780),
+            Math.hypot((p.x - 120) / 520, (p.y - 1700) / 360) * 1.1);
           const sai = p.s * 0.85 + 0.1 * (p.x / 1080);
           const fica = K.suave(sai + 0.06, sai, f * 0.75);
-          const v = K.suave(1, 0.25, d) * (0.35 + 0.65 * ruido(p.x / 130 + t * 0.2, p.y / 130)) * fica;
-          return { v, u: 0.15 + 0.85 * K.clamp((p.x - 200) / 900, 0, 1) };
+          const v = K.suave(1, 0.2, d) * (0.4 + 0.6 * ruido(p.x / 130 + t * 0.2, p.y / 130)) * fica;
+          return { v, u: 0.05 + 0.95 * K.clamp((p.x + 0.3 * (p.y - 900)) / 1200, 0, 1) };
         }, "#000");
       }
       K.relogio(tl, dur, desenhar);
